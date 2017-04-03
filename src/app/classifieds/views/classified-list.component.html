@@ -1,0 +1,14 @@
+<p>
+  classified-list works!
+</p>
+<ul *ngFor="let classified of classifieds">
+  <li><a href="#">{{classified.title}}</a></li>
+</ul>
+
+<!--<ul *ngFor="let externalLogin of externalLogins">
+        <li>
+            <img style="max-height: 40px; max-width: 40px;" src="assets/images/social/{{externalLogin.loginProvider}}.png">
+            <button *ngIf="!externalLogin.providerKey" (click)="onAddExternalLogin(externalLogin)">Connect</button>
+            <button *ngIf="externalLogin.providerKey" (click)="onRemoveExternalLogin(externalLogin)">Disconnect</button>
+        </li>
+    </ul>-->

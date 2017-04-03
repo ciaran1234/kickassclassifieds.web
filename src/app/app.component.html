@@ -1,0 +1,31 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+          aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   <a class="navbar-brand" routerLink="/" routerLinkActive="active">KickAss Classifieds</a>
+  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">    
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/classifieds" routerLinkActive="active">Classifieds</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/account/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/account/register" routerLinkActive="active">Register</a>
+      </li>
+
+      <li class="nav-item" *ngIf="user">
+        <a class="nav-link" routerLink="/account/me" routerLinkActive="active">My Account</a>
+      </li>
+      <li class="nav-item" *ngIf="user">
+        <button class="nav-link" (click)="onSignout()">Logout</button>
+      </li>
+    </ul>  
+  </div>
+</nav>
+
+<div class="container-fluid"> 
+  <router-outlet></router-outlet>
+</div>

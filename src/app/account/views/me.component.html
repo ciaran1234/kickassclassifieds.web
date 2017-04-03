@@ -1,0 +1,20 @@
+<section id="me-social">
+    <ul *ngFor="let externalLogin of externalLogins">
+        <li>
+            <img style="max-height: 40px; max-width: 40px;" src="assets/images/social/{{externalLogin.loginProvider}}.png">
+            <button *ngIf="!externalLogin.providerKey" (click)="onAddExternalLogin(externalLogin)">Connect</button>
+            <button *ngIf="externalLogin.providerKey" (click)="onRemoveExternalLogin(externalLogin)">Disconnect</button>
+        </li>
+    </ul>
+</section>
+<section id="me-image" *ngIf="user">
+    <section>
+        <h2>{{user.firstName}} {{user.lastName}} ({{user.email}})</h2>
+        <img style="max-height: 520px; max-width: 1800px" src="{{user?.profileImageUrl}}">
+    </section>
+    <section>
+        <div>
+            <input type="file" name="profileImageUrl" (change)="onFileChange($event)" placeholder="Upload file" accept=".png, .jpg, .jpeg, .gif">
+        </div>
+    </section>
+</section>
