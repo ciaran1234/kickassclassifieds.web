@@ -4,7 +4,7 @@ import { ClassifiedService } from '../services/classifieds.service';
 
 @Component({
   selector: 'app-classified-list',
-  templateUrl: './../views/classified-list.component.html'
+  templateUrl: '../views/classified-list.component.html'
 })
 
 export class ClassifiedListComponent implements OnInit {

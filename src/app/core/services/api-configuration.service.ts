@@ -23,7 +23,10 @@ export class ApiConfiguration {
     readonly uploadProfilePicture = this.schema + this.hostApi + this.users + 'picture';
 
     //classified urls
-    readonly getAllClassifieds =  this.schema + this.hostApi + this.classifiedUrl;
+    readonly classifieds =  this.schema + this.hostApi + this.classifiedUrl;    
+    classifiedDetails(id: any) {
+        return this.classifieds + id;
+    }  
 
     openAuthEndpoint(provider: string, redirectUrl: string, token?: string): string {
         return this.schema + this.hostApi + this.accountUrl + provider + '?redirectUrl=' + redirectUrl + (token ? '&local_token=' + token : '');

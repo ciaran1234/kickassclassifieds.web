@@ -10,10 +10,24 @@ export class ClassifiedService {
     constructor(private httpClient: HttpClient,
         private apiConfiguration: ApiConfiguration) { }
 
+    get(id: string): Promise<Classified> {
+        return this.httpClient.get(this.apiConfiguration.classifiedDetails(id))
+            .toPromise()
+            .then(res => res.json() as Classified)
+            .catch(error => this.handleError(error));
+    }
+
     getAll(): Promise<Classified[]> {
-        return this.httpClient.get(this.apiConfiguration.getAllClassifieds)
+        return this.httpClient.get(this.apiConfiguration.classifieds)
             .toPromise()
             .then(res => res.json() as Classified[])
+            .catch(error => this.handleError(error));
+    }
+
+    create(classified: Classified): Promise<Classified> {
+        return this.httpClient.post(this.apiConfiguration.classifieds, classified)
+            .toPromise()
+            .then(response => response.json() as Classified)
             .catch(error => this.handleError(error));
     }
 

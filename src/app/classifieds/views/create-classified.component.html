@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col">
+        <form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified">
+            <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
+                <label for="title" class="form-control-label">Title</label>
+                <input id="title" class="form-control" placeholder="Title" formControlName="title" />
+                <div class="form-control-feedback" *ngIf="classified.get('title').hasError('required') && (classified.get('title').touched || submitted)">
+                    Title is Required
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['description'].valid && (classified.controls['description'].touched || submitted) }">
+                <label for="description" class="form-control-label">Description</label>
+                <textarea id="description" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                <div class="form-control-feedback" *ngIf="classified.get('description').hasError('required') && (classified.get('description').touched || submitted)">
+                    Description is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a routerLink="/classifieds" class="btn btn-outline-warning">Cancel</a>
+        </form>
+    </div>
+</div>
