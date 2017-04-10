@@ -3,9 +3,11 @@ import { LocationService } from './services/location.service';
 import { ApiConfiguration } from './services/api-configuration.service';
 import { HttpClient } from './extensions/httpClient';
 import { UserService } from './services/user.service';
+import { CurrencyService } from './services/currency.service';
+import { CountryService } from './services/country.service';
 
-@NgModule({  
- 
+@NgModule({
+
 })
 
 export class CoreModule {
@@ -16,7 +18,9 @@ export class CoreModule {
         ApiConfiguration,
         HttpClient,
         LocationService,
-        UserService
+        UserService,
+        CurrencyService,
+        CountryService
       ]
     };
   }

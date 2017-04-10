@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit, Inject } from '@angular/core';
 import { UserService } from './core/services/user.service';
 import { User } from './account/models/user';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,11 +12,16 @@ export class AppComponent implements OnInit {
   user: User;
   subscription: Subscription;
   isNavbarCollapsed: Boolean = false;
+  languages = [
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' }
+  ];
 
-  constructor(private userService: UserService,
+  constructor(@Inject(LOCALE_ID) protected localeId: string,
+    private userService: UserService,
     private router: Router) { }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.subscription = this.userService
       .user.subscribe(user => this.user = user);
 

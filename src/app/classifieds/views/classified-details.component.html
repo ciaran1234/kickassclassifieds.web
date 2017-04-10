@@ -1,5 +1,34 @@
 <h2>{{classified?.title}}</h2>
-<p>{{classified?.description}}</p>
-<div>
-    <a routerLink="/classifieds">Back</a>
+<p>Description: {{classified?.description}}</p>
+
+<p>Category: {{classified?.category.name}}</p>
+<p>Country: {{classified?.country.name}}</p>
+<p>Region: {{classified?.region.name}}</p>
+<p>Areas:</p>
+<ul>
+    <li *ngFor="let state of classified?.states">{{state}}</li>
+</ul>
+<p>Price: <span class="iso-currency" [ngClass]="classified?.price?.ccy"></span>{{classified?.price?.value.$numberDecimal}}</p>
+Images:
+<div class="row">
+    <div class="col-sm-2" *ngFor="let image of classified?.images">
+        <img class="img-thumbnail" src="{{image}}">
+    </div>
 </div>
+<div>
+    <a routerLink="/classifieds" class="btn btn-outline-warning">Back</a>
+</div>
+
+<style>
+    span.iso-currency.USD::after {
+        content: "$"
+    }
+    
+    span.iso-currency.GBP::after {
+        content: "£"
+    }
+    
+    span.iso-currency.EUR::after {
+        content: "€"
+    }
+</style>

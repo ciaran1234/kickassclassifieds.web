@@ -15,7 +15,9 @@ export class ClassifiedListComponent implements OnInit {
 
   ngOnInit() {
     this.classifiedService.getAll()
-      .then(classifieds => this.classifieds = classifieds)
+      .then(classifieds => {      
+        this.classifieds = classifieds
+      })
       .catch(error => alert('error.....'));
   }
 }

@@ -25,7 +25,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-danger': !registration.controls['email'].valid && (registration.controls['email'].touched || submitted) }">
                 <label class="form-control-label">Email</label>
-                <input type="email" placeholder="Your Email" formControlName="email" class="form-control" />
+                <input type="email" placeholder="Your Email" i18n-placeholder="Your Email" formControlName="email" class="form-control" />
                 <div *ngIf="registration.get('email').hasError('required') && (registration.get('email').touched || submitted)"
                     class="form-control-feedback">
                     Email is required

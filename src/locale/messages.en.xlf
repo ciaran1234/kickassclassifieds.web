@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5f2319eb0e45dbf47feb272b634530cde31d2745" datatype="html">
+        <source>KickAss Classifieds</source>
+        <target>KickAss Classifieds</target>
+        <note priority="1" from="description">Brand Link</note>
+      </trans-unit>
+      <trans-unit id="f41db7900b1bf792565d5f7cc6d54c1208aaa85b" datatype="html">
+        <source>Classifieds</source>
+        <target>Classifieds</target>
+        <note priority="1" from="description">Classified link</note>
+      </trans-unit>
+      <trans-unit id="5a49f221378f8688a0cf91b1a3207407623f1918" datatype="html">
+        <source>Signin</source>
+         <target>Signin</target>
+        <note priority="1" from="description">Login link</note>
+      </trans-unit>
+      <trans-unit id="cfc2f436ec2beffb042e7511a73c89c372e86a6c" datatype="html">
+        <source>Register</source>
+        <target>Register</target>
+        <note priority="1" from="description">Registration link</note>
+      </trans-unit>
+      <trans-unit id="5ce2bda884ea801c34a1a6c23627d9a5e08f0a82" datatype="html">
+        <source>My Account</source>
+        <target>My Account</target>
+        <note priority="1" from="description">My Account Link</note>
+      </trans-unit>
+      <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
+        <source>Logout</source>
+         <target>Logout</target>
+        <note priority="1" from="description">Logout link</note>
+      </trans-unit>
+      <trans-unit id="d289b86bc9ccf473518cc37dfe1cc810e7a2f5c9" datatype="html">
+        <source>Lang</source>
+          <target>Lang</target>
+        <note priority="1" from="description">description</note>
+        <note priority="1" from="meaning">message</note>
+      </trans-unit>
+      <trans-unit id="3a68d4faff1a69cad899d07ce5355ce60b65dd5d" datatype="html">
+        <source>Welcome to Kick Ass Classifieds</source>
+        <target>Welcome to Kick Ass Classifieds</target>
+        <note priority="1" from="description">Site introduction slogan</note>
+        <note priority="1" from="meaning">Site slogan</note>
+      </trans-unit>
+       <trans-unit id="1990d5345c7a2899bcdba4f6c3f4b60aa093bf9f" datatype="html">
+        <source>Your Email</source>
+        <target>Your Email</target>
+        <note priority="1" from="description">Email text box placeholder</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

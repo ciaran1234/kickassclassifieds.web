@@ -7,8 +7,11 @@ export class ApiConfiguration {
     private hostApi = this.host + 'api/';
     private accountUrl = 'auth/';
     private locationsUrl = 'locations/';
-    private classifiedUrl = 'classifieds/'
+    private classifiedUrl = 'classifieds/';
+    private categoriesUrl = 'categories/';
     private users = 'users/';
+    private currenciesUrl = 'currencies/';
+    private countriesUrl = 'countries/';
 
     //account urls
     readonly confirmResetPassword = this.schema + this.hostApi + this.accountUrl + 'confirmResetPassword';
@@ -21,12 +24,23 @@ export class ApiConfiguration {
     readonly confirmAccount = this.schema + this.hostApi + this.accountUrl + 'confirm';
     readonly removeExternalLogin = this.schema + this.hostApi + this.accountUrl + 'social';
     readonly uploadProfilePicture = this.schema + this.hostApi + this.users + 'picture';
+    readonly currencies = this.schema + this.hostApi + this.currenciesUrl;
+    readonly countries = this.schema + this.hostApi + this.countriesUrl;
 
     //classified urls
     readonly classifieds =  this.schema + this.hostApi + this.classifiedUrl;    
     classifiedDetails(id: any) {
         return this.classifieds + id;
     }  
+
+    //categories urls
+    readonly categories = this.schema + this.hostApi + this.categoriesUrl;
+    categoryDetails(id: string) {
+        return this.categories + id;
+    }
+    subCategories(id: string) {
+        return this.categories + id + '/subcategories';
+    }
 
     openAuthEndpoint(provider: string, redirectUrl: string, token?: string): string {
         return this.schema + this.hostApi + this.accountUrl + provider + '?redirectUrl=' + redirectUrl + (token ? '&local_token=' + token : '');

@@ -1,0 +1,15 @@
+1. xlf file generation command:
+ng xi18n --output-path src/locale
+
+ -----------------------------------------------------------------------------------------------------------------------
+
+2. Ahead of time compilation for localization testing:
+ 
+ ng serve --aot \ --i18n-file=src/locale/messages.fr.xlf \  --locale=fr \  --i18n-format=xlf
+
+ -----------------------------------------------------------------------------------------------------------------------
+
+3. Ahead of time compilation localization build order for production:
+ng build --output-path=dist --aot -prod --bh / --i18n-file=src/locale/messages.en.xlf --i18n-format=xlf --locale=en
+ng build --output-path=dist/en --aot -prod --bh /en/ --i18n-file=src/locale/messages.en.xlf --i18n-format=xlf --locale=en
+ng build --output-path=dist/fr --aot -prod --bh /fr/ --i18n-file=src/locale/messages.fr.xlf --i18n-format=xlf --locale=fr

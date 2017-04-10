@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-home',
     templateUrl: './../views/home.component.html',
 })
-export class HomeComponent {
-    title = 'app works!';
+
+export class HomeComponent  {
+ 
 }

@@ -4,9 +4,7 @@ import { HomeComponent } from './layout/components/home.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'classifieds', loadChildren: './classifieds/module' },
-    { path: 'account', loadChildren: './account/module'},  
+    { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
@@ -15,3 +13,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
+
+export const routingComponents = [HomeComponent];

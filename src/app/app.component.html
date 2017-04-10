@@ -1,31 +1,49 @@
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
-          aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-controls="exCollapsingNavbar2"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-   <a class="navbar-brand" routerLink="/" routerLinkActive="active">KickAss Classifieds</a>
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active" i18n="Brand Link">KickAss Classifieds</a>
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">    
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/classifieds" routerLinkActive="active">Classifieds</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/account/login" routerLinkActive="active">Login</a>
+        <a class="nav-link" routerLink="/classifieds" routerLinkActive="active" i18n="Classified link">Classifieds</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/account/register" routerLinkActive="active">Register</a>
+        <a class="nav-link" routerLink="/classifieds/create" routerLinkActive="active" i18n="Post Advert">Post Advert</a>
       </li>
-
-      <li class="nav-item" *ngIf="user">
-        <a class="nav-link" routerLink="/account/me" routerLinkActive="active">My Account</a>
+    </ul>
+    <ul class="navbar-nav mr-right">
+      <ng-container *ngIf="!user else accountBlock">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/account/signin" routerLinkActive="active" i18n="Login link">Signin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/account/register" routerLinkActive="active" i18n="Registration link">Register</a>
+        </li>
+      </ng-container>
+      <ng-template #accountBlock>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/account/me" routerLinkActive="active" i18n="My Account Link">My Account</a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link" (click)="onSignout()" i18n="Logout link">Logout</a>
+        </li>
+      </ng-template>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a href="javascript:void(0)" class="nav-link dropdown-toggle" id="languageMenu" ngbDropdownToggle i18n="message|description">Lang</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageMenu">
+          <ng-template ngFor let-lang [ngForOf]="languages">
+            <span *ngIf="lang.code !== localeId">
+               <a href="/{{lang.code}}/" class="dropdown-item">{{lang.label}}</a>
+            </span>
+          </ng-template>
+        </div>
       </li>
-      <li class="nav-item" *ngIf="user">
-        <button class="nav-link" (click)="onSignout()">Logout</button>
-      </li>
-    </ul>  
+    </ul>
   </div>
 </nav>
 
-<div class="container-fluid"> 
+<div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

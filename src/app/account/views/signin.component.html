@@ -3,7 +3,7 @@
         <form novalidate (ngSubmit)="onLogin(login)" [formGroup]="login">
             <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['email'].valid && (login.controls['email'].touched || submitted) }">
                 <label for="email" class="form-control-label">Email</label>
-                <input type="email" placeholder="Your Email" formControlName="email" id="email" class="form-control" />
+                <input type="email" placeholder="Your Email" i18n-placeholder="Email text box placeholder" formControlName="email" id="email" class="form-control" />
                 <div *ngIf="login.get('email').hasError('required') && (login.get('email').touched || submitted)" class="form-control-feedback">
                     Email is required
                 </div>
