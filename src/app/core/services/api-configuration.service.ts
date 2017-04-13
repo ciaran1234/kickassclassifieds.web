@@ -29,9 +29,13 @@ export class ApiConfiguration {
 
     //classified urls
     readonly classifieds =  this.schema + this.hostApi + this.classifiedUrl;    
-    classifiedDetails(id: any) {
+    classifiedDetails(id: string) {
         return this.classifieds + id;
     }  
+
+    classifiedImageUpload(id: string) {
+        return this.classifieds + id + '/uploadImages';
+    }
 
     //categories urls
     readonly categories = this.schema + this.hostApi + this.categoriesUrl;

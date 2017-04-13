@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+  span.iso-currency.USD::after {
+                        content: "$"
+                    }
+                    
+                    span.iso-currency.GBP::after {
+                        content: "£"
+                    }
+                    
+                    span.iso-currency.EUR::after {
+                        content: "€"
+                    }
+
+.custom-file-control::before {
+    content: "Browse"
+}
+
+.custom-file-control::after {
+    content: "Choose File"
+}

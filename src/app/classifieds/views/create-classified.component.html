@@ -1,81 +1,108 @@
-<div class="row">
-    <div class="col-md-12">
-        <form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified">
-            <fieldset>
-                <legend>Post Advert</legend>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="parent-category" class="form-control-label" i18n="Main category|Main category for the classified">Main Category</label>
-                        <select id="parent-category" formControlName="parentCategory" class="form-control" (change)="onCategoryChanged()">
-                            <option *ngFor="let category of categories" [ngValue]="category._id">{{category.name}}</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="subCategory" class="form-control-label" i18n="Sub category|Sub category for the classified">Sub Category</label>
-                        <select id="subCategory" formControlName="category" class="form-control">
-                            <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory">{{subCategory.name}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
-                    <label for="title" class="form-control-label" i18n="Classified Title|Title for the classified">Title</label>
-                    <input id="title" class="form-control" placeholder="Title" formControlName="title" />
-                    <div class="form-control-feedback" *ngIf="classified.get('title').hasError('required') && (classified.get('title').touched || submitted)">
-                        Title is Required
-                    </div>
-                </div>
-                <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['description'].valid && (classified.controls['description'].touched || submitted) }">
-                    <label for="description" class="form-control-label">Description</label>
-                    <textarea id="description" class="form-control" placeholder="Description" formControlName="description"></textarea>
-                    <div class="form-control-feedback" *ngIf="classified.get('description').hasError('required') && (classified.get('description').touched || submitted)">
-                        Description is required
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="country" class="form-control-label">Country</label>
-                    <select id="country" class="form-control" formControlName="country" (change)="onCountryChanged()">
-                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="region" class="form-control-label">Region/State</label>
-                    <select id="region" class="form-control" formControlName="region" (change)="onRegionChanged()">
-                        <option *ngFor="let r of regions" [ngValue]="r">{{r.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group" *ngIf="states?.length">
-                    <label for="state" class="form-control-label">County/City (Optional)</label>
-                    <select multiple id="state" class="form-control" formControlName="state">
-                        <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group row" formGroupName="price">
-                    <div class="col-sm-2">
-                        <label for="currency" class="form-control-label">Currency</label>
-                        <select id="currency" class="form-control" formControlName="currency">
-                            <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency.ccy}}</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-10">
-                        <label for="price" class="form-control-label">Price</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                {{ classified.get('price.currency').value.symbolNative
-                            ||  classified.get('price.currency').value.symbol
-                            ||  classified.get('price.currency').value.ccy
-                                }}
-                            </span>
-                            <input type="number" placeholder="Price" i18n-placeholder="Price" class="form-control" id="price" formControlName="value"
-                            />
+<form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified" class="mt-3 mb-5">
+    <fieldset>
+        <legend>Post Advert</legend>
+        <!-- Begin File Upload -->
+        <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
+            class="my-drop-zone mb-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="ml-4 sl-2">Base drop zone</h2>
+                    <label class="custom-file">
+                        <input type="file" id="file" class="custom-file-input" ng2FileSelect [uploader]="uploader" multiple>                       
+                        <span class="custom-file-control"></span>                             
+                    </label>                    
+                </div>             
+                <div class="col-12 col-sm-4 col-md-2 mb-3 mt-3 clearfix" *ngFor="let item of uploader.queue">
+                    <div class="card">
+                        <img src="" class="card-img-top img-responsive" style="max-height: 175px;" imagePreview [image]="item?._file" alt="Uploaded Image"
+                        />
+                        <div class="card-block">
+                            <h6 class="card-title">{{ item?.file?.name }}</h6>
+                            <p class="card-text">{{ item?.file?.size/1024/1024 | number:'.2' }} MB</p>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> Remove
+                            </button>
                         </div>
                     </div>
-                </div>            
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a routerLink="/classifieds" class="btn btn-outline-warning">Cancel</a>
+                </div>
+            </div>
 
-            </fieldset>
-        </form>
-    </div>
-</div>
+        </div>
+        <!-- End File Upload -->
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <label for="parent-category" class="form-control-label" i18n="Main category|Main category for the classified">Main Category</label>
+                <select id="parent-category" formControlName="parentCategory" class="form-control" (change)="onCategoryChanged()">
+                    <option *ngFor="let category of categories" [ngValue]="category._id">{{category.name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="subCategory" class="form-control-label" i18n="Sub category|Sub category for the classified">Sub Category</label>
+                <select id="subCategory" formControlName="category" class="form-control">
+                            <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory">{{subCategory.name}}</option>
+                        </select>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
+            <label for="title" class="form-control-label" i18n="Classified Title|Title for the classified">Title</label>
+            <input id="title" class="form-control" placeholder="Title" formControlName="title" />
+            <div class="form-control-feedback" *ngIf="classified.get('title').hasError('required') && (classified.get('title').touched || submitted)">
+                Title is Required
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['description'].valid && (classified.controls['description'].touched || submitted) }">
+            <label for="description" class="form-control-label">Description</label>
+            <textarea id="description" class="form-control" placeholder="Description" formControlName="description"></textarea>
+            <div class="form-control-feedback" *ngIf="classified.get('description').hasError('required') && (classified.get('description').touched || submitted)">
+                Description is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country" class="form-control-label">Country</label>
+            <select id="country" class="form-control" formControlName="country" (change)="onCountryChanged()">
+                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+                    </select>
+        </div>
+        <div class="form-group">
+            <label for="region" class="form-control-label">Region/State</label>
+            <select id="region" class="form-control" formControlName="region" (change)="onRegionChanged()">
+                        <option *ngFor="let r of regions" [ngValue]="r">{{r.name}}</option>
+                    </select>
+        </div>
+        <div class="form-group" *ngIf="states?.length">
+            <label for="state" class="form-control-label">County/City (Optional)</label>
+            <select multiple id="state" class="form-control" formControlName="state">
+                        <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
+                    </select>
+        </div>
+        <div class="form-group row" formGroupName="price">
+            <div class="col-sm-2">
+                <label for="currency" class="form-control-label">Currency</label>
+                 <input id="currency" class="form-control" placeholder="Currency" formControlName="ccy" />               
+            </div>
+            <div class="col-sm-10">
+                <label for="price" class="form-control-label">Price</label>
+                <div class="input-group">
+                    <span class="input-group-addon iso-currency" [ngClass]="classified.get('price.ccy').value"></span>
+                    <input type="number" placeholder="Price" i18n-placeholder="Price" class="form-control" id="price" formControlName="value"
+                    />
+                </div>
+            </div>
+        </div>
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+            
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+        </style>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a routerLink="/classifieds" class="btn btn-outline-warning">Cancel</a>
+
+    </fieldset>
+</form>

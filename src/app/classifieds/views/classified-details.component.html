@@ -8,27 +8,13 @@
 <ul>
     <li *ngFor="let state of classified?.states">{{state}}</li>
 </ul>
-<p>Price: <span class="iso-currency" [ngClass]="classified?.price?.ccy"></span>{{classified?.price?.value.$numberDecimal}}</p>
+<p>Price: <span class="iso-currency" [ngClass]="classified?.price?.ccy"></span>{{classified?.price?.value.$numberDecimal | number : '1.2-2'}}</p>
 Images:
 <div class="row">
     <div class="col-sm-2" *ngFor="let image of classified?.images">
         <img class="img-thumbnail" src="{{image}}">
     </div>
 </div>
-<div>
+<div class="mb-5">
     <a routerLink="/classifieds" class="btn btn-outline-warning">Back</a>
 </div>
-
-<style>
-    span.iso-currency.USD::after {
-        content: "$"
-    }
-    
-    span.iso-currency.GBP::after {
-        content: "£"
-    }
-    
-    span.iso-currency.EUR::after {
-        content: "€"
-    }
-</style>

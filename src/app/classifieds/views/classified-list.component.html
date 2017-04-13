@@ -1,9 +1,33 @@
-<p>
-  classified-list works!
-</p>
-<p>
-  <a routerLink="/classifieds/create">Create a classified</a>
-</p>
-<ul *ngFor="let classified of classifieds">
-  <li><a [routerLink]="['/classifieds/details', classified._id]">{{classified.title}}</a></li>
-</ul>
+<div class="row">
+  <div class="col-12">
+    <a class="btn btn-success btn-lg mb-3 mt-3" routerLink="/classifieds/create">Create a classified</a>
+  </div>
+</div>
+<ng-container *ngIf="classifieds?.length > 0 else emptyBlock">
+  <div class="row">
+    <div *ngFor="let classified of classifieds" class="col-12 col-sm-6 col-xs-12 col-md-2">
+      <div class="card mb-3">
+        <img class="card-img-top img-responsive" style="max-height: 200px;" src="{{classified.images[0]}}">
+        <div class="card-block">
+          <h6 class="card-title">{{ classified.title }}</h6>
+          <p class="card-text">
+            <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ classified.price?.value.$numberDecimal | number : '1.2-2'
+            || 'N/A' }}
+          </p>
+          <a class="btn btn-primary btn-sm" [routerLink]="['/classifieds/details', classified._id]">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #emptyBlock>
+  <div class="row">
+    <div class="col-12">
+      <div class="card bg-faded">
+        <div class="card-block">
+          <h3 class="card-title">No Classifieds Found</h3>    
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

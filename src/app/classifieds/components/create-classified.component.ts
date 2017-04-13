@@ -13,6 +13,8 @@ import { Region } from '../../core/models/region';
 import { State } from '../../core/models/state';
 import { Observable } from 'rxjs/Rx';
 import _ from 'lodash';
+import { CustomFileUploader } from '../../core/extensions/customFileUploader';
+import { HttpClient } from '../../core/extensions/httpClient';
 
 @Component({
     selector: 'app-classified-create',
@@ -21,20 +23,33 @@ import _ from 'lodash';
 
 export class CreateClassifiedComponent implements OnInit {
     classified: FormGroup;
-    submitted: boolean = false;    
+    submitted: boolean = false;
     categories: Category[];
     subCategories: Category[];
-    currencies: Currency[];
     countries: Country[];
     regions: Region[];
-    states: State[];   
+    states: State[];
+
+    uploader: CustomFileUploader = new CustomFileUploader({});
+    private images: string[];
+
+    hasBaseDropZoneOver: boolean = false;
+    hasAnotherDropZoneOver: boolean = false;
+
+    fileOverBase(e: any): void {
+        this.hasBaseDropZoneOver = e;
+    }
+
+    fileOverAnother(e: any): void {
+        this.hasAnotherDropZoneOver = e;
+    }
 
     constructor(private fb: FormBuilder,
         private classifiedService: ClassifiedService,
         private categoryService: CategoryService,
         private router: Router,
         private countryService: CountryService,
-        private currencyService: CurrencyService) { }  
+        private currencyService: CurrencyService) { }
 
     ngOnInit() {
         this.classified = this.fb.group({
@@ -44,7 +59,8 @@ export class CreateClassifiedComponent implements OnInit {
             category: ['', [Validators.required]],
             price: this.fb.group({
                 value: [''],
-                currency: { value: '', disabled: true }
+                ccy: [''],
+                ccyNbr: ['']
             }),
             country: [{}],
             region: [{}],
@@ -62,15 +78,12 @@ export class CreateClassifiedComponent implements OnInit {
                         this.classified.get('category').setValue(subCategories.length ? subCategories[0] : '');
                     });
             }),
-            this.currencyService.getAll().then(currencies => {
-                this.currencies = currencies;
-                this.countryService.getAll()
-                    .then(countries => {
-                        this.countries = countries;
-                        this.classified.get('country').setValue(countries.length ? countries[0] : {});
-                        this.onCountryChanged();
-                    })
-            })
+            this.countryService.getAll()
+                .then(countries => {
+                    this.countries = countries;
+                    this.classified.get('country').setValue(countries.length ? countries[0] : {});
+                    this.onCountryChanged();
+                })
         );
     }
 
@@ -79,17 +92,24 @@ export class CreateClassifiedComponent implements OnInit {
 
         if (valid) {
             value.states = value.state && value.state.constructor === Array ? _.map(value.state, 'name') : [];
-            value.price = value.price && value.price.value ? {
-                value: value.price.value.toString(),
-                ccy: this.classified.get('price.currency').value.ccy,
-                ccyNbr: this.classified.get('price.currency').value.ccyNbr
-            } : undefined;
 
             this.classifiedService.create(value)
                 .then(classified => {
+
+                    if (this.uploader.queue.length) {
+                        return this.uploader.uploadAllAsync({
+                            fieldName: 'images',
+                            url: 'http://localhost:3000/api/classifieds/' + classified._id + '/uploadImages'
+                        })
+                    }
+
+                    return classified;
+                })
+                .then(response => {
+                    let classified = response as Classified;
                     this.router.navigate(['/classifieds/details', classified._id]);
                 })
-                .catch(error => alert(JSON.stringify(error)));
+                .catch(error => alert(error));
         }
     }
 
@@ -104,17 +124,18 @@ export class CreateClassifiedComponent implements OnInit {
     }
 
     onCountryChanged() {
-        let countryCode = this.classified.get('country').value.countryCode;
+        let country = this.classified.get('country').value;
 
-        if (countryCode) {
-            let currency = _.find(this.currencies, { 'ccyNbr': countryCode });
-            this.classified.get('price.currency').setValue(currency);
+        if (country) {
+
+            this.classified.get('price.ccy').setValue(country.currency.ccy);
+            this.classified.get('price.ccyNbr').setValue(country.currency.ccyNbr);
         }
 
-        let regions = this.classified.get('country').value.regions;
+        let regions = country.regions;
         this.regions = regions;
         this.classified.get('region').setValue(regions[0]);
-        this.onRegionChanged()
+        this.onRegionChanged();
     }
 
     onRegionChanged() {

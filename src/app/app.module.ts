@@ -13,7 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountModule } from './account/account.module';
 import { ClassifiedModule } from './classifieds/classifieds.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
