@@ -5,9 +5,10 @@ import { ClassifiedService } from './services/classifieds.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective, FileDropDirective , FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { ImagePreview } from '../core/directives/image-preview.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports: [ClasifiedRoutingModule, CommonModule, ReactiveFormsModule],
+  imports: [ClasifiedRoutingModule, CommonModule, ReactiveFormsModule,  NgbModule.forRoot()],
   declarations: [routedComponents, FileSelectDirective, FileDropDirective, ImagePreview],
   providers: [ClassifiedService]
 })

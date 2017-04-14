@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
+
 export class AppComponent implements OnInit {
   user: User;
   subscription: Subscription;

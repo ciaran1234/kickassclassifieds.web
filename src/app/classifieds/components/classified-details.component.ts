@@ -14,7 +14,7 @@ export class ClassifiedDetailsComponent implements OnInit {
 
     constructor(private classifiedService: ClassifiedService, private route: ActivatedRoute) { }
 
-    ngOnInit() {     
+    ngOnInit() {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.getClassifiedDetails();

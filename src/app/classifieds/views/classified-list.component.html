@@ -11,7 +11,7 @@
         <div class="card-block">
           <h6 class="card-title">{{ classified.title }}</h6>
           <p class="card-text">
-            <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ classified.price?.value.$numberDecimal | number : '1.2-2'
+            <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal | number : '1.2-2')
             || 'N/A' }}
           </p>
           <a class="btn btn-primary btn-sm" [routerLink]="['/classifieds/details', classified._id]">View</a>

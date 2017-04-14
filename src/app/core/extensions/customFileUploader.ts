@@ -5,6 +5,12 @@ import 'rxjs/add/operator/toPromise';
 
 export class CustomFileUploader extends FileUploader {
 
+    constructor(options: FileUploaderOptions) {
+        options.authTokenHeader = options.authTokenHeader || 'Authorization';
+        options.authToken = options.authToken || localStorage.getItem('accessToken');
+        super(options);
+    }
+
     uploadAllAsync(options?: any): Promise<any> {
         options = options || {};
 
@@ -31,8 +37,9 @@ export class CustomFileUploader extends FileUploader {
                         }
                     }
                 };
-
+                                
                 xhr.open(options.method || 'POST', options.url || this.queue[0].url, true);
+                xhr.setRequestHeader(this.options.authTokenHeader, this.options.authToken);
                 xhr.send(form);
             }
         }).toPromise();

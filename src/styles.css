@@ -18,3 +18,7 @@
 .custom-file-control::after {
     content: "Choose File"
 }
+
+.carousel-inner {
+    background-color: #333;
+}
