@@ -118,7 +118,7 @@ export class CreateClassifiedComponent implements OnInit {
 
         this.categoryService.getSubCategories(id)
             .then(subCategories => {
-                this.subCategories = subCategories;
+                this.subCategories = subCategories;    
                 this.classified.get('category').setValue(subCategories.length > 0 ? subCategories[0] : '');
             });
     }

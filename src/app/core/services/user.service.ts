@@ -81,10 +81,10 @@ export class UserService {
 
     checkIfUserLoggedIn(): Promise<void> {
         if (localStorage.getItem('accessToken')) {
-
             this.me().then(user => {
                 this.onUserChanged(user);
-            });
+            })
+            .catch(error => localStorage.removeItem('accessToken')); //token expired. clear it from storage
         }
 
         return null;
