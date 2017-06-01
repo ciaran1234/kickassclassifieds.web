@@ -1,6 +1,6 @@
 <form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified" class="mt-3 mb-5">
     <fieldset>
-        <legend>Post Advert</legend>
+        <legend>Post Advert</legend>      
         <!-- Begin File Upload -->
         <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
             class="my-drop-zone mb-3">
@@ -29,6 +29,7 @@
 
         </div>
         <!-- End File Upload -->
+
         <div class="form-group row">
             <div class="col-sm-6">
                 <label for="parent-category" class="form-control-label" i18n="Main category|Main category for the classified">Main Category</label>
@@ -38,12 +39,14 @@
             </div>
             <div class="col-sm-6">
                 <label for="subCategory" class="form-control-label" i18n="Sub category|Sub category for the classified">Sub Category</label>
-                <select id="subCategory" formControlName="category" class="form-control">
+                <select id="subCategory" formControlName="category" class="form-control" (change)="onSubCategoryChanged()">
                      <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory">{{subCategory.name}}</option>
-                </select>        
-                <code>{{classified.get('category.details')?.value}}</code>       
+                </select>
             </div>
         </div>
+        <dynamic-form-bootstrap-control *ngFor="let controlModel of formModel" [group]="detailsFormGroup" [model]="controlModel"
+            [hasErrorMessaging]="controlModel.hasErrorMessages">
+        </dynamic-form-bootstrap-control>
         <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
             <label for="title" class="form-control-label" i18n="Classified Title|Title for the classified">Title</label>
             <input id="title" class="form-control" placeholder="Title" formControlName="title" />
@@ -94,7 +97,7 @@
             .my-drop-zone {
                 border: dotted 3px lightgray;
             }
-            
+
             .nv-file-over {
                 border: dotted 3px red;
             }

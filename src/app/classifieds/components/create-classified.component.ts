@@ -15,6 +15,9 @@ import { Observable } from 'rxjs/Rx';
 import _ from 'lodash';
 import { CustomFileUploader } from '../../core/extensions/customFileUploader';
 import { HttpClient } from '../../core/extensions/httpClient';
+import { DynamicFormControlFactory } from '../../dynamicForms/dynamicFormControlFactory';
+import { DynamicFormService } from "@ng2-dynamic-forms/core";
+import { DynamicFormControlModel } from "@ng2-dynamic-forms/core";
 
 @Component({
     selector: 'app-classified-create',
@@ -23,13 +26,15 @@ import { HttpClient } from '../../core/extensions/httpClient';
 
 export class CreateClassifiedComponent implements OnInit {
     classified: FormGroup;
+    detailsFormGroup: FormGroup;
     submitted: boolean = false;
     categories: Category[];
     subCategories: Category[];
     countries: Country[];
     regions: Region[];
     states: State[];
-
+    formModel: DynamicFormControlModel[] = [];
+    color: string;
     uploader: CustomFileUploader = new CustomFileUploader({});
     private images: string[];
 
@@ -49,14 +54,18 @@ export class CreateClassifiedComponent implements OnInit {
         private categoryService: CategoryService,
         private router: Router,
         private countryService: CountryService,
-        private currencyService: CurrencyService) { }
+        private currencyService: CurrencyService,
+        private formService: DynamicFormService) { }
 
     ngOnInit() {
+        this.detailsFormGroup = this.formService.createFormGroup(this.formModel);
+
         this.classified = this.fb.group({
             title: ['', [Validators.required]],
             description: ['', [Validators.required]],
             parentCategory: [{}, [Validators.required]],
             category: ['', [Validators.required]],
+            details: this.detailsFormGroup,
             price: this.fb.group({
                 value: [''],
                 ccy: [''],
@@ -76,6 +85,7 @@ export class CreateClassifiedComponent implements OnInit {
                     .then(subCategories => {
                         this.subCategories = subCategories;
                         this.classified.get('category').setValue(subCategories.length ? subCategories[0] : '');
+                        this.setDynamicForm();
                     });
             }),
             this.countryService.getAll()
@@ -118,9 +128,14 @@ export class CreateClassifiedComponent implements OnInit {
 
         this.categoryService.getSubCategories(id)
             .then(subCategories => {
-                this.subCategories = subCategories;    
+                this.subCategories = subCategories;
                 this.classified.get('category').setValue(subCategories.length > 0 ? subCategories[0] : '');
+                this.setDynamicForm();
             });
+    }
+
+    onSubCategoryChanged() {
+        this.setDynamicForm();
     }
 
     onCountryChanged() {
@@ -141,5 +156,10 @@ export class CreateClassifiedComponent implements OnInit {
     onRegionChanged() {
         this.states = this.classified.get('region').value.states;
         this.classified.get('state').setValue(this.states.length ? this.states[0] : {});
+    }
+
+    setDynamicForm(): void {
+        DynamicFormControlFactory.setFormGroup(this.detailsFormGroup,
+            this.formService, this.formModel, this.classified.get('category').value.details);
     }
 }

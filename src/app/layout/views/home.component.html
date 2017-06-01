@@ -1,4 +1,43 @@
 <h1 i18n="Site slogan|Site introduction slogan">Welcome to Kick Ass Classifieds</h1>
-<app-search></app-search>
 
+<div class="row">
+    <div class="col">
+        <form novalidate [formGroup]="searchForm">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="text" id="q" formControlName="q" class="form-control" placeholder="Search" />
+                </div>
+                <div class="col-sm-4">
+                    <select id="category" formControlName="category" class="form-control">
+                        <option value="">All Categories</option>
+                        <optgroup *ngFor="let parent of categories" [label]="parent.name">
+                             <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
+                        </optgroup>                       
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <select id="country" formControlName="country" class="form-control">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let country of countries" [ngValue]="country.countryCode">{{country.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
+<div class="row">
+    <div *ngFor="let classified of classifieds | async" class="col-12 col-sm-6 col-xs-12 col-md-2">
+        <div class="card mb-3">
+            <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
+            <div class="card-block">
+                <h6 class="card-title">{{ classified.title }}</h6>
+                <p class="card-text">
+                    <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
+                    | number : '1.2-2') || 'N/A' }}
+                </p>
+                <a class="btn btn-primary btn-sm" [routerLink]="['/classifieds/details', classified._id]">View</a>
+            </div>
+        </div>
+    </div>
+</div>

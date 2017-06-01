@@ -4,6 +4,7 @@ import { Region } from '../../core/models/region';
 import { State } from '../../core/models/state';
 import { Advertiser } from './advertiser';
 import { Category } from '../../core/models/category';
+import { ClassifiedCountry } from './classifiedCountry';
 
 export class Classified {
     public _id: string;
@@ -13,8 +14,8 @@ export class Classified {
     public images: string[];
     public advertiser: Advertiser;
     public price: Price;
-    public country: Number;
+    public country: ClassifiedCountry;
     public region: string;
     public states: string[];
-    public details: any;    
+    public details: any;
 }

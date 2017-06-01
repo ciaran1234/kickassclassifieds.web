@@ -3,9 +3,9 @@
     <a class="btn btn-success btn-lg mb-3 mt-3" routerLink="/classifieds/create">Create a classified</a>
   </div>
 </div>
-<ng-container *ngIf="classifieds?.length > 0 else emptyBlock">
+<ng-container *ngIf="(classifieds | async)?.length > 0 else emptyBlock">
   <div class="row">
-    <div *ngFor="let classified of classifieds" class="col-12 col-sm-6 col-xs-12 col-md-2">
+    <div *ngFor="let classified of classifieds | async" class="col-12 col-sm-6 col-xs-12 col-md-2">
       <div class="card mb-3">
         <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
         <div class="card-block">

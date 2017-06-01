@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Classified } from '../models/classified';
 import { ClassifiedService } from '../services/classifieds.service';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-classified-list',
@@ -9,15 +11,11 @@ import { ClassifiedService } from '../services/classifieds.service';
 
 export class ClassifiedListComponent implements OnInit {
 
-  classifieds: Classified[];
+  classifieds: Observable<Classified[]>;
 
   constructor(private classifiedService: ClassifiedService) { }
 
   ngOnInit() {
-    this.classifiedService.getAll()
-      .then(classifieds => {      
-        this.classifieds = classifieds
-      })
-      .catch(error => alert('error.....'));
+    //this.classifieds = this.classifiedService.getAll();
   }
 }
