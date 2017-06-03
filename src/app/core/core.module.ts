@@ -4,6 +4,7 @@ import { HttpClient } from './extensions/httpClient';
 import { UserService } from './services/user.service';
 import { CurrencyService } from './services/currency.service';
 import { CountryService } from './services/country.service';
+import { FilterService } from './services/filterService';
 
 @NgModule({
 
@@ -17,6 +18,7 @@ export class CoreModule {
         ApiConfiguration,
         HttpClient,       
         UserService,
+        FilterService,
         CurrencyService,
         CountryService
       ]

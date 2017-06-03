@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomValidator } from '../../core/validation/customValidator';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Signin } from '../models/signin';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-signin',
@@ -14,7 +15,10 @@ export class SigninComponent implements OnInit {
     login: FormGroup;
     submitted: boolean = false;
 
-    constructor(private fb: FormBuilder, private userService: UserService, private apiConfiguration: ApiConfiguration) { }
+    constructor(private fb: FormBuilder, 
+    private userService: UserService, 
+    private apiConfiguration: ApiConfiguration,
+    private router: Router) { }
 
     ngOnInit() {
         this.login = this.fb.group({
@@ -28,7 +32,7 @@ export class SigninComponent implements OnInit {
 
         if (valid) {
             this.userService.signin(value)
-                .then(response => console.log(JSON.stringify(response)))
+                .then(response => this.router.navigate(['/classifieds']))
                 .catch(error => alert(error.message || 'invalid username or password'));
         }
     }

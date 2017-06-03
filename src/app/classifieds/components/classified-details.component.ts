@@ -1,34 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Classified } from '../models/classified';
+import { ClassifiedService } from '../services/classifieds.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'classified-details',
-    templateUrl: '../views/classified-details.component.html'
+    selector: 'app-classified-details',
+    templateUrl: '../views/classified-details.component.html'    
 })
 
-export class ClassifiedDetailsComponent {
-    @Input() data: any
-    details: any[] = [];
+export class ClassifiedDetailsComponent implements OnInit {
+    id: string;
+    classified: Classified;
 
-    constructor() { }
+    constructor(private classifiedService: ClassifiedService, private route: ActivatedRoute) { }
 
-    ngOnChanges() {
-        if (this.data) {
-            for (let property in this.data) {
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.getClassifiedDetails();
+        });
+    }
 
-                if (typeof (this.data[property]) === 'object') {
-                    let value = '';
-
-                    for(let subProperty in this.data[property]){
-                        value += this.data[property][subProperty] + ' ';
-                    }
-
-                    this.details.push({ key: property, value: value });
-                }
-                else {
-                    this.details.push({ key: property, value: this.data[property] });
-                }
-            }
-        }
+    private getClassifiedDetails() {
+        return this.classifiedService.get(this.id)
+            .then(classified => this.classified = classified)
+            .catch(error => alert('error.....'));
     }
 }

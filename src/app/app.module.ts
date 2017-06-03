@@ -29,8 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    CategoryService,   
-    UserService
+    CategoryService 
   ],
   bootstrap: [AppComponent]
 })

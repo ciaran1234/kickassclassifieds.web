@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { ClassifiedListComponent } from './components/classified-list.component';
-import { ClassifiedInfoComponent } from './components/classified-info.component';
+import { ClassifiedDetailsComponent } from './components/classified-details.component';
 import { CreateClassifiedComponent } from './components/create-classified.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     { path: 'classifieds', component: ClassifiedListComponent },
-    { path: 'classifieds/details/:id', component: ClassifiedInfoComponent },
+    { path: 'classifieds/details/:id', component: ClassifiedDetailsComponent },
     { path: 'classifieds/create', component: CreateClassifiedComponent } 
 ];
 
@@ -19,6 +19,6 @@ export class ClasifiedRoutingModule { }
 
 export const routedComponents = [
     ClassifiedListComponent,
-    ClassifiedInfoComponent,
+    ClassifiedDetailsComponent,
     CreateClassifiedComponent   
 ]

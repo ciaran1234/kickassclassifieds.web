@@ -5,7 +5,7 @@
                 <label class="form-control-label">First Name</label>
                 <input type="text" placeholder="Your First Name" formControlName="firstName" class="form-control" />
                 <div *ngIf="registration.get('firstName').hasError('required') && (registration.get('firstName').touched || submitted)"
-                    class="form-control-feedback">
+                     class="form-control-feedback">
                     First Name is required
                 </div>
                 <div *ngIf="registration.get('firstName').hasError('maxlength') && registration.get('firstName').touched" class="form-control-feedback">
@@ -16,7 +16,7 @@
                 <label class="form-control-label">Last Name</label>
                 <input type="text" placeholder="Your Last Name" formControlName="lastName" class="form-control" />
                 <div *ngIf="registration.get('lastName').hasError('required') && (registration.get('lastName').touched || submitted)"
-                    class="form-control-feedback">
+                     class="form-control-feedback">
                     Last Name is required
                 </div>
                 <div *ngIf="registration.get('lastName').hasError('maxlength') && registration.get('lastName').touched" class="form-control-feedback">
@@ -27,7 +27,7 @@
                 <label class="form-control-label">Email</label>
                 <input type="email" placeholder="Your Email" i18n-placeholder="Your Email" formControlName="email" class="form-control" />
                 <div *ngIf="registration.get('email').hasError('required') && (registration.get('email').touched || submitted)"
-                    class="form-control-feedback">
+                     class="form-control-feedback">
                     Email is required
                 </div>
                 <div *ngIf="registration.get('email').hasError('maxlength') && registration.get('email').touched" class="form-control-feedback">
@@ -44,7 +44,7 @@
                 <label class="form-control-label">Password</label>
                 <input type="password" placeholder="Password" formControlName="password" class="form-control" />
                 <div *ngIf="registration.get('password').hasError('required') && (registration.get('password').touched || submitted)"
-                    class="form-control-feedback">
+                     class="form-control-feedback">
                     Password is required
                 </div>
                 <div *ngIf="registration.get('password').hasError('minlength') && registration.get('password').touched" class="form-control-feedback">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="form-group" [ngClass]="{ 'has-danger': !registration.controls['confirmPassword'].valid && (registration.controls['confirmPassword'].touched || submitted) }"
-                class="form-control-feedback">
+                 class="form-control-feedback">
                 <label class="form-control-label">Confirm Password</label>
                 <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" />
                 <div *ngIf="registration.get('confirmPassword').hasError('required') && (registration.get('confirmPassword').touched || submitted)" class="form-control-feedback">

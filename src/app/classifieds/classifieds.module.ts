@@ -8,7 +8,9 @@ import { ImagePreview } from '../core/directives/image-preview.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormsCoreModule } from "@ng2-dynamic-forms/core";
 import { DynamicFormsBootstrapUIModule } from "@ng2-dynamic-forms/ui-bootstrap";
-import {ClassifiedDetailsComponent} from './components/classified-details.component';
+import { ClassifiedDynamicDetailsComponent } from './components/classified-dynamic-details.component';
+
+
 @NgModule({
   imports: [ClasifiedRoutingModule,
     CommonModule,
@@ -16,10 +18,13 @@ import {ClassifiedDetailsComponent} from './components/classified-details.compon
     DynamicFormsCoreModule.forRoot(),
     DynamicFormsBootstrapUIModule,
     NgbModule.forRoot()],
-  declarations: [routedComponents,
+  declarations:
+  [routedComponents,
     FileSelectDirective,
     FileDropDirective,
-    ImagePreview, ClassifiedDetailsComponent],
+    ImagePreview,
+    ClassifiedDynamicDetailsComponent
+    ],
   providers: [ClassifiedService]
 })
 

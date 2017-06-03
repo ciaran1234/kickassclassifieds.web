@@ -20,11 +20,25 @@ export class DynamicFormControlFactory {
                 return new DynamicInputModel({
                     id: key,
                     label: key,
-                    value: '',
-                    required: property.required,
+                   // value: '',
+                    placeholder: key,
+                    //required: property.required,
                     inputType: 'text',
+                    validators: {
+                        required: null,
+                        maxLength: 5
+                    },
                     errorMessages: {
                         required: "{{label}} is required."
+                    }
+                }, {
+                    element: {
+                        container: "col-sm-6",
+                        label: "control-label"
+                    },
+                    grid: {
+                        // control: "col-sm-9",
+                        //label: "col-sm-3"
                     }
                 });
             case 'Number':
@@ -32,9 +46,13 @@ export class DynamicFormControlFactory {
                 return new DynamicInputModel({
                     id: key,
                     label: key,
-                    value: '',
+                    // value: '',
+                    placeholder: key,
                     required: property.required,
                     inputType: 'number',
+                    validators: {
+                        required: null
+                    },
                     errorMessages: {
                         required: "{{label}} is required."
                     }
@@ -82,7 +100,7 @@ export class DynamicFormControlFactory {
         }
     }
 
-   static setFormGroup(formGroup: FormGroup, formService: DynamicFormService, formModel: DynamicFormControlModel[], data: any) {
+    static setFormGroup(formGroup: FormGroup, formService: DynamicFormService, formModel: DynamicFormControlModel[], data: any) {
         var length = formModel.length;
 
         if (length > 0) {

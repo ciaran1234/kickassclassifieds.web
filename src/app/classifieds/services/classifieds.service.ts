@@ -19,13 +19,11 @@ export class ClassifiedService {
             .catch(error => this.handleError(error));
     }
 
-    getAll(router :Router, activeRoute: ActivatedRoute, filter?: any): Observable<Classified[]> {
-        var url = this.apiConfiguration.classifieds;
-
-        return this.httpClient.getFiltered(url, filter, router, activeRoute)
-        .map(res => res.json() as Classified[])
-        .catch(err => this.handleError(err));
-    }  
+    getAll(): Observable<Classified[]> {
+        return this.httpClient.get(this.apiConfiguration.classifieds)
+            .map(res => res.json() as Classified[])
+            .catch(err => this.handleError(err));
+    }
 
     create(classified: Classified): Promise<Classified> {
         return this.httpClient.post(this.apiConfiguration.classifieds, classified)

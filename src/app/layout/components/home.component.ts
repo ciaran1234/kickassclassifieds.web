@@ -9,6 +9,9 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilterService } from '../../core/services/filterService';
+import { ApiConfiguration } from '../../core/services/api-configuration.service';
+import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 
 @Component({
     selector: 'app-home',
@@ -16,10 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
-    title: string = '';
-    category: object = {};
-    searchTermStream = new Subject<string>();
-    classifieds: Observable<Classified[]>;
+    classifieds: Classified[];
     countries: Country[];
     categories: Category[];
     searchForm: FormGroup;
@@ -27,28 +27,30 @@ export class HomeComponent implements OnInit {
     constructor(private classifiedService: ClassifiedService,
         private categoryService: CategoryService,
         private countryService: CountryService,
+        private filterService: FilterService<ClassifiedFilter, Classified[]>,
+        private apiConfiguration: ApiConfiguration,
         private fb: FormBuilder,
         private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
+        //this.filterService.init();
+
         this.searchForm = this.fb.group({
             q: [''],
             category: [''],
-            country: ['']
+            country: [''],
         });
 
-
-        // this.router.navigate([], {
-        //     queryParams: { q: 'query_here' },
-        //     relativeTo: this.route
-        // });
-
         this.categoryService.getAllGrouped().then(categories => this.categories = categories);
+
         this.countryService.getAll().then(countries => this.countries = countries);
 
-        this.classifieds = this.searchForm.valueChanges
-            .debounceTime(500).distinctUntilChanged().startWith(null)
-            .switchMap((filter: any) => this.classifiedService.getAll(this.router, this.route, filter));
+        this.classifiedService.getAll().toPromise()
+            .then(classifieds => this.classifieds = classifieds);
+    }
+
+    onSearch({ value, valid }: { value: any, valid: boolean }) {
+        this.router.navigate(['/classifieds'], { queryParams: value });
     }
 }

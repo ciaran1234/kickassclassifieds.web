@@ -1,6 +1,6 @@
-<form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified" class="mt-3 mb-5">
-    <fieldset>
-        <legend>Post Advert</legend>      
+<div class="container">
+    <form novalidate (ngSubmit)="onSave(classified)" [formGroup]="classified" class="mt-3 mb-5">
+
         <!-- Begin File Upload -->
         <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
             class="my-drop-zone mb-3">
@@ -8,11 +8,11 @@
                 <div class="col-12">
                     <h2 class="ml-4 sl-2">Base drop zone</h2>
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input" ng2FileSelect [uploader]="uploader" multiple>                       
-                        <span class="custom-file-control"></span>                             
+                        <input type="file" id="file" class="custom-file-input" ng2FileSelect [uploader]="uploader" multiple>
+                        <span class="custom-file-control"></span>
                     </label>
                 </div>
-                <div class="col-12 col-sm-4 col-md-2 mb-3 mt-3 clearfix" *ngFor="let item of uploader.queue">
+                <div class="col-12 col-sm-4 col-md-3 mb-3 mt-3 clearfix" *ngFor="let item of uploader.queue">
                     <div class="card">
                         <img src="" class="card-img-top img-responsive" style="max-height: 175px;" imagePreview [image]="item?._file" alt="Uploaded Image"
                         />
@@ -40,12 +40,13 @@
             <div class="col-sm-6">
                 <label for="subCategory" class="form-control-label" i18n="Sub category|Sub category for the classified">Sub Category</label>
                 <select id="subCategory" formControlName="category" class="form-control" (change)="onSubCategoryChanged()">
-                     <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory">{{subCategory.name}}</option>
+                    <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory">{{subCategory.name}}</option>
                 </select>
             </div>
         </div>
-        <dynamic-form-bootstrap-control *ngFor="let controlModel of formModel" [group]="detailsFormGroup" [model]="controlModel"
-            [hasErrorMessaging]="controlModel.hasErrorMessages">
+        <dynamic-form-bootstrap-control *ngFor="let controlModel of formModel" [group]="detailsFormGroup" [model]="controlModel">
+
+
         </dynamic-form-bootstrap-control>
         <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
             <label for="title" class="form-control-label" i18n="Classified Title|Title for the classified">Title</label>
@@ -64,20 +65,20 @@
         <div class="form-group">
             <label for="country" class="form-control-label">Country</label>
             <select id="country" class="form-control" formControlName="country" (change)="onCountryChanged()">
-                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
-                    </select>
+                <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="region" class="form-control-label">Region/State</label>
             <select id="region" class="form-control" formControlName="region" (change)="onRegionChanged()">
-                        <option *ngFor="let r of regions" [ngValue]="r">{{r.name}}</option>
-                    </select>
+                <option *ngFor="let r of regions" [ngValue]="r">{{r.name}}</option>
+            </select>
         </div>
         <div class="form-group" *ngIf="states?.length">
             <label for="state" class="form-control-label">County/City (Optional)</label>
             <select multiple id="state" class="form-control" formControlName="state">
-                        <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
-                    </select>
+                <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
+            </select>
         </div>
         <div class="form-group row" formGroupName="price">
             <div class="col-sm-2">
@@ -105,6 +106,5 @@
 
         <button type="submit" class="btn btn-primary">Save</button>
         <a routerLink="/classifieds" class="btn btn-outline-warning">Cancel</a>
-
-    </fieldset>
-</form>
+    </form>
+</div>

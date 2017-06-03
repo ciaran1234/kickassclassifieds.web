@@ -19,8 +19,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['password'].valid && (login.controls['password'].touched || submitted) }">
                 <label for="password" class="form-control-label">Password</label>
-                <input type="password" placeholder="Your Password" formControlName="password" id="password" name="password" class="form-control"
-                />
+                <input type="password" placeholder="Your Password" formControlName="password" id="password" name="password" class="form-control" />
                 <div class="form-control-feedback" *ngIf="login.get('password').hasError('required') && (login.get('password').touched || submitted)">
                     Password is required
                 </div>
