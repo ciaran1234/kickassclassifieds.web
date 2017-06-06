@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Category } from '../../core/models/category';
 import { Classified } from '../models/classified';
 import { ClassifiedService } from '../services/classifieds.service';
@@ -15,9 +15,10 @@ import { Observable } from 'rxjs/Rx';
 import _ from 'lodash';
 import { CustomFileUploader } from '../../core/extensions/customFileUploader';
 import { HttpClient } from '../../core/extensions/httpClient';
-import { DynamicFormControlFactory } from '../../dynamicForms/dynamicFormControlFactory';
-import { DynamicFormService } from "@ng2-dynamic-forms/core";
-import { DynamicFormControlModel } from "@ng2-dynamic-forms/core";
+import { DynamicFormControlFactory } from '../../dynamicForms/models/dynamicFormControl.factory';
+import { DynamicFormService } from "../../dynamicForms/services/dynamicForm.service";
+import { DynamicFormControlModel } from "../../dynamicForms/models/dynamicFormControl.model";
+import { CustomValidator } from '../../core/validation/customValidator';
 
 @Component({
     selector: 'app-classified-create',
@@ -97,8 +98,21 @@ export class CreateClassifiedComponent implements OnInit {
         );
     }
 
+    markFormAsSubmitted(formGroup: FormGroup): void {
+        Object.keys(formGroup.controls).map((controlName) => {
+            let control = formGroup.get(controlName);
+
+            if (control instanceof FormGroup) {
+                this.markFormAsSubmitted(control as FormGroup);
+            }
+            else {
+                control.markAsTouched({ onlySelf: true });
+            }
+        });
+    }
+
     onSave({ value, valid }: { value: any, valid: boolean }) {
-        this.submitted = true;
+        this.markFormAsSubmitted(this.classified);
 
         if (valid) {
             value.states = value.state && value.state.constructor === Array ? _.map(value.state, 'name') : [];

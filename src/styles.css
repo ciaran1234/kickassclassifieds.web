@@ -22,3 +22,13 @@
 .carousel-inner {
     background-color: #222;
 }
+
+dynamic-form-control {
+    display: block;
+}
+
+.dynamic-form-group-label {
+    width: 100%;
+    padding-left: 15px;
+    display: inline-block;
+}

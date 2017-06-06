@@ -1,4 +1,4 @@
-import { ApiConfiguration } from '../../core/services/api-configuration.service';
+﻿import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { HttpClient } from '../../core/extensions/httpClient';
 import { Injectable } from '@angular/core';
 import { Classified } from '../models/classified';

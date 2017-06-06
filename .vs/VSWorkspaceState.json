@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\dynamicForms",
+    "\\src\\app\\dynamicForms\\models",
+    "\\src\\app\\dynamicForms\\views"
+  ],
+  "SelectedNode": "\\src\\app\\dynamicForms\\dynamicForms.module.ts",
+  "PreviewInSolutionExplorer": false
+}

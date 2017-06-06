@@ -1,0 +1,30 @@
+﻿<div [ngClass]="model.style.innerGrid" [class.has-danger]="showErrorMessages && model.type !== 1" [formGroup]="group">
+
+  <label *ngIf="model.label !== null" [ngClass]="model.style.label">{{model.label}}</label>
+  <ng-container [ngSwitch]="model.type">
+    <ng-container *ngSwitchCase="1" [formGroupName]="model.id">
+
+
+      <dynamic-form-control *ngFor="let controlModel of model.group" [group]="control" [model]="controlModel">
+      </dynamic-form-control>
+
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <input class="form-control" [type]="model.inputType" [placeholder]="model.placeholder" [formControlName]="model.id" [required]="model.required"
+        [maxlength]="model.maxLength" [minlength]="model.minLength" />
+    </ng-container>
+    <ng-container *ngSwitchCase="3">
+      <select class="form-control" [formControlName]="model.id" [required]="model.required">
+         <option *ngFor="let option of model.options"
+                        [attr.name]="model.name"
+                        [ngValue]="option.value">{{option.label}}
+          </option>
+     </select>
+    </ng-container>
+  </ng-container>
+  <div *ngIf="model.type !== 1 && showErrorMessages">
+    <div *ngFor="let message of errorMessages" class="form-control-feedback">
+      {{message}}
+    </div>
+  </div>
+</div>

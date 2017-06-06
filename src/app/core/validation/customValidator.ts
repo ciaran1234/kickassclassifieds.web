@@ -43,4 +43,38 @@ export class CustomValidator {
             return valid !== true ? { 'notEqualTo': { value } } : null;
         };
     }
+
+    static greaterThan(minValue: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+
+            const value = control.value;
+        
+            return !(value > minValue) ? { 'greaterThan': { value } } : null;
+        };
+    }
+
+    static greaterThanOrEqual(minValue: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+
+           
+
+            const value = control.value;
+            return !(value >= minValue) ? { 'greaterThanOrEqual': { value } } : null;
+        };
+    }
+
+    static lessThan(maxValue: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+
+            const value = control.value;
+            return !(value < maxValue) ? { 'lessThan': { value } } : null;
+        };
+    }
+
+    static lessThanOrEqual(maxValue: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+            const value = control.value;
+            return !(value <= maxValue) ? { 'lessThanOrEqual': { value } } : null;
+        };
+    }
 }

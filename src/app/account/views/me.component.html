@@ -1,20 +1,40 @@
-<section id="me-social">
-    <ul *ngFor="let externalLogin of externalLogins">
-        <li>
-            <img style="max-height: 40px; max-width: 40px;" src="assets/images/social/{{externalLogin.loginProvider}}.png">
-            <button *ngIf="!externalLogin.providerKey" (click)="onAddExternalLogin(externalLogin)">Connect</button>
-            <button *ngIf="externalLogin.providerKey" (click)="onRemoveExternalLogin(externalLogin)">Disconnect</button>
-        </li>
-    </ul>
-</section>
-<section id="me-image" *ngIf="user">
-    <section>
-        <h2>{{user.firstName}} {{user.lastName}} ({{user.email}})</h2>
-        <img style="max-height: 520px; max-width: 1800px" src="{{user?.profileImageUrl}}">
-    </section>
-    <section>
-        <div>
-            <input type="file" name="profileImageUrl" (change)="onFileChange($event)" placeholder="Upload file" accept=".png, .jpg, .jpeg, .gif">
-        </div>
-    </section>
-</section>
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <section id="me-social" class="col-sm-6 col-xs-12">
+            <ul class="list-group" *ngFor="let externalLogin of externalLogins">
+                <li class="list-group-item">
+                    <ng-container *ngIf="!externalLogin.providerKey">
+                        <i class="fa fa-lg" [ngClass]="'fa-'+externalLogin.loginProvider" aria-hidden="true"></i>
+                        <button type="button" class="btn btn-primary" (click)="onAddExternalLogin(externalLogin)">
+                        Connect
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="externalLogin.providerKey">
+                        <span class="fa-stack fa-lg">
+  <i class="fa fa-square fa-stack-2x"></i>
+  <i class="fa fa-stack-1x fa-inverse" [ngClass]="'fa-'+externalLogin.loginProvider"></i>
+</span> &nbsp;
+                        <!--<i class="fa fa-lg" [ngClass]="'fa-'+externalLogin.loginProvider" aria-hidden="true"></i>-->
+                        <button type="button" class="btn btn-danger" (click)="onRemoveExternalLogin(externalLogin)">
+                         Disconnect
+                        </button>
+                    </ng-container>
+
+
+                </li>
+            </ul>
+
+        </section>
+        <section id="me-image" *ngIf="user" class="col-sm-6 col-xs-12">
+            <section>
+                <h3>{{user.firstName}} {{user.lastName}} ({{user.email}})</h3>
+                <img class="img-fluid" src="{{user?.profileImageUrl}}">
+            </section>
+            <section>
+                <div>
+                    <input type="file" name="profileImageUrl" (change)="onFileChange($event)" placeholder="Upload file" accept=".png, .jpg, .jpeg, .gif">
+                </div>
+            </section>
+        </section>
+    </div>
+</div>

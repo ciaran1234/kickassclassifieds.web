@@ -40,7 +40,7 @@
             <div class="card mb-3">
                 <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
                 <div class="card-block">
-                    <h6 class="card-title">{{ classified.title }}</h6>
+                    <h6 class="card-title text-truncate">{{ classified.title }}</h6>
                     <p class="card-text">
                         <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
                         | number : '1.2-2') || 'N/A' }}
