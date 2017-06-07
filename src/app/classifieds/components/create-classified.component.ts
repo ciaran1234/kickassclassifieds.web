@@ -62,8 +62,8 @@ export class CreateClassifiedComponent implements OnInit {
         this.detailsFormGroup = this.formService.createFormGroup(this.formModel);
 
         this.classified = this.fb.group({
-            title: ['', [Validators.required]],
-            description: ['', [Validators.required]],
+            title: ['', [Validators.required, Validators.maxLength(100)]],
+            description: ['', [Validators.required, Validators.maxLength(2000)]],
             parentCategory: [{}, [Validators.required]],
             category: ['', [Validators.required]],
             details: this.detailsFormGroup,
@@ -72,8 +72,8 @@ export class CreateClassifiedComponent implements OnInit {
                 ccy: [''],
                 ccyNbr: ['']
             }),
-            country: [{}],
-            region: [{}],
+            country: [{}, [Validators.required]],
+            region: [{}, [Validators.required]],
             state: [[]]
         });
 

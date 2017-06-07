@@ -45,18 +45,24 @@
     </div>
     <dynamic-form-control *ngFor="let controlModel of formModel" [group]="detailsFormGroup" [model]="controlModel">
     </dynamic-form-control>
-    <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched || submitted) }">
+    <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['title'].valid && (classified.controls['title'].touched) }">
       <label for="title" class="form-control-label" i18n="Classified Title|Title for the classified">Title</label>
-      <input id="title" class="form-control" placeholder="Title" formControlName="title" />
-      <div class="form-control-feedback" *ngIf="classified.get('title').hasError('required') && (classified.get('title').touched || submitted)">
+      <input id="title" class="form-control" placeholder="Title" formControlName="title" maxlength="100" />
+      <div class="form-control-feedback" *ngIf="classified.get('title').hasError('required') && (classified.get('title').touched)">
         Title is Required
       </div>
+      <div class="form-control-feedback" *ngIf="classified.get('title').hasError('maxlength') && (classified.get('title').touched)">
+        Max length of 100 characters for Title
+      </div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['description'].valid && (classified.controls['description'].touched || submitted) }">
+    <div class="form-group" [ngClass]="{ 'has-danger': !classified.controls['description'].valid && (classified.controls['description'].touched) }">
       <label for="description" class="form-control-label">Description</label>
-      <textarea id="description" class="form-control" placeholder="Description" formControlName="description" rows="6"></textarea>
-      <div class="form-control-feedback" *ngIf="classified.get('description').hasError('required') && (classified.get('description').touched || submitted)">
+      <textarea id="description" class="form-control" placeholder="Description" formControlName="description" rows="10" maxlength="2000"></textarea>
+      <div class="form-control-feedback" *ngIf="classified.get('description').hasError('required') && (classified.get('description').touched)">
         Description is required
+      </div>
+      <div class="form-control-feedback" *ngIf="classified.get('description').hasError('maxlength') && (classified.get('description').touched)">
+        Max length of 2000 characters for Description
       </div>
     </div>
     <div class="form-group">

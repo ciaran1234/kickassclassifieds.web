@@ -12,8 +12,7 @@ export class DynamicFormControlFactory {
     static get(key: string, property: any): DynamicFormControlModel {
         let discriminator = property.data !== undefined ? 'option' : typeof property.type === 'object' ? 'object' : property.type;
 
-        switch (discriminator) {
-            case 'String':
+        switch (_.toLower(discriminator)) {
             case 'string':
                 return new DynamicInputModel({
                     id: key,
@@ -38,8 +37,8 @@ export class DynamicFormControlFactory {
                         max: '{{displayName}} cannot be greater than {{max}}'
                     }
                 }, property.style);
-            case 'Number':
-            case 'number':
+            case 'int':
+            case 'decimal':
                 return new DynamicInputModel({
                     id: key,
                     label: property.label,
@@ -63,7 +62,6 @@ export class DynamicFormControlFactory {
                         lessThanOrEqual: '{{displayName}} must be less than or equal to {{max}}'
                     }
                 }, property.style);
-            case 'Boolean':
             case 'boolean':
                 return new DynamicCheckboxModel({
                     id: key,
