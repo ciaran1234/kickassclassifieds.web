@@ -14,21 +14,23 @@ export class ApiConfiguration {
     private countriesUrl = 'countries/';
 
     //account urls
-    readonly confirmResetPassword = this.schema + this.hostApi + this.accountUrl + 'confirmResetPassword';
-    readonly resetPassword = this.schema + this.hostApi + this.accountUrl + 'resetPassword';
-    readonly login = this.schema + this.hostApi + this.accountUrl + 'signin';
-    readonly me = this.schema + this.hostApi + this.users + 'me';
-    readonly register = this.schema + this.hostApi + this.accountUrl + 'signup';
+    readonly confirmResetPassword = this.schema + this.hostApi + this.accountUrl + 'confirmResetPassword/';
+    readonly resetPassword = this.schema + this.hostApi + this.accountUrl + 'resetPassword/';
+    readonly login = this.schema + this.hostApi + this.accountUrl + 'signin/';
+    readonly me = this.schema + this.hostApi + this.users + 'me/';
+    readonly myClassifieds = this.me + 'classifieds/';
+    readonly register = this.schema + this.hostApi + this.accountUrl + 'signup/';
     readonly locations = this.schema + this.hostApi + this.locationsUrl;
-    readonly exchangeExternalToken = this.schema + this.hostApi + this.accountUrl + 'exchange';
-    readonly confirmAccount = this.schema + this.hostApi + this.accountUrl + 'confirm';
-    readonly removeExternalLogin = this.schema + this.hostApi + this.accountUrl + 'social';
-    readonly uploadProfilePicture = this.schema + this.hostApi + this.users + 'picture';
+    readonly exchangeExternalToken = this.schema + this.hostApi + this.accountUrl + 'exchange/';
+    readonly confirmAccount = this.schema + this.hostApi + this.accountUrl + 'confirm/';
+    readonly removeExternalLogin = this.schema + this.hostApi + this.accountUrl + 'social/';
+    readonly uploadProfilePicture = this.schema + this.hostApi + this.users + 'picture/';
     readonly currencies = this.schema + this.hostApi + this.currenciesUrl;
     readonly countries = this.schema + this.hostApi + this.countriesUrl;
 
     //classified urls
     readonly classifieds = this.schema + this.hostApi + this.classifiedUrl;
+
     classifiedDetails(id: string) {
         return this.classifieds + id;
     }

@@ -1,7 +1,7 @@
 import { ApiConfiguration } from './api-configuration.service';
-import { HttpClient } from '../extensions/httpClient';
+import { HttpClient } from './http-client.service';
 import { Injectable } from '@angular/core';
-import { Category } from './../models/category';
+import { Category } from './../models/category.model';
 import 'rxjs/add/operator/toPromise';
 import _ from 'lodash';
 

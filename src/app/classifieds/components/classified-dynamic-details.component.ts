@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Classified } from '../models/classified';
+import { Classified } from '../models/classified.model';
 
 @Component({
     selector: 'classified-dynamic-details',

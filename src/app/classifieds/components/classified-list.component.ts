@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Classified } from '../models/classified';
-import { Country } from '../../core/models/country';
-import { Category } from '../../core/models/category';
-import { Currency } from '../../core/models/currency';
-import { ClassifiedService } from '../services/classifieds.service';
+import { Classified } from '../models/classified.model';
+import { Country } from '../../core/models/country.model';
+import { Category } from '../../core/models/category.model';
+import { Currency } from '../../core/models/currency.model';
+import { ClassifiedService } from '../services/classified.service';
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
 import { CurrencyService } from '../../core/services/currency.service';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilterService } from '../../core/services/filterService';
+import { FilterService } from '../../core/services/filter.service';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 
 @Component({
-  selector: 'app-classified-list',
+  selector: 'classified-list',
   templateUrl: '../views/classified-list.component.html'
 })
 

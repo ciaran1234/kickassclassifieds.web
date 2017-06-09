@@ -1,7 +1,7 @@
 import { ApiConfiguration } from './api-configuration.service';
-import { HttpClient } from '../extensions/httpClient';
+import { HttpClient } from './http-client.service';
 import { Injectable } from '@angular/core';
-import { Currency } from './../models/currency';
+import { Currency } from './../models/currency.model';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

@@ -1,6 +1,10 @@
-<h1 i18n="Site slogan|Site introduction slogan">Welcome to Kick Ass Classifieds</h1>
-
 <div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-12">
+            <h1 i18n="Site slogan|Site introduction slogan" class="display-4">Welcome to Kick Ass Classifieds</h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <form novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
@@ -37,24 +41,26 @@
             <h3>Recent Adverts</h3>
         </div>
         <div *ngFor="let classified of classifieds" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
-            <div class="card mb-3">
-                <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
-                <div class="card-block">
-                    <h6 class="card-title text-truncate">{{ classified.title }}</h6>
-                    <p class="card-text">
-                        <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
-                        | number : '1.2-2') || 'N/A' }}
-                    </p>
-                    <a class="btn btn-primary btn-sm" [routerLink]="['/classifieds/details', classified._id]">View</a>
+            <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
+                <div class="card mb-3">
+                    <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
+                    <div class="card-block">
+                        <h6 class="card-title text-truncate">{{ classified.title }}</h6>
+                        <p class="card-text">
+                            <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
+                            | number : '1.2-2') || 'N/A' }}
+                        </p>
+                        <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy hh:mm'}}</small></p>
+                    </div>
                 </div>
-            </div>
+            </a>
+
         </div>
         <div class="col-sm-12">
             <div class="jumbotron" *ngIf="classifieds?.length==0">
                 <h2 class="display-4">No Recent Adverts Found....</h2>
-                <p class="lead">Please change your search criteria</p>
+                <p class="lead">Be the first to <a routerLink="/classifieds/create">post an advert</a>. It's completely free!</p>
             </div>
         </div>
     </div>
-   
 </div>

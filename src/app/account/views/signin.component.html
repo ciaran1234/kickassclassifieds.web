@@ -1,44 +1,50 @@
-<div class="row">
-    <div class="col">
-        <form novalidate (ngSubmit)="onLogin(login)" [formGroup]="login">
-            <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['email'].valid && (login.controls['email'].touched || submitted) }">
-                <label for="email" class="form-control-label">Email</label>
-                <input type="email" placeholder="Your Email" i18n-placeholder="Email text box placeholder" formControlName="email" id="email" class="form-control" />
-                <div *ngIf="login.get('email').hasError('required') && (login.get('email').touched || submitted)" class="form-control-feedback">
-                    Email is required
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <form novalidate (ngSubmit)="onLogin(login)" [formGroup]="login">
+                <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['email'].valid && (login.controls['email'].touched || submitted) }">
+                    <label for="email" class="form-control-label">Email</label>
+                    <input type="email" placeholder="Your Email" i18n-placeholder="Email text box placeholder" formControlName="email" id="email"
+                        class="form-control" />
+                    <div *ngIf="login.get('email').hasError('required') && (login.get('email').touched || submitted)" class="form-control-feedback">
+                        Email is required
+                    </div>
+                    <div *ngIf="login.get('email').hasError('maxlength') && login.get('email').touched" class="form-control-feedback">
+                        Maximum of 256 characters
+                    </div>
+                    <div *ngIf="login.get('email').hasError('minlength') && login.get('email').touched" class="form-control-feedback">
+                        Minimum of 5 characters
+                    </div>
+                    <div *ngIf="login.get('email').hasError('invalidEmail') && login.get('email').touched" class="form-control-feedback">
+                        Invalid Email
+                    </div>
                 </div>
-                <div *ngIf="login.get('email').hasError('maxlength') && login.get('email').touched" class="form-control-feedback">
-                    Maximum of 256 characters
+                <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['password'].valid && (login.controls['password'].touched || submitted) }">
+                    <label for="password" class="form-control-label">Password</label>
+                    <input type="password" placeholder="Your Password" formControlName="password" id="password" name="password" class="form-control"
+                    />
+                    <div class="form-control-feedback" *ngIf="login.get('password').hasError('required') && (login.get('password').touched || submitted)">
+                        Password is required
+                    </div>
+                    <div class="form-control-feedback" *ngIf="login.get('password').hasError('minlength') && login.get('password').touched">
+                        Minimum of 7 characters
+                    </div>
                 </div>
-                <div *ngIf="login.get('email').hasError('minlength') && login.get('email').touched" class="form-control-feedback">
-                    Minimum of 5 characters
-                </div>
-                <div *ngIf="login.get('email').hasError('invalidEmail') && login.get('email').touched" class="form-control-feedback">
-                    Invalid Email
-                </div>
-            </div>
-            <div class="form-group" [ngClass]="{ 'has-danger': !login.controls['password'].valid && (login.controls['password'].touched || submitted) }">
-                <label for="password" class="form-control-label">Password</label>
-                <input type="password" placeholder="Your Password" formControlName="password" id="password" name="password" class="form-control" />
-                <div class="form-control-feedback" *ngIf="login.get('password').hasError('required') && (login.get('password').touched || submitted)">
-                    Password is required
-                </div>
-                <div class="form-control-feedback" *ngIf="login.get('password').hasError('minlength') && login.get('password').touched">
-                    Minimum of 7 characters
-                </div>
-            </div>
-            <div>
-                <button class="btn btn-primary" type="submit">Login</button>
-            </div>
-            <div>
-                <a routerLink="/account/resetPassword">Forgot Password?</a>
-            </div>
-        </form>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                    <div class="col-sm-12">
+                        <a routerLink="/account/resetPassword">Forgot Password?</a>
+                    </div>
+                </div>               
+            </form>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col">
-        <button type="button" (click)="onloginExternal('facebook')" class="btn btn-primary">Signin with facebook</button>
-        <button type="button" (click)="onloginExternal('google')" class="btn btn-danger">Signin with Google</button>
+    <div class="row">
+        <div class="col">
+            <button type="button" (click)="onloginExternal('facebook')" class="btn btn-primary">Signin with facebook</button>
+            <button type="button" (click)="onloginExternal('google')" class="btn btn-danger">Signin with Google</button>
+        </div>
     </div>
 </div>

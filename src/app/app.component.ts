@@ -1,6 +1,6 @@
 import { Component, LOCALE_ID, OnInit, Inject } from '@angular/core';
 import { UserService } from './core/services/user.service';
-import { User } from './account/models/user';
+import { User } from './account/models/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   user: User;
   subscription: Subscription;
-  isNavbarCollapsed: Boolean = false;
+  isCollapsed: boolean = true;
+
   languages = [
     { code: 'en', label: 'English' },
     { code: 'fr', label: 'Français' }
   ];
 
-  constructor(@Inject(LOCALE_ID) protected localeId: string,
+  constructor( @Inject(LOCALE_ID) protected localeId: string,
     private userService: UserService,
     private router: Router) { }
 

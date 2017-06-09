@@ -2,8 +2,8 @@ import { ApiConfiguration } from './../../core/services/api-configuration.servic
 import { UserService } from '../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Registration } from './../models/registration';
-import { CustomValidator } from '../../core/validation/customValidator';
+import { Registration } from './../models/registration.model';
+import { CustomValidator } from '../../core/validation/custom-validation.validator';
 
 @Component({
     moduleId: module.id,

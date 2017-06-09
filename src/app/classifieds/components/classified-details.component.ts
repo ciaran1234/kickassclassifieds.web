@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Classified } from '../models/classified';
-import { ClassifiedService } from '../services/classifieds.service';
+import { Classified } from '../models/classified.model';
+import { ClassifiedService } from '../services/classified.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-classified-details',
+    selector: 'classified-details',
     templateUrl: '../views/classified-details.component.html'    
 })
 

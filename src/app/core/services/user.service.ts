@@ -1,14 +1,15 @@
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
-import { HttpClient } from '../../core/extensions/httpClient';
-import { ConfirmResetPassword } from '../../account/models/confirmResetPassword';
-import { ResetPassword } from '../../account/models/resetPassword';
+import { HttpClient } from './http-client.service';
+import { ConfirmResetPassword } from '../../account/models/confirm-reset-password.model';
+import { ResetPassword } from '../../account/models/reset-password.model';
 import { Injectable } from '@angular/core';
-import { Signin } from '../../account/models/signin';
-import { Registration } from '../../account/models/registration';
+import { Signin } from '../../account/models/signin.model';
+import { Registration } from '../../account/models/registration.model';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
-import { ExternalLogin } from '../../account/models/externalLogin';
-import { User } from '../../account/models/user';
+import { ExternalLogin } from '../../account/models/external-login.model';
+import { User } from '../../account/models/user.model';
+import { Classified } from '../../classifieds/models/classified.model';
 
 @Injectable()
 export class UserService {
@@ -84,7 +85,7 @@ export class UserService {
             this.me().then(user => {
                 this.onUserChanged(user);
             })
-            .catch(error => localStorage.removeItem('accessToken')); //token expired. clear it from storage
+                .catch(error => localStorage.removeItem('accessToken')); //token expired. clear it from storage
         }
 
         return null;
@@ -100,6 +101,15 @@ export class UserService {
             .toPromise()
             .then(response => {
                 return response.json() as User;
+            })
+            .catch(error => this.handleError(error));
+    }
+
+    myClassifieds(): Promise<Classified[]> {
+        return this.httpClient.get(this.apiConfiguration.myClassifieds)
+            .toPromise()
+            .then(response => {
+                return response.json() as Classified[];
             })
             .catch(error => this.handleError(error));
     }

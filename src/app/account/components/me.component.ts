@@ -1,11 +1,11 @@
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { UserService } from '../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user';
-import { ExternalLogin } from '../models/externalLogin';
+import { User } from '../models/user.model';
+import { ExternalLogin } from '../models/external-login.model';
 
 @Component({
-    selector: 'me-view',
+    selector: 'account-me',
     templateUrl: './../views/me.component.html'
 })
 

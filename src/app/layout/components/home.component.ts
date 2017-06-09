@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Classified } from '../../classifieds/models/classified';
-import { Category } from '../../core/models/category';
-import { Country } from '../../core/models/country';
-import { ClassifiedService } from '../../classifieds/services/classifieds.service';
+import { Classified } from '../../classifieds/models/classified.model';
+import { Category } from '../../core/models/category.model';
+import { Country } from '../../core/models/country.model';
+import { ClassifiedService } from '../../classifieds/services/classified.service';
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilterService } from '../../core/services/filterService';
+import { FilterService } from '../../core/services/filter.service';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
+import clean from 'lodash-clean';
 
 @Component({
     selector: 'app-home',
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
         private route: ActivatedRoute) { }
 
     ngOnInit() {
-        //this.filterService.init();
+        this.filterService.init();
 
         this.searchForm = this.fb.group({
             q: [''],
@@ -51,6 +52,6 @@ export class HomeComponent implements OnInit {
     }
 
     onSearch({ value, valid }: { value: any, valid: boolean }) {
-        this.router.navigate(['/classifieds'], { queryParams: value });
+        this.router.navigate(['/classifieds'], { queryParams: clean(value) });
     }
 }

@@ -1,13 +1,13 @@
 import { ApiConfiguration } from './../../core/services/api-configuration.service';
 import { UserService } from '../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { CustomValidator } from '../../core/validation/customValidator';
+import { CustomValidator } from '../../core/validation/custom-validation.validator';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Signin } from '../models/signin';
+import { Signin } from '../models/signin.model';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-signin',
+    selector: 'account-signin',
     templateUrl: './../views/signin.component.html'
 })
 
