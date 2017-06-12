@@ -25,6 +25,26 @@ export class EditClassifiedComponent implements OnInit {
     }
 
     onSave(result: any) {
-        alert(JSON.stringify(result.classified));
+        result.classified._id = this.classified._id;
+
+        this.classifiedService.edit(result.classified)
+            .then(classified => {
+
+                if (result.uploader.queue.length) {
+                    return result.uploader.uploadAllAsync({
+                        fieldName: 'images',
+                        url: this.apiConfiguration.classifiedImageUpload(classified._id)
+                    })
+                }
+
+                return classified;
+            })
+            .then(response => {
+                return this.classifiedService.deleteImages(this.classified._id, result.imagesToDelete)
+            })
+            .then(response => {
+                this.router.navigate(['/classifieds/details', this.classified._id]);
+            })
+            .catch(error => alert(error));
     }
 }

@@ -37,7 +37,7 @@
                         <label for="country" class="form-control-label">Locations</label>
                         <select id="country" formControlName="country" class="form-control">
                         <option value="">All Countries</option>
-                        <option *ngFor="let country of countries" [ngValue]="country.countryCode.toString()">{{country.name}}</option>
+                        <option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
                     </select>
                     </div>
                 </div>
@@ -67,6 +67,11 @@
                     <div class="col-sm-12">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
+                              <input  class="form-check-input" [checked]="!searchForm.get('advertType').value" type="radio" value="" formControlName="advertType"> All
+                             </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
                               <input  class="form-check-input" [checked]="searchForm.get('advertType').value === 'sell'" type="radio" value="sell" formControlName="advertType"> For Sale
                              </label>
                         </div>
@@ -89,14 +94,14 @@
                 <div *ngFor="let classified of classifieds | async" class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
                     <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
                         <div class="card mb-3">
-                            <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
+                            <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]?.path}}">
                             <div class="card-block">
                                 <h6 class="card-title text-truncate">{{ classified.title }}</h6>
                                 <p class="card-text">
                                     <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
                                     | number : '1.2-2') || 'N/A' }}
                                 </p>                               
-                                <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy'}}</small></p>
+                                <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small></p>
                             </div>
                         </div>
                     </a>

@@ -5,17 +5,19 @@ import { State } from '../../core/models/state.model';
 import { Advertiser } from './advertiser.model';
 import { Category } from '../../core/models/category.model';
 import { ClassifiedCountry } from './classified-country.model';
+import { Image } from '../../core/models/image.model';
 
 export class Classified {
     public _id: string;
     public title: string;
     public description: string;
     public category: Category;
-    public images: string[];
+    public advertType: string;
+    public images: Image[];
     public advertiser: Advertiser;
     public price: Price;
     public country: ClassifiedCountry;
-    public region: string;
+    public region: Region;
     public states: string[];
     public details: any;
 }

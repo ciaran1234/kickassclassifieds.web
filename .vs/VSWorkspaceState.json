@@ -3,10 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\dynamicForms",
-    "\\src\\app\\dynamicForms\\models",
-    "\\src\\app\\dynamicForms\\views"
+    "\\src\\app\\layout",
+    "\\src\\app\\layout\\views"
   ],
-  "SelectedNode": "\\src\\app\\dynamicForms\\dynamicForms.module.ts",
+  "SelectedNode": "\\src\\app\\layout\\views\\home.component.html",
   "PreviewInSolutionExplorer": false
 }

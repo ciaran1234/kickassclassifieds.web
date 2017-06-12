@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     }
 
     onSearch({ value, valid }: { value: any, valid: boolean }) {
+       // value.advertType = 'sell';
         this.router.navigate(['/classifieds'], { queryParams: clean(value) });
     }
 }

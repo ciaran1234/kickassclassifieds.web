@@ -32,6 +32,20 @@ export class ClassifiedService {
             .catch(error => this.handleError(error));
     }
 
+    edit(classified: Classified): Promise<Classified> {
+        return this.httpClient.put(this.apiConfiguration.classifieds, classified)
+            .toPromise()
+            .then(response => response.json() as Classified)
+            .catch(error => this.handleError(error));
+    }
+
+    deleteImages(id: string, images: string[]): Promise<boolean> {
+        return this.httpClient.delete(this.apiConfiguration.classifiedImageUpload(id), { body: images })
+            .toPromise()
+            .then(response => true)
+            .catch(error => this.handleError(error));
+    }
+
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.json() || error);
     }

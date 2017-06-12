@@ -6,7 +6,7 @@
                 <div class="card-block" *ngIf="classified?.images.length">
                     <ngb-carousel [interval]="false">
                         <template ngbSlide *ngFor="let image of classified?.images">
-                            <img src="{{image}}" style="max-height: 500px;" class="img-fluid mx-auto d-block" alt="Random first slide">
+                            <img src="{{image.path}}" style="max-height: 500px;" class="img-fluid mx-auto d-block" [alt]="image.name">
                         </template>
                     </ngb-carousel>
                 </div>

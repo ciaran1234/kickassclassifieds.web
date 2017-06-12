@@ -9,7 +9,8 @@ import { FormGroup } from '@angular/forms';
 import _ from 'lodash';
 
 export class DynamicFormControlFactory {
-    static get(key: string, property: any): DynamicFormControlModel {
+    static get(key: string, property: any, value?: any): DynamicFormControlModel {
+
         let discriminator = property.data !== undefined ? 'option' : typeof property.type === 'object' ? 'object' : _.toLower(property.type);
 
         switch (_.toLower(discriminator)) {
@@ -17,6 +18,7 @@ export class DynamicFormControlFactory {
                 return new DynamicInputModel({
                     id: key,
                     label: property.label,
+                    value: value,
                     displayName: property.displayName || key,
                     placeholder: property.displayName || key,
                     required: property.required,
@@ -38,6 +40,7 @@ export class DynamicFormControlFactory {
                 return new DynamicInputModel({
                     id: key,
                     label: property.label,
+                    value: value,
                     displayName: property.displayName || key,
                     placeholder: property.displayName || key,
                     required: property.required,
@@ -59,14 +62,14 @@ export class DynamicFormControlFactory {
                     id: key,
                     label: property.label,
                     displayName: property.displayName || key,
-                    value: false,
+                    value: value || false,
                     nativeType: discriminator
                 });
             case 'object':
                 let subProperties = [];
 
                 for (let subProperty in property.type) {
-                    subProperties.push(this.get(subProperty, property.type[subProperty]));
+                    subProperties.push(this.get(subProperty, property.type[subProperty], value ? value[subProperty] : null));
                 }
 
                 return new DynamicFormGroupModel({
@@ -81,7 +84,7 @@ export class DynamicFormControlFactory {
                     id: key,
                     label: property.label,
                     displayName: property.displayName || key,
-                    value: property.data[0],
+                    value: value ? value : property.data[0],
                     nativeType: discriminator,
                     errorMessages: this.errorMessages,
                     options: _.map(property.data, function (value) {

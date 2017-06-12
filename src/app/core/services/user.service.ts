@@ -25,6 +25,13 @@ export class UserService {
         this._user.next(user);
     }
 
+    update(user: User): Promise<User> {
+        return this.httpClient.put(this.apiConfiguration.users, user)
+            .toPromise()
+            .then(response => response.json() as User)
+            .catch(error => this.handleError(error));
+    }
+
     confirmResetPassword(resetPassword: ConfirmResetPassword): Promise<boolean> {
         return this.httpClient.post(this.apiConfiguration.confirmResetPassword, resetPassword)
             .toPromise()

@@ -20,7 +20,7 @@ export class DynamicFormService {
                 let groupModel = model as DynamicFormGroupModel;
                 formGroup[model.id] = this.createFormGroup(groupModel.group);
             }
-            else {
+            else {               
                 formGroup[model.id] = new FormControl({ value: model.value, disabled: false }, this.getValidators(model));
             }
         });
@@ -106,20 +106,19 @@ export class DynamicFormService {
         return validators;
     }
 
-    resetFormGroup(formGroup: FormGroup, formModel: DynamicFormControlModel[], data: any) {
+    resetFormGroup(formGroup: FormGroup, formModel: DynamicFormControlModel[], template: any, data: any) {
         var length = formModel.length;
 
         if (length > 0) {
-            for (let i = length - 1; i >= 0; i--) { //clear controls
+            for (let i = length - 1; i >= 0; i--) {
                 this.removeFormGroupControl(i, formGroup, formModel);
             }
         }
 
-        if (data) {
-            for (let property in data) { //add new controls                
-                var control = DynamicFormControlFactory.get(property, data[property]);
+        if (template) {
+            for (let property in template) {
+                var control = DynamicFormControlFactory.get(property, template[property], data ? data[property] : null);
                 this.addFormGroupControl(formGroup, formModel, control);
-
             }
         }
     }

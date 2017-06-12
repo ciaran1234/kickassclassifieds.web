@@ -12,7 +12,7 @@ export abstract class DynamicFormControlModel {
     public name: string;
     public required: boolean;
     public maxLength: number;
-    public minLength: number;    
+    public minLength: number;
     public validators: any;
     public errorMessages: any;
     public style: any;
@@ -23,14 +23,14 @@ export abstract class DynamicFormControlModel {
         this.label = config.label;
         this.name = this.id;
         this.displayName = config.displayName;
-        this.value = config.value || null;
+        this.value = config.value;
         this.placeholder = config.placeholder || '';
         this.required = config.required == true ? true : false;
         this.maxLength = config.maxLength;
-        this.minLength = config.minLength;       
+        this.minLength = config.minLength;
         this.validators = config.validators;
         this.nativeType = config.nativeType;
         this.errorMessages = config.errorMessages;
-        this.style = style ? style : null;       
+        this.style = style ? style : null;
     }
 }

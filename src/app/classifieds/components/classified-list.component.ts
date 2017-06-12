@@ -47,7 +47,7 @@ export class ClassifiedListComponent implements OnInit {
       currency: [this.filterService.filter.currency || '840'],
       minPrice: [this.filterService.filter.minPrice],
       maxPrice: [this.filterService.filter.maxPrice],
-      advertType: [this.filterService.filter.advertType || 'sell'],
+      advertType: [this.filterService.filter.advertType],
     });
 
     this.categoryService.getAllGrouped().then(categories => this.categories = categories);
@@ -66,7 +66,7 @@ export class ClassifiedListComponent implements OnInit {
       category: '',
       country: '',
       currency: '840',
-      advertType: 'sell'
+      advertType: ''
     });
   }
 }

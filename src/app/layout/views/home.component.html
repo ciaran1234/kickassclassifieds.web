@@ -1,66 +1,61 @@
-<div class="container">
-    <div class="row mt-3 mb-3">
-        <div class="col-sm-12">
-            <h1 i18n="Site slogan|Site introduction slogan" class="display-4">Welcome to Kick Ass Classifieds</h1>
-        </div>
+﻿<div class="container">
+  <div class="row mt-3 mb-3">
+    <div class="col-sm-12 hidden-sm-down">
+      <h1 i18n="Site slogan|Site introduction slogan" class="display-4">Welcome to Kick Ass Classifieds</h1>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
+          <div class="input-group">
+            <select id="category" formControlName="category" class="form-control form-control-lg w-25 hidden-sm-down">
+              <option value="">All Categories</option>
+              <optgroup *ngFor="let parent of categories" [label]="parent.name">
+                <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
+              </optgroup>
+            </select>
+            <select id="country" formControlName="country" class="form-control form-control-lg w-25 hidden-sm-down">
+              <option value="">All Countries</option>
+              <option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
+            </select>
+            <input type="text" id="q" formControlName="q" class="form-control form-control-lg w-50" placeholder="Search" />
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-secondary">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </form>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Recent Adverts</h3>
+    </div>
+    <div *ngFor="let classified of classifieds" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
+      <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
+        <div class="card mb-3">
+          <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]?.path}}">
+          <div class="card-block">
+            <h6 class="card-title text-truncate">{{ classified.title }}</h6>
+            <p class="card-text">
+              <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{
+ (classified.price?.value.$numberDecimal
+                            | number : '1.2-2') || 'N/A'
+              }}
+            </p>
+            <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small></p>
+          </div>
+        </div>
+      </a>
 
-    <div class="row">
-        <div class="col">
-            <form novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
-                <div class="form-group row">
-                    <div class="col-sm-3">
-                        <select id="category" formControlName="category" class="form-control">
-                        <option value="">All Categories</option>
-                        <optgroup *ngFor="let parent of categories" [label]="parent.name">
-                            <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
-                        </optgroup>
-                    </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="country" formControlName="country" class="form-control">
-                          <option value="">All Countries</option>
-                           <option *ngFor="let country of countries" [ngValue]="country.countryCode.toString()">{{country.name}}</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" id="q" formControlName="q" class="form-control" placeholder="Search" />
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>Recent Adverts</h3>
-        </div>
-        <div *ngFor="let classified of classifieds" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
-            <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
-                <div class="card mb-3">
-                    <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]}}">
-                    <div class="card-block">
-                        <h6 class="card-title text-truncate">{{ classified.title }}</h6>
-                        <p class="card-text">
-                            <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
-                            | number : '1.2-2') || 'N/A' }}
-                        </p>
-                        <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy hh:mm'}}</small></p>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-        <div class="col-sm-12">
-            <div class="jumbotron" *ngIf="classifieds?.length==0">
-                <h2 class="display-4">No Recent Adverts Found....</h2>
-                <p class="lead">Be the first to <a routerLink="/classifieds/create">post an advert</a>. It's completely free!</p>
-            </div>
-        </div>
+    <div class="col-sm-12">
+      <div class="jumbotron" *ngIf="classifieds?.length==0">
+        <h2 class="display-4">No Recent Adverts Found....</h2>
+        <p class="lead">Be the first to <a routerLink="/classifieds/create">post an advert</a>. It's completely free!</p>
+      </div>
     </div>
+  </div>
 </div>

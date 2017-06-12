@@ -9,7 +9,7 @@ export class ApiConfiguration {
     private locationsUrl = 'locations/';
     private classifiedUrl = 'classifieds/';
     private categoriesUrl = 'categories/';
-    private users = 'users/';
+    private usersUrl = 'users/';
     private currenciesUrl = 'currencies/';
     private countriesUrl = 'countries/';
 
@@ -17,14 +17,15 @@ export class ApiConfiguration {
     readonly confirmResetPassword = this.schema + this.hostApi + this.accountUrl + 'confirmResetPassword/';
     readonly resetPassword = this.schema + this.hostApi + this.accountUrl + 'resetPassword/';
     readonly login = this.schema + this.hostApi + this.accountUrl + 'signin/';
-    readonly me = this.schema + this.hostApi + this.users + 'me/';
+    readonly me = this.schema + this.hostApi + this.usersUrl + 'me/';
     readonly myClassifieds = this.me + 'classifieds/';
     readonly register = this.schema + this.hostApi + this.accountUrl + 'signup/';
     readonly locations = this.schema + this.hostApi + this.locationsUrl;
     readonly exchangeExternalToken = this.schema + this.hostApi + this.accountUrl + 'exchange/';
     readonly confirmAccount = this.schema + this.hostApi + this.accountUrl + 'confirm/';
     readonly removeExternalLogin = this.schema + this.hostApi + this.accountUrl + 'social/';
-    readonly uploadProfilePicture = this.schema + this.hostApi + this.users + 'picture/';
+    readonly uploadProfilePicture = this.schema + this.hostApi + this.usersUrl + 'picture/';
+    readonly users = this.schema + this.hostApi + this.usersUrl;
     readonly currencies = this.schema + this.hostApi + this.currenciesUrl;
     readonly countries = this.schema + this.hostApi + this.countriesUrl;
 
@@ -36,7 +37,7 @@ export class ApiConfiguration {
     }
 
     classifiedImageUpload(id: string) {
-        return this.classifieds + id + '/uploadImages';
+        return this.classifieds + id + '/images';
     }
 
     //categories urls

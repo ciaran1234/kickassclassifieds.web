@@ -8,7 +8,8 @@ export class HttpClient {
 
     addAuthorizationHeader(options: RequestOptionsArgs) {
         options = options || {};
-        options.headers = options.headers || new Headers();
+        options.headers = options.headers || new Headers();      
+
         let token = localStorage.getItem('accessToken');
 
         if (token) {
@@ -22,12 +23,6 @@ export class HttpClient {
         options = this.addAuthorizationHeader(options);
         return this.http.get(url, options);
     }
-
-    // getFiltered<T>(url: string, filter: Filter<T>,  router :Router, activeRoute: ActivatedRoute, options?: RequestOptionsArgs) {
-    //     options = this.addAuthorizationHeader(options);
-    //     let filteredUrl = new FilterBuilder<T>(router, activeRoute).buildQuery(filter, url);
-    //     return this.http.get(filteredUrl, options);
-    // }
 
     delete(url: string, options?: RequestOptionsArgs) {
         options = this.addAuthorizationHeader(options);

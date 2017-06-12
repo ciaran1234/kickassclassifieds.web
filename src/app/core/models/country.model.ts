@@ -6,7 +6,7 @@ export class Country {
     name: string;
     alpha2: string;
     alpha3: string;
-    countryCode: Number;
+    code: Number;
     regions: Region[];
     currency: Currency;
 }
