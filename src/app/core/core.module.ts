@@ -5,10 +5,9 @@ import { UserService } from './services/user.service';
 import { CurrencyService } from './services/currency.service';
 import { CountryService } from './services/country.service';
 import { FilterService } from './services/filter.service';
+import { MessageService } from './services/message.service';
 
-@NgModule({
-
-})
+@NgModule({})
 
 export class CoreModule {
   static forRoot(): ModuleWithProviders {
@@ -16,11 +15,12 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         ApiConfiguration,
-        HttpClient,       
+        HttpClient,
         UserService,
         FilterService,
         CurrencyService,
-        CountryService
+        CountryService,
+        MessageService
       ]
     };
   }

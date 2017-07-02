@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Registration } from './../models/registration.model';
 import { CustomValidator } from '../../core/validation/custom-validation.validator';
+import { FormComponent } from '../../core/components/form.component';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -11,12 +13,17 @@ import { CustomValidator } from '../../core/validation/custom-validation.validat
     templateUrl: './../views/registration.component.html'
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent extends FormComponent implements OnInit {
     registration: FormGroup;
     submitted: boolean = false;
     success: boolean = false;
 
-    constructor(private fb: FormBuilder, private userService: UserService, private apiConfiguration: ApiConfiguration) { }
+    constructor(private fb: FormBuilder,
+        private userService: UserService,
+        private apiConfiguration: ApiConfiguration,
+        protected router: Router) {
+        super(router);
+    }
 
     ngOnInit() {
         this.registration = this.fb.group({
@@ -29,14 +36,14 @@ export class RegistrationComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: Registration, valid: boolean }) {
-        this.submitted = true;
+        this.markFormAsSubmitted(this.registration);
 
-        if (valid) {
+       if (valid) {
             value.confirmationUrl = location.protocol + '//' + location.host + '/account/confirm';
             this.userService.register(value)
                 .then(response => this.success = response)
-                .catch(error => console.log(error));
-        }
+                .catch(error => this.handleError(error));            
+       }
     }
 
     onRegisterExternal(provider: string): void {

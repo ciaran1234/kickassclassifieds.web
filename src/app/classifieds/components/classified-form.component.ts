@@ -17,14 +17,17 @@ import { DynamicFormControlModel } from "../../dynamic-forms/models/dynamic-form
 import { Observable } from 'rxjs/Rx';
 import _ from 'lodash';
 import { FileItem, FileLikeObject } from 'ng2-file-upload';
+import { FormComponent } from '../../core/components/form.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'classified-form',
     templateUrl: '../views/classified-form.component.html'
 })
 
-export class ClassifiedFormComponent implements OnInit {
+export class ClassifiedFormComponent extends FormComponent implements OnInit {
     @Input() classified: Classified;
+    @Input() validationErrors: string[];
     @Output() onSave = new EventEmitter();
 
     form: FormGroup;
@@ -45,7 +48,10 @@ export class ClassifiedFormComponent implements OnInit {
         private categoryService: CategoryService,
         private countryService: CountryService,
         private currencyService: CurrencyService,
-        private formService: DynamicFormService) { }
+        private formService: DynamicFormService,
+        protected router: Router) {
+        super(router);
+    }
 
     fileOverBase(e: any): void {
         this.hasBaseDropZoneOver = e;
@@ -183,19 +189,6 @@ export class ClassifiedFormComponent implements OnInit {
     setDynamicForm(data?: any): void {
         this.formService.resetFormGroup(this.detailsFormGroup, this.formModel,
             this.form.get('category').value.details, data);
-    }
-
-    markFormAsSubmitted(formGroup: FormGroup): void {
-        Object.keys(formGroup.controls).map((controlName) => {
-            let control = formGroup.get(controlName);
-
-            if (control instanceof FormGroup) {
-                this.markFormAsSubmitted(control as FormGroup);
-            }
-            else {
-                control.markAsTouched({ onlySelf: true });
-            }
-        });
     }
 
     onSubmitted({ value, valid }: { value: any, valid: boolean }) {

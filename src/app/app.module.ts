@@ -11,25 +11,28 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountModule } from './account/account.module';
 import { ClassifiedModule } from './classifieds/classifieds.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorRoutingModule, errorRoutedComponents } from './errors/error-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    errorRoutedComponents
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    CoreModule.forRoot(),
+    CoreModule.forRoot(),  
     NgbModule.forRoot(),
     AppRoutingModule,
     AccountModule,
     ClassifiedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorRoutingModule
   ],
   providers: [
-    CategoryService 
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

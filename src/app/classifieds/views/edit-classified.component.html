@@ -1,5 +1,5 @@
 <div class="container">
   <ng-container *ngIf="classified">
-    <classified-form [classified]="classified" (onSave)="onSave($event)"></classified-form>
+    <classified-form [classified]="classified" [validationErrors]="serverValidationErrors"  (onSave)="onSave($event)"></classified-form>
   </ng-container>
 </div>

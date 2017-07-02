@@ -8,6 +8,7 @@ import { RegistrationComponent } from './components/registration.component';
 import { MeComponent } from './components/me.component';
 import { MyClassifieds } from './components/my-classifieds.component';
 import { MyMessages } from './components/my-messages.component';
+import { MessageDetails } from './components/message-details.component';
 import { MyWishList } from './components/my-wishlist.component';
 import { ExternalSigninComponent } from './components/external-signin.component';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'account/me', component: MeComponent },
     { path: 'account/classifieds', component: MyClassifieds },
     { path: 'account/messages', component: MyMessages },
+    { path: 'account/messages/details/:id', component: MessageDetails },
     { path: 'account/wishlist', component: MyWishList }
 ];
 
@@ -31,11 +33,13 @@ const routes: Routes = [
 
 export class AccountRoutingModule { }
 
-export const routedComponents = [SigninComponent,
+export const routedComponents = [
+    SigninComponent,
     RegistrationComponent,
     MeComponent,
     MyClassifieds,
     MyMessages,
+    MessageDetails,
     MyWishList,
     ExternalSigninComponent,
     ConfirmAccountComponent,

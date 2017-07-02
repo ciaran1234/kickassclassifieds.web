@@ -3,18 +3,21 @@ import { Router } from '@angular/router';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { Classified } from '../models/classified.model';
 import { ClassifiedService } from '../services/classified.service';
+import { FormComponent } from '../../core/components/form.component';
 
 @Component({
     selector: 'classified-create',
     templateUrl: '../views/create-classified.component.html'
 })
 
-export class CreateClassifiedComponent {
+export class CreateClassifiedComponent extends FormComponent {
     classified: Classified = new Classified();
 
     constructor(private classifiedService: ClassifiedService,
-        private router: Router,
-        private apiConfiguration: ApiConfiguration) { }
+        protected router: Router,
+        private apiConfiguration: ApiConfiguration) {
+        super(router);
+    }
 
     onSave(result: any) {
         this.classifiedService.create(result.classified)
@@ -33,6 +36,6 @@ export class CreateClassifiedComponent {
                 let classified = response as Classified;
                 this.router.navigate(['/classifieds/details', classified._id]);
             })
-            .catch(error => alert(error));
+            .catch(error => this.handleError(error));
     }
 }

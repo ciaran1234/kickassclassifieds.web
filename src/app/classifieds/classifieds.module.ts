@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective, FileDropDirective, FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
@@ -10,11 +10,13 @@ import { ClassifiedDynamicDetailsComponent } from './components/classified-dynam
 import { ClassifiedFormComponent } from './components/classified-form.component';
 import { DynamicFormService } from '../dynamic-forms/services/dynamic-form.service';
 import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-control.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [ClasifiedRoutingModule,
-        CommonModule,
+        CommonModule,      
         ReactiveFormsModule,
+        FormsModule,
         NgbModule.forRoot()],
     declarations: [routedComponents,
         FileSelectDirective,
@@ -24,7 +26,9 @@ import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-con
         ClassifiedFormComponent,
         DynamicFormControl
     ],
-    providers: [ClassifiedService, DynamicFormService]
+    providers: [ClassifiedService,
+        DynamicFormService
+     ]
 })
 
 export class ClassifiedModule { }

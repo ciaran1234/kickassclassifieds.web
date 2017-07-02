@@ -2,15 +2,19 @@
 import { HttpClient } from '../../core/services/http-client.service';
 import { Injectable } from '@angular/core';
 import { Classified } from '../models/classified.model';
-import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseService } from '../../core/services/base.service';
+import { Image } from '../../core/models/image.model';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class ClassifiedService {
+export class ClassifiedService extends BaseService {
 
     constructor(private httpClient: HttpClient,
-        private apiConfiguration: ApiConfiguration) { }
+        private apiConfiguration: ApiConfiguration) { 
+            super();
+        }
 
     get(id: string): Promise<Classified> {
         return this.httpClient.get(this.apiConfiguration.classifiedDetails(id))
@@ -39,14 +43,10 @@ export class ClassifiedService {
             .catch(error => this.handleError(error));
     }
 
-    deleteImages(id: string, images: string[]): Promise<boolean> {
+    deleteImages(id: string, images: Image[]): Promise<boolean> {
         return this.httpClient.delete(this.apiConfiguration.classifiedImageUpload(id), { body: images })
             .toPromise()
             .then(response => true)
             .catch(error => this.handleError(error));
-    }
-
-    private handleError(error: any): Promise<any> {
-        return Promise.reject(error.json() || error);
     }
 }

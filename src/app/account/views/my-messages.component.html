@@ -1,1 +1,45 @@
-<h1>Messages go here....</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="display-4">My Messages</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ngb-tabset (tabChange)="onTabChanged($event)">
+                <ngb-tab id="received" title="Inbox">
+                    <ng-template ngbTabContent>
+                        <ul class="list-group">
+                            <li class="list-group-item" [ngClass]="{ 'list-group-item-warning': !message.read }" *ngFor="let message of messages | async">
+                                <a [routerLink]="['/account/messages/details', message?.key]"> 
+                                    <span>{{message?.from?.firstName}} {{message?.from?.lastName}} </span>    
+                                    <span>{{message?.subject}} </span>   
+                                    <span>{{message?.timestamp | date:'dd/MM/yyyy HH:mm'}}</span>  
+                                </a>
+                            </li>
+                        </ul>
+                        <p *ngIf="(messages | async)?.length==0">
+                            No Messages Found....
+                        </p>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="sent" title="Sent" (click)="test()">
+                    <ng-template ngbTabContent>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let message of messages | async">
+                                <a [routerLink]="['/account/messages/details', message.key]">
+                                    <span>{{message?.from?.firstName}} {{message?.from?.lastName}} </span>    
+                                    <span>{{message?.subject}} </span>   
+                                    <span>{{message?.timestamp | date:'dd/MM/yyyy HH:mm'}}</span> 
+                                </a>
+                            </li>
+                        </ul>
+                        <p *ngIf="(messages | async)?.length==0">
+                            No Messages Found....
+                        </p>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

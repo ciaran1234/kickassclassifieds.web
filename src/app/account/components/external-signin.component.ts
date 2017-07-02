@@ -19,7 +19,7 @@ export class ExternalSigninComponent implements OnInit {
 
             if (provider && accessToken) {
                 this.userService.exchangeExternalToken(provider, accessToken)
-                    .then(response => this.router.navigateByUrl('/home'))
+                    .then(response => this.router.navigateByUrl('/'))
                     .catch(err => this.errorMessage = 'Something went wrong. Please try again');  //some generic 'something went wrong response''
             }
             else {                

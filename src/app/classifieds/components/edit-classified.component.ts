@@ -3,19 +3,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { Classified } from '../models/classified.model';
 import { ClassifiedService } from '../services/classified.service';
+import { FormComponent } from '../../core/components/form.component';
 
 @Component({
     selector: 'classified-edit',
     templateUrl: '../views/edit-classified.component.html'
 })
 
-export class EditClassifiedComponent implements OnInit {
+export class EditClassifiedComponent extends FormComponent implements OnInit {
     classified: Classified;
 
     constructor(private classifiedService: ClassifiedService,
-        private router: Router,
+        protected router: Router,
         private activatedRoute: ActivatedRoute,
-        private apiConfiguration: ApiConfiguration) { }
+        private apiConfiguration: ApiConfiguration) {
+        super(router);
+    }
 
     ngOnInit() {
         let id = this.activatedRoute.snapshot.params['id'];
@@ -45,6 +48,6 @@ export class EditClassifiedComponent implements OnInit {
             .then(response => {
                 this.router.navigate(['/classifieds/details', this.classified._id]);
             })
-            .catch(error => alert(error));
+            .catch(error => this.handleError(error));
     }
 }

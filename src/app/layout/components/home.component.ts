@@ -32,7 +32,9 @@ export class HomeComponent implements OnInit {
         private apiConfiguration: ApiConfiguration,
         private fb: FormBuilder,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute) {
+
+    }
 
     ngOnInit() {
         this.filterService.init();
@@ -48,11 +50,12 @@ export class HomeComponent implements OnInit {
         this.countryService.getAll().then(countries => this.countries = countries);
 
         this.classifiedService.getAll().toPromise()
-            .then(classifieds => this.classifieds = classifieds);
+            .then(classifieds => this.classifieds = classifieds)
+            .catch(error => alert(error));
     }
 
     onSearch({ value, valid }: { value: any, valid: boolean }) {
-       // value.advertType = 'sell';
+        // value.advertType = 'sell';
         this.router.navigate(['/classifieds'], { queryParams: clean(value) });
     }
 }

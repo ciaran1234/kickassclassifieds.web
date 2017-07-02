@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from '../../core/services/message.service';
+import { Observable } from 'rxjs/observable';
 
 @Component({
     selector: 'account-messages',
@@ -6,7 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MyMessages implements OnInit {
-    ngOnInit() {
+    messages: Observable<any[]>;
 
+    constructor(private messageService: MessageService) { }
+
+    ngOnInit() {
+        this.messages = this.messageService.getReceived().publish().refCount();
     }
+
+    onTabChanged($event: any) {      
+        switch ($event.nextId) {
+            case 'received':
+                this.messages = this.messageService.getReceived().publish().refCount();
+                break;
+            case 'sent':               
+                this.messages = this.messageService.getSent().publish().refCount();
+                break;
+        }
+    }  
 }

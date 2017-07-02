@@ -10,12 +10,15 @@ import 'rxjs/add/operator/toPromise';
 import { ExternalLogin } from '../../account/models/external-login.model';
 import { User } from '../../account/models/user.model';
 import { Classified } from '../../classifieds/models/classified.model';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class UserService {
+export class UserService extends BaseService {
 
     constructor(private httpClient: HttpClient,
-        private apiConfiguration: ApiConfiguration) { }
+        private apiConfiguration: ApiConfiguration) {
+        super();
+    }
 
     private _user = new BehaviorSubject<User>(null); //globally available observable
 
@@ -89,9 +92,8 @@ export class UserService {
 
     checkIfUserLoggedIn(): Promise<void> {
         if (localStorage.getItem('accessToken')) {
-            this.me().then(user => {
-                this.onUserChanged(user);
-            })
+            this.me()
+                .then(user => this.onUserChanged(user))
                 .catch(error => localStorage.removeItem('accessToken')); //token expired. clear it from storage
         }
 
@@ -130,9 +132,5 @@ export class UserService {
 
     private storeToken(token: string) {
         localStorage.setItem('accessToken', token);
-    }
-
-    private handleError(error: any): Promise<any> {
-        return Promise.reject(error.json() || error);
     }
 }

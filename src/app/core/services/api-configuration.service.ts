@@ -12,6 +12,7 @@ export class ApiConfiguration {
     private usersUrl = 'users/';
     private currenciesUrl = 'currencies/';
     private countriesUrl = 'countries/';
+    private messagesUrl = 'messages/';
 
     //account urls
     readonly confirmResetPassword = this.schema + this.hostApi + this.accountUrl + 'confirmResetPassword/';
@@ -29,7 +30,21 @@ export class ApiConfiguration {
     readonly currencies = this.schema + this.hostApi + this.currenciesUrl;
     readonly countries = this.schema + this.hostApi + this.countriesUrl;
 
-    //classified urls
+    //messages
+    readonly messages = this.schema + this.hostApi + this.messagesUrl;
+    readonly messageReply = this.messages + 'reply';
+    readonly messagesReceived = this.messages + 'received/';
+    readonly messagesSent = this.messages + 'sent/';
+
+    messageDetails(key: string) {
+        return this.messages + key;
+    }
+
+    markMessageAsRead(key: string) {
+        return this.messages + 'markasread/' + key;
+    }
+
+    //classified
     readonly classifieds = this.schema + this.hostApi + this.classifiedUrl;
 
     classifiedDetails(id: string) {
@@ -40,7 +55,7 @@ export class ApiConfiguration {
         return this.classifieds + id + '/images';
     }
 
-    //categories urls
+    //categories
     readonly categories = this.schema + this.hostApi + this.categoriesUrl;
     readonly parentCategories = this.categories + 'parents/'
     categoryDetails(id: string) {
@@ -50,6 +65,7 @@ export class ApiConfiguration {
         return this.categories + id + '/subcategories';
     }
 
+    //external authentication
     openAuthEndpoint(provider: string, redirectUrl: string, token?: string): string {
         return this.schema + this.hostApi + this.accountUrl + provider + '?redirectUrl=' + redirectUrl + (token ? '&local_token=' + token : '');
     }

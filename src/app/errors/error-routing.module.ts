@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { NotFoundComponent } from './components/not-found.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './layout/components/home.component';
 
 const routes: Routes = [
-    { path: '', pathMatch: 'full', component: HomeComponent }  
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
@@ -11,6 +11,8 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class ErrorRoutingModule { }
 
-export const routingComponents = [HomeComponent];
+export const errorRoutedComponents = [
+    NotFoundComponent
+]
