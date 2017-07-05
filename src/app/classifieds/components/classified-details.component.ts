@@ -40,7 +40,8 @@ export class ClassifiedDetailsComponent implements OnInit {
     }
 
     sendMessage() {
-        if (this.message && this.message.body.length > 0 && this.message.subject.length > 0) {
+        if (this.message && this.message.body.length > 0 && this.message.subject.length > 0) {           
+            this.message.url = location.protocol + '//' + location.host + '/account/messages/details/{key}';
             this.messageService.send(this.message)
                 .then(response => {
                     alert(response);

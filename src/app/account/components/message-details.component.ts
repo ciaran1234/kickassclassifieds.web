@@ -4,6 +4,7 @@ import { MessageService } from '../../core/services/message.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FormComponent } from '../../core/components/form.component';
+import { Message } from '../../core/models/message.model';
 
 @Component({
     selector: 'account-message-details',
@@ -12,7 +13,7 @@ import { FormComponent } from '../../core/components/form.component';
 
 export class MessageDetails extends FormComponent implements OnInit {
     id: string;
-    messages: any;
+    messages: Message[];
     form: FormGroup;
 
     constructor(private fb: FormBuilder,
@@ -43,9 +44,9 @@ export class MessageDetails extends FormComponent implements OnInit {
     }
 
     onSubmitted({ value, valid }: { value: MessageForm, valid: boolean }) {
-        this.markFormAsSubmitted(this.form);
-
+        this.markFormAsSubmitted(this.form);      
         if (valid === true) {
+            value.url = location.protocol + '//' + location.host + '/account/messages/details/{key}';
             this.messageService.reply(value)
                 .then(reply => {
                     this.form.reset();

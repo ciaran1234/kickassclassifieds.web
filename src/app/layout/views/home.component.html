@@ -7,26 +7,43 @@
   <div class="row">
     <div class="col-sm-12">
       <form novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
-          <div class="input-group">
-            <select id="category" formControlName="category" class="form-control form-control-lg w-25 hidden-sm-down">
+        <div class="input-group">
+          <select id="category" formControlName="category" class="form-control form-control-lg w-25 hidden-sm-down">
               <option value="">All Categories</option>
               <optgroup *ngFor="let parent of categories" [label]="parent.name">
                 <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
               </optgroup>
             </select>
-            <select id="country" formControlName="country" class="form-control form-control-lg w-25 hidden-sm-down">
+          <select id="country" formControlName="country" class="form-control form-control-lg w-25 hidden-sm-down">
               <option value="">All Countries</option>
               <option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
             </select>
-            <input type="text" id="q" formControlName="q" class="form-control form-control-lg w-50" placeholder="Search" />
-            <span class="input-group-btn">
+          <input type="text" id="q" formControlName="q" class="form-control form-control-lg w-50" placeholder="Search" />
+          <span class="input-group-btn">
               <button type="submit" class="btn btn-secondary">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
             </span>
-          </div>
-        </form>
+        </div>
+      </form>
     </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Browse Categories</h3>      
+    </div>
+    <div *ngFor="let parent of categories" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
+        <ul>
+          <li>{{parent.name}}
+            <ul>
+              <li *ngFor="let category of parent.children">
+                <a [routerLink]="['/classifieds']" [queryParams]="{ category: category._id }">{{category.name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
   </div>
   <hr />
   <div class="row">
@@ -40,16 +57,13 @@
           <div class="card-block">
             <h6 class="card-title text-truncate">{{ classified.title }}</h6>
             <p class="card-text">
-              <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{
- (classified.price?.value.$numberDecimal
-                            | number : '1.2-2') || 'N/A'
-              }}
+              <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
+              | number : '1.2-2') || 'N/A' }}
             </p>
             <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small></p>
           </div>
         </div>
       </a>
-
     </div>
     <div class="col-sm-12">
       <div class="jumbotron" *ngIf="classifieds?.length==0">

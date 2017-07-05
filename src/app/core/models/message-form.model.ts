@@ -3,4 +3,5 @@ export class MessageForm {
     public subject: string;
     public body: string;
     public classifiedId: string;
+    public url: string;
 }

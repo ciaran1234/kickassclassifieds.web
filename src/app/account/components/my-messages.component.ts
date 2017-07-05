@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../core/services/message.service';
 import { Observable } from 'rxjs/observable';
+import { Message } from '../../core/models/message.model';
 
 @Component({
     selector: 'account-messages',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs/observable';
 })
 
 export class MyMessages implements OnInit {
-    messages: Observable<any[]>;
+    messages: Observable<Message[]>;
 
     constructor(private messageService: MessageService) { }
 

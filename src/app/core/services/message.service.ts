@@ -5,6 +5,7 @@ import { ApiConfiguration } from './api-configuration.service';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/observable';
 import { MessageForm } from '../models/message-form.model';
+import { Message } from '../models/message.model';
 
 @Injectable()
 export class MessageService extends BaseService {
@@ -13,22 +14,22 @@ export class MessageService extends BaseService {
         super();
     }
 
-    get(key: string): Promise<any> {
+    get(key: string): Promise<Message[]> {
         return this.httpClient.get(this.apiConfiguration.messageDetails(key))
             .toPromise()
-            .then(response => response.json() as any)
+            .then(response => response.json() as Message[])
             .catch(error => this.handleError(error));
     }
 
-    getSent(): Observable<any> {
+    getSent(): Observable<Message[]> {
         return this.httpClient.get(this.apiConfiguration.messagesSent)
-            .map(response => response.json() as any)
+            .map(response => response.json() as Message[])
             .catch(error => this.handleError(error));
     }
 
-    getReceived(): Observable<any> {
+    getReceived(): Observable<Message[]> {
         return this.httpClient.get(this.apiConfiguration.messagesReceived)
-            .map(response => response.json() as any)
+            .map(response => response.json() as Message[])
             .catch(error => this.handleError(error));
     }
 
@@ -39,10 +40,10 @@ export class MessageService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
-    reply(message: MessageForm): Promise<any> {
+    reply(message: MessageForm): Promise<Message> {
         return this.httpClient.post(this.apiConfiguration.messageReply, message)
             .toPromise()
-            .then(response => response.json() as any)
+            .then(response => response.json() as Message)
             .catch(error => this.handleError(error));
     }
 
