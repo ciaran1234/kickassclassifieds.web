@@ -130,6 +130,27 @@ export class UserService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
+    getWishlist() : Promise<Classified[]> {
+        return this.httpClient.get(this.apiConfiguration.userWishlist)
+            .toPromise()
+            .then(response => response.json() as Classified[])
+            .catch(error => this.handleError(error));
+    }
+
+    addToWishlist(classifiedId: string): Promise<User> {
+        return this.httpClient.post(this.apiConfiguration.userWishlist + classifiedId, null)
+            .toPromise()
+            .then(response => response.json() as User)
+            .catch(error => this.handleError(error));
+    }
+
+    removeFromWishlist(classifiedId: string) : Promise<User> {
+        return this.httpClient.delete(this.apiConfiguration.userWishlist + classifiedId, null)
+        .toPromise()
+        .then(response => response.json() as User)
+        .catch(error => this.handleError(error));
+    }
+
     private storeToken(token: string) {
         localStorage.setItem('accessToken', token);
     }

@@ -7,6 +7,7 @@ import { ClassifiedService } from '../services/classified.service';
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
 import { CurrencyService } from '../../core/services/currency.service';
+import { UserService } from '../../core/services/user.service';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +34,7 @@ export class ClassifiedListComponent implements OnInit {
     private currencyService: CurrencyService,
     private filterService: FilterService<ClassifiedFilter, Classified[]>,
     private apiConfiguration: ApiConfiguration,
+    private userService: UserService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -59,6 +61,16 @@ export class ClassifiedListComponent implements OnInit {
       .switchMap((filter: ClassifiedFilter) => {
         return this.filterService.query(filter, this.apiConfiguration.classifieds);
       }).publish().refCount();
+  }
+
+  onFavourite(event, classified) {
+    event.stopPropagation();
+
+    this.userService.addToWishlist(classified._id)
+      .then(user => { classified.favourite = true; })
+      .catch(error => alert(error));
+
+    return false;
   }
 
   clearSearch() {

@@ -26,6 +26,7 @@ export class ApiConfiguration {
     readonly confirmAccount = this.schema + this.hostApi + this.accountUrl + 'confirm/';
     readonly removeExternalLogin = this.schema + this.hostApi + this.accountUrl + 'social/';
     readonly uploadProfilePicture = this.schema + this.hostApi + this.usersUrl + 'picture/';
+    readonly userWishlist = this.schema + this.hostApi + this.usersUrl + 'wishlist/'
     readonly users = this.schema + this.hostApi + this.usersUrl;
     readonly currencies = this.schema + this.hostApi + this.currenciesUrl;
     readonly countries = this.schema + this.hostApi + this.countriesUrl;

@@ -94,14 +94,25 @@
                 <div *ngFor="let classified of classifieds | async" class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
                     <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
                         <div class="card mb-3">
-                            <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.images[0]?.path}}">
+                            <img class="card-img-top img-fluid" style="max-height: 200px;" src="{{classified.image?.path}}">
                             <div class="card-block">
                                 <h6 class="card-title text-truncate">{{ classified.title }}</h6>
                                 <p class="card-text">
                                     <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
                                     | number : '1.2-2') || 'N/A' }}
-                                </p>                               
-                                <p class="card-text"><small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small></p>
+                                </p>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <p class="card-text pt-3">
+                                            <small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span class="favourite pull-right" [ngClass]="{ 'saved': classified.favourite }" (click)="onFavourite($event, classified)">
+                                     <span class="star"></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </a>

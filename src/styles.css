@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #444;   
+}
+
+.container {
+    background-color: #fff;
+}
+
   span.iso-currency.USD::after {
                         content: "$"
                     }
@@ -41,6 +49,11 @@ a.card-link:hover, a.card-link:focus, a.card-link:active {
     text-decoration: none;
 }
 
+.card .card-img-top.img-fluid {
+    height: 200px;
+}
+
+
  .my-drop-zone {
         border: dotted 3px lightgray;
       }
@@ -48,3 +61,42 @@ a.card-link:hover, a.card-link:focus, a.card-link:active {
       .nv-file-over {
         border: dotted 3px red;
       }
+
+     .favourite {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 30px;
+}   
+
+.favourite.saved span.star:before {
+ content: "\f005";
+    color: #e3cf7a;
+}
+
+.favourite span.star {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+}
+
+.favourite span.star:hover{
+    cursor: pointer;
+}
+
+.favourite span.star:before{
+    content: "\f006";
+    padding-right: 5px;
+    color: #777;
+}
+
+.favourite.saved span.star:hover:before, .favourite.saved span.star:hover~span.star:before {
+     content: "\f006";
+    padding-right: 5px;
+    color: #777;
+}
+
+.favourite span.star:hover:before, .favourite span.star:hover~span.star:before {
+    content: "\f005";
+    color: #e3cf7a;
+}

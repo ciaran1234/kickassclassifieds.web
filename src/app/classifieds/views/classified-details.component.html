@@ -32,7 +32,7 @@
             <div class="card">
                 <h3 class="card-header">{{classified?.advertiser.firstName}} {{classified?.advertiser.lastName}}</h3>
                 <div class="card-block">
-                    <button class="btn btn-primary" (click)="open(content)">Send Message</button>
+                    <button class="btn btn-primary" (click)="open(content)" *ngIf="classified?.advertiser._id !== user?._id">Send Message</button>
                     <p class="mt-3">Member since {{classified?.advertiser.dateRegistered | date: 'yyyy' }}</p>
                 </div>
             </div>

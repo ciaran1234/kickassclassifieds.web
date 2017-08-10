@@ -6,6 +6,8 @@ export class BaseComponent {
     constructor(protected router: Router) { }
 
     handleError(error: any) {
+
+        console.log(error);
         if (error instanceof UnauthorizedError) {
             this.handleUnauthorizedError();
         }

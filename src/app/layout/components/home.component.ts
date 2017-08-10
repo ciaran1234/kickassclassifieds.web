@@ -5,6 +5,7 @@ import { Country } from '../../core/models/country.model';
 import { ClassifiedService } from '../../classifieds/services/classified.service';
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
+import { UserService } from '../../core/services/user.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
     constructor(private classifiedService: ClassifiedService,
         private categoryService: CategoryService,
         private countryService: CountryService,
+        private userService: UserService,
         private filterService: FilterService<ClassifiedFilter, Classified[]>,
         private apiConfiguration: ApiConfiguration,
         private fb: FormBuilder,
@@ -54,7 +56,25 @@ export class HomeComponent implements OnInit {
             .catch(error => alert(error));
     }
 
-    onSearch({ value, valid }: { value: any, valid: boolean }) {       
+    onSearch({ value, valid }: { value: any, valid: boolean }) {
         this.router.navigate(['/classifieds'], { queryParams: clean(value) });
+    }
+
+    onFavourite(event, classified) {
+        event.stopPropagation();
+        let favourite = !classified.favourite;
+
+        if (favourite) {
+            this.userService.addToWishlist(classified._id)
+                .then(user => { classified.favourite = true; })
+                .catch(error => alert(error));
+        }
+        else {
+            this.userService.removeFromWishlist(classified._id)
+                .then(user => { classified.favourite = false; })
+                .catch(error => alert(error));
+        }
+
+        return false;
     }
 }

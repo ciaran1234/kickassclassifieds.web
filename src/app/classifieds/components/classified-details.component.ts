@@ -5,6 +5,9 @@ import { MessageService } from '../../core/services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MessageForm } from '../../core/models/message-form.model';
+import { UserService } from '../../core/services/user.service';
+import { User } from '../../account/models/user.model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'classified-details',
@@ -15,13 +18,19 @@ export class ClassifiedDetailsComponent implements OnInit {
     id: string;
     classified: Classified;
     message: MessageForm = new MessageForm();
+    user: User;
+    subscription: Subscription;
 
     constructor(private classifiedService: ClassifiedService,
         private messageService: MessageService,
         private route: ActivatedRoute,
-        private modalService: NgbModal) { }
+        private modalService: NgbModal,
+        private userService: UserService) { }
 
     ngOnInit() {
+        this.subscription = this.userService
+            .user.subscribe(user => this.user = user);
+
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.getClassifiedDetails();
@@ -40,7 +49,7 @@ export class ClassifiedDetailsComponent implements OnInit {
     }
 
     sendMessage() {
-        if (this.message && this.message.body.length > 0 && this.message.subject.length > 0) {           
+        if (this.message && this.message.body.length > 0 && this.message.subject.length > 0) {
             this.message.url = location.protocol + '//' + location.host + '/account/messages/details/{key}';
             this.messageService.send(this.message)
                 .then(response => {
