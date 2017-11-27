@@ -1,86 +1,208 @@
-﻿<div class="container">
-  <div class="row pt-3 mb-3">
-    <div class="col-sm-12 hidden-sm-down">
-      <h1 i18n="Site slogan|Site introduction slogan" class="display-4">Welcome to Kick Ass Classifieds</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <form novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
-        <div class="input-group">
-          <select id="category" formControlName="category" class="form-control form-control-lg w-25 hidden-sm-down">
-              <option value="">All Categories</option>
-              <optgroup *ngFor="let parent of categories" [label]="parent.name">
-                <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
-              </optgroup>
-            </select>
-          <select id="country" formControlName="country" class="form-control form-control-lg w-25 hidden-sm-down">
-              <option value="">All Countries</option>
-              <option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
-            </select>
-          <input type="text" id="q" formControlName="q" class="form-control form-control-lg w-50" placeholder="Search" />
-          <span class="input-group-btn">
-              <button type="submit" class="btn btn-secondary">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-    </div>
-  </div>
-  <hr/>
-  <div class="row">
-    <div class="col-sm-12">
-      <h3>Browse Categories</h3>
-    </div>
-    <div *ngFor="let parent of categories" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
-      <ul>
-        <li>{{parent.name}}
-          <ul>
-            <li *ngFor="let category of parent.children">
-              <a [routerLink]="['/classifieds']" [queryParams]="{ category: category._id }">{{category.name}}</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-sm-12">
-      <h3>Recent Adverts</h3>
-    </div>
-    <div *ngFor="let classified of classifieds" class="col-lg-3 col-sm-6 col-xs-12 col-md-4">
-      <a class="card-link" [routerLink]="['/classifieds/details', classified._id]">
-        <div class="card mb-3">
-          <img class="card-img-top img-fluid" src="{{classified.image?.path}}">
-          <div class="card-block">
-            <h6 class="card-title text-truncate">{{ classified.title }}</h6>
-            <p class="card-text">
-              <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ (classified.price?.value.$numberDecimal
-              | number : '1.2-2') || 'N/A' }}
-            </p>
-            <div class="row">
-              <div class="col-sm-9">
-                <p class="card-text pt-3">
-                  <small class="text-muted">Posted {{classified.created | date : 'dd-MM-yyyy HH:mm'}}</small>
-                </p>
-              </div>
-              <div class="col-sm-3">
-                <span class="favourite pull-right" [ngClass]="{ 'saved': classified.favourite }" (click)="onFavourite($event, classified)">
-                      <span class="star"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-sm-12">
-      <div class="jumbotron" *ngIf="classifieds?.length==0">
-        <h2 class="display-4">No Recent Adverts Found....</h2>
-        <p class="lead">Be the first to <a routerLink="/classifieds/create">post an advert</a>. It's completely free!</p>
-      </div>
-    </div>
-  </div>
+﻿
+<div id="tg-homebanner" class="tg-homebanner tg-haslayout">
+	<figure class="item" data-vide-bg="poster: assets/images/slider/img-01.jpg" data-vide-options="position: 50% 50%">
+		<figcaption>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="tg-bannercontent">
+							<h1>World’s Largest Marketplace</h1>
+							<h2>Search from 12,45,754 Awesome Verified Ads!</h2>
+							<form class="tg-formtheme tg-formbannersearch" novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
+								<fieldset>
+									<div class="form-group tg-inputwithicon">
+										<i class="icon-bullhorn"></i>
+										<input type="text" id="q" formControlName="q" class="form-control" placeholder="What are you looking for">
+									</div>
+									<div class="form-group tg-inputwithicon">
+										<i class="icon-location"></i>
+										<!-- <a class="tg-btnsharelocation fa fa-crosshairs" href="javascript:void(0);"></a> -->
+										<div class="tg-select">
+											<select id="country" formControlName="country">
+												<option value="">All Countries</option>
+												<option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group tg-inputwithicon">
+										<i class="icon-layers"></i>
+										<div class="tg-select">
+											<select id="category" formControlName="category">
+												<option value="">All Categories</option>
+												<optgroup *ngFor="let parent of categories" [label]="parent.name">
+													<option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									<button class="tg-btn" type="submit">Search Now</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</figcaption>
+	</figure>
 </div>
+<main id="tg-main" class="tg-main tg-haslayout">
+	<!--************************************
+					Categories Search Start
+			*************************************-->
+	<section class="tg-haslayout">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-push-1 col-lg-10">
+					<div class="tg-categoriessearch">
+						<div class="tg-title">
+							<h2>
+								<span>Boost your search with</span> Trending Categories</h2>
+						</div>
+						<owl-carousel [options]="{ items: 5, dots: false, nav: true, loop: true,
+							 center: true, autoplay: false,	dotsClass: 'tg-sliderdots',
+							 navClass: ['tg-prev', 'tg-next'], 
+							 navContainerClass: 'tg-slidernav',
+							 navText: ['<span class=\'icon-chevron-left\'></span>', '<span class=\'icon-chevron-right\'></span>'],
+							 responsive: { '0': { items: 1, center: false }, '480': { items: 2, center: false }, '568': { items: 3, center: false },	'768': { items: 5 }	}}"
+						 [items]="categories" [carouselClasses]="['tg-categoriesslider', 'tg-categories']">
+							<div class="tg-category" *ngFor="let c of categories">
+								<div class="tg-categoryholder">
+									<figure>
+										<img src="assets/images/icons/img-08.png" alt="image description">
+									</figure>
+									<h3>{{c.name}}</h3>
+								</div>
+							</div>
+						</owl-carousel>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="tg-sectionspace tg-haslayout">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="tg-sectionhead">
+						<div class="tg-title">
+							<h2>Featured Ads</h2>
+						</div>
+						<div class="tg-description">
+							<p>Over 10,56,432 Featured Ads</p>
+						</div>
+					</div>
+				</div>
+				<div class="tg-ads row">
+					<div *ngFor="let classified of classifieds" class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="tg-ad tg-verifiedad">
+							<figure>
+								<span class="tg-themetag tg-featuretag">featured</span>
+								<a [routerLink]="['/classifieds/details', classified._id]">
+									<img src="{{classified.image?.path || 'assets/images/ads/img-01.jpg'}}" alt="{{classified.title}}">
+								</a>
+								<span class="tg-photocount">See {{classified.imageCount}} Photos</span>
+							</figure>
+							<div class="tg-adcontent">
+								<ul class="tg-productcagegories">
+									<li>
+										<a href="javascript:void(0);">{{classified.category?.name}}</a>
+									</li>
+								</ul>
+								<div class="tg-adtitle">
+									<h3>
+										<a [routerLink]="['/classifieds/details', classified._id]">{{classified.title}}</a>
+									</h3>
+								</div>
+								<time datetime="2017-06-06">Last Updated: {{classified.updated || classified.created | date : 'dd-MM-yyyy HH:mm'}}</time>
+								<div class="tg-adprice">
+									<h4>
+										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{(classified.price?.value.$numberDecimal | number : '1.2-2') || 'N/A'}}</h4>
+								</div>
+								<address>{{classified.region?.name}}, {{classified.country?.name}}</address>
+								<div class="tg-phonelike">
+									<a class="tg-btnphone" href="javascript:void(0);">
+										<i class="icon-phone-handset"></i>
+										<span data-toggle="tooltip" data-placement="top" title="Show Phone No." data-last="0800 - 1234 - 562 - 6">
+											<em>Show Phone No.</em>
+										</span>
+									</a>
+									<span class="tg-like" [ngClass]="{ 'tg-liked': classified.favourite }" (click)="onFavourite($event, classified)">
+										<i class="fa fa-heart"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="tg-btnbox">
+						<a class="tg-btn" href="javascript:void(0);">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="tg-sectionspace tg-bglight tg-haslayout">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="tg-sectionhead">
+						<div class="tg-title">
+							<h2>Latest Posted Ads</h2>
+						</div>
+						<div class="tg-description">
+							<p>Over 10,56,432 New Ads</p>
+						</div>
+					</div>
+				</div>
+				<div class="tg-ads tg-adsvtwo row">
+					<div *ngFor="let classified of classifieds" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<div class="tg-ad tg-verifiedad">
+							<figure>
+								<span class="tg-themetag tg-featuretag">featured</span>
+								<a [routerLink]="['/classifieds/details', classified._id]">
+									<img src="{{classified.image?.path || 'assets/images/ads/img-01.jpg'}}" alt="{{classified.title}}">
+								</a>
+								<span class="tg-photocount">See {{classified.imageCount}} Photos</span>
+							</figure>
+							<div class="tg-adcontent">
+								<ul class="tg-productcagegories">
+									<li>
+										<a href="javascript:void(0);">{{classified.category?.name}}</a>
+									</li>
+								</ul>
+								<div class="tg-adtitle">
+									<h3>
+										<a [routerLink]="['/classifieds/details', classified._id]">{{classified.title}}</a>
+									</h3>
+								</div>
+								<time datetime="2017-06-06">Last Updated: {{classified.updated || classified.created | date : 'dd-MM-yyyy HH:mm'}}</time>
+								<div class="tg-adprice">
+									<h4>
+										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{(classified.price?.value.$numberDecimal | number : '1.2-2') || 'N/A'}}</h4>
+								</div>
+								<address>{{classified.region?.name}}, {{classified.country?.name}}</address>
+								<div class="tg-phonelike">
+									<a class="tg-btnphone" href="javascript:void(0);">
+										<i class="icon-phone-handset"></i>
+										<span data-toggle="tooltip" data-placement="top" title="Show Phone No." data-last="0800 - 1234 - 562 - 6">
+											<em>Show Phone No.</em>
+										</span>
+									</a>
+									<span class="tg-like" [ngClass]="{ 'tg-liked': classified.favourite }" (click)="onFavourite($event, classified)">
+										<i class="fa fa-heart"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="tg-btnbox">
+						<a class="tg-btn" href="javascript:void(0);">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

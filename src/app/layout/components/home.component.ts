@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FilterService } from '../../core/services/filter.service';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
-import clean from 'lodash-clean';
+import * as clean from 'lodash-clean';
 
 @Component({
     selector: 'app-home',
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit() {       
         this.filterService.init();
 
         this.searchForm = this.fb.group({

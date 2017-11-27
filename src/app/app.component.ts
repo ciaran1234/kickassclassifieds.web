@@ -3,6 +3,9 @@ import { UserService } from './core/services/user.service';
 import { User } from './account/models/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
+import '../js/main.js';
+declare var websiteTemplate: any;
 
 @Component({
   selector: 'app-root',
@@ -24,6 +27,10 @@ export class AppComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    $(function () {
+      websiteTemplate.init();
+    });
+
     this.subscription = this.userService
       .user.subscribe(user => this.user = user);
 

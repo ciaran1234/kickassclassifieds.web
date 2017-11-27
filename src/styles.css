@@ -1,23 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-    background-color: #444;   
+.tg-ad figure img, .tg-ad figure a img {
+    width: 240px !important;
+    height: 200px;
 }
 
-.container {
-    background-color: #fff;
+div.tg-navigationarea {
+    padding: 35px 0px 25px 0px;
+} 
+
+.navbar {
+    padding: .0rem 1rem;
 }
 
-  span.iso-currency.USD::after {
-                        content: "$"
-                    }
-                    
-                    span.iso-currency.GBP::after {
-                        content: "£"
-                    }
-                    
-                    span.iso-currency.EUR::after {
-                        content: "€"
-                    }
+span.iso-currency.USD::after {
+    content: "$"
+}
+
+span.iso-currency.GBP::after {
+    content: "£"
+}
+
+span.iso-currency.EUR::after {
+    content: "€"
+}
 
 .custom-file-control::before {
     content: "Browse"
@@ -25,78 +29,4 @@ body{
 
 .custom-file-control::after {
     content: "Choose File"
-}
-
-.carousel-inner {
-    background-color: #222;
-}
-
-dynamic-form-control {
-    display: block;
-}
-
-.dynamic-form-group-label {
-    width: 100%;
-    padding-left: 15px;
-    display: inline-block;
-}
-
-a.card-link .card {
-    color: initial;      
-}
-
-a.card-link:hover, a.card-link:focus, a.card-link:active {
-    text-decoration: none;
-}
-
-.card .card-img-top.img-fluid {
-    height: 200px;
-}
-
-
- .my-drop-zone {
-        border: dotted 3px lightgray;
-      }
-
-      .nv-file-over {
-        border: dotted 3px red;
-      }
-
-     .favourite {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  font-size: 30px;
-}   
-
-.favourite.saved span.star:before {
- content: "\f005";
-    color: #e3cf7a;
-}
-
-.favourite span.star {
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-}
-
-.favourite span.star:hover{
-    cursor: pointer;
-}
-
-.favourite span.star:before{
-    content: "\f006";
-    padding-right: 5px;
-    color: #777;
-}
-
-.favourite.saved span.star:hover:before, .favourite.saved span.star:hover~span.star:before {
-     content: "\f006";
-    padding-right: 5px;
-    color: #777;
-}
-
-.favourite span.star:hover:before, .favourite span.star:hover~span.star:before {
-    content: "\f005";
-    color: #e3cf7a;
 }

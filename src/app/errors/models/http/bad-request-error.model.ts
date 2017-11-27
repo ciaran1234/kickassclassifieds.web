@@ -6,10 +6,8 @@ export class BadRequestError extends HttpError {
     constructor(messages: any) {
         super();
         this.status = 400;
-        this.mapServerMessages(messages.errors);
-    }
+        let errors = messages.errors;
 
-    mapServerMessages(errors: any) {
         if (errors) {
             for (let property in errors) {
                 if (errors[property].message) {

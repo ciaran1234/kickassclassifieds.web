@@ -1,6 +1,10 @@
 <div class="container">
-    <h1>My Wishlist</h1>
     <div class="row">
+        <div class="col-sm-12">
+            <h1>My Wishlist</h1>
+        </div>
+    </div>
+    <div class="row pb-3">
         <div *ngFor="let wish of wishlist" class="col-lg-3 d-flex align-items-stretch">
             <a class="card-link" [routerLink]="['/classifieds/details', wish._id]">
                 <div class="card" style="height: 350px;">
@@ -8,8 +12,7 @@
                     <div class="card-block">
                         <h6 class="card-title text-truncate">{{ wish.title }}</h6>
                         <p class="card-text">
-                            <span class="iso-currency" [ngClass]="wish.price?.ccy"></span>{{ (wish.price?.value.$numberDecimal
-                            | number : '1.2-2') || 'N/A' }}
+                            <span class="iso-currency" [ngClass]="wish.price?.ccy"></span>{{ (wish.price?.value.$numberDecimal | number : '1.2-2') || 'N/A' }}
                         </p>
                         <div class="row">
                             <div class="col-sm-9">
@@ -21,6 +24,11 @@
                     </div>
                 </div>
             </a>
+        </div>
+        <div *ngIf="wishlist?.length === 0" class="row">            
+            <div class="col-sm-12">
+                <h3>No Items found</h3>
+            </div>
         </div>
     </div>
 </div>

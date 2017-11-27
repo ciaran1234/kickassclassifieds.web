@@ -1,0 +1,60 @@
+<div id="tg-innerbanner" class="tg-innerbanner tg-haslayout">
+    <figure data-vide-bg="poster: assets/images/slider/img-01.jpg" data-vide-options="position: 50% 50%">
+        <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(&quot;assets/images/slider/img-01.jpg&quot;);">
+            <video autoplay="" loop="" muted="" style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: hidden; opacity: 0; width: auto; height: 142px;"></video>
+        </div>
+        <figcaption>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-bannercontent">
+                            <form class="tg-formtheme tg-formbannersearch" novalidate [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
+                                <fieldset>
+                                    <div class="form-group tg-inputwithicon">
+                                        <i class="icon-bullhorn"></i>
+                                        <input type="text" id="q" formControlName="q" class="form-control" placeholder="What are you looking for">
+                                    </div>
+                                    <div class="form-group tg-inputwithicon">
+                                        <i class="icon-location"></i>
+                                        <div class="tg-select">
+                                            <select id="country" formControlName="country">
+                                                <option value="">All Countries</option>
+                                                <option *ngFor="let country of countries" [ngValue]="country.code.toString()">{{country.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group tg-inputwithicon">
+                                        <i class="icon-layers"></i>
+                                        <div class="tg-select">
+                                            <select id="category" formControlName="category">
+                                                <option value="">All Categories</option>
+                                                <optgroup *ngFor="let parent of categories" [label]="parent.name">
+                                                    <option *ngFor="let category of parent.children" [ngValue]="category._id">{{category.name}}</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="tg-btn" type="submit">Search Now</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </figcaption>
+    </figure>
+    <div class="tg-breadcrumbarea">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ol class="tg-breadcrumb">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="tg-active">ad listing grid</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

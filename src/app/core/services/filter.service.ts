@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from './http-client.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
-import clean from 'lodash-clean';
+import * as clean from 'lodash-clean';
 
 @Injectable()
 export class FilterService<TFilter extends Filter, TResponse> {

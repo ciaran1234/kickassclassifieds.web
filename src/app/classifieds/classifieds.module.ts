@@ -11,12 +11,14 @@ import { ClassifiedFormComponent } from './components/classified-form.component'
 import { DynamicFormService } from '../dynamic-forms/services/dynamic-form.service';
 import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-control.directive';
 import { FormsModule } from '@angular/forms';
+import {LayoutModule } from '../layout/layout.module';
 
 @NgModule({
     imports: [ClasifiedRoutingModule,
         CommonModule,      
         ReactiveFormsModule,
         FormsModule,
+        LayoutModule,
         NgbModule.forRoot()],
     declarations: [routedComponents,
         FileSelectDirective,

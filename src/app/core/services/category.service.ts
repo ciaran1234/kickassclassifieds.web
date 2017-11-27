@@ -3,7 +3,7 @@ import { HttpClient } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { Category } from './../models/category.model';
 import 'rxjs/add/operator/toPromise';
-import _ from 'lodash';
+import * as _ from "lodash";
 
 @Injectable()
 export class CategoryService {

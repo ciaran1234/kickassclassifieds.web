@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { LayoutModule } from './layout/layout.module';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { UserService } from './core/services/user.service';
@@ -12,10 +13,11 @@ import { AccountModule } from './account/account.module';
 import { ClassifiedModule } from './classifieds/classifieds.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorRoutingModule, errorRoutedComponents } from './errors/error-routing.module';
+import { OwlModule } from 'ng2-owl-carousel';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,    
     routingComponents,
     errorRoutedComponents
   ],
@@ -29,8 +31,10 @@ import { ErrorRoutingModule, errorRoutedComponents } from './errors/error-routin
     AccountModule,
     ClassifiedModule,
     ReactiveFormsModule,
-    ErrorRoutingModule
-  ],
+    ErrorRoutingModule,
+    OwlModule,
+    LayoutModule
+  ],  
   providers: [
     CategoryService
   ],

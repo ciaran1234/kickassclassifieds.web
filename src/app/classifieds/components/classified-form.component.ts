@@ -15,7 +15,7 @@ import { HttpClient } from '../../core/services/http-client.service';
 import { DynamicFormService } from "../../dynamic-forms/services/dynamic-form.service";
 import { DynamicFormControlModel } from "../../dynamic-forms/models/dynamic-form-control.model";
 import { Observable } from 'rxjs/Rx';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { FileItem, FileLikeObject } from 'ng2-file-upload';
 import { FormComponent } from '../../core/components/form.component';
 import { Router } from '@angular/router';

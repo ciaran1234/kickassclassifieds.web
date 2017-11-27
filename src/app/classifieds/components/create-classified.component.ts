@@ -7,7 +7,8 @@ import { FormComponent } from '../../core/components/form.component';
 
 @Component({
     selector: 'classified-create',
-    templateUrl: '../views/create-classified.component.html'
+    templateUrl: '../views/create-classified.component.html',
+    styleUrls: ['../../../css/dashboard.css']
 })
 
 export class CreateClassifiedComponent extends FormComponent {
