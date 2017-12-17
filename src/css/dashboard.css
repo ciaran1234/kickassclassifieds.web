@@ -352,8 +352,8 @@ input[type=file].tg-fileinput{display: none;}
 	width: 100%;
 	float: left;
 }
-.tg-wrapper:before{display: none;}
-.tg-wrapper {
+.tg-wrapper.dashboard:before{display: none;}
+.tg-wrapper.dashboard {
 	overflow: hidden;
 	background: #f7f7f7;
 	padding: 0 0 2px 250px;
@@ -588,8 +588,8 @@ input[type=file].tg-fileinput{display: none;}
 	background: rgba(0,0,0,0.20);
 }
 .tg-appstoreicons li{ padding: 0 5px; }
-.tg-wrapper.tg-openmenu { padding-left: 60px; }
-.tg-wrapper.tg-openmenu .tg-sidebarwrapper { width: 60px; }
+.tg-wrapper.tg-openmenu.dashboard { padding-left: 60px; }
+.tg-wrapper.tg-openmenu.dashboard .tg-sidebarwrapper { width: 60px; }
 .tg-openmenu .tg-sidebarwrapper .tg-logo{ margin: 0 0 0 60px; }
 .tg-openmenu .tg-user{
 	background: #363b4d;

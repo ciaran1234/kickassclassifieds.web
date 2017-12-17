@@ -1,0 +1,134 @@
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="container">
+        <div class="row pt-3 pb-3">
+            <div class="tg-title">
+                <h2 class="text-left">Register Now</h2>
+            </div>
+            <div class="tg-haslayout" *ngIf="!success">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                        <form class="tg-formtheme tg-formregister" novalidate (ngSubmit)="onSubmit(registration)" [formGroup]="registration">
+                            <fieldset>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['firstName'].valid && (registration.controls['firstName'].touched ) }">
+                                    <i class="icon-user"></i>
+                                    <input type="text" placeholder="First Name*" formControlName="firstName" class="form-control" />
+                                    <div *ngIf="registration.get('firstName').hasError('required') && (registration.get('firstName').touched )" class="form-control-feedback">
+                                        First Name is required
+                                    </div>
+                                    <div *ngIf="registration.get('firstName').hasError('maxlength') && registration.get('firstName').touched" class="form-control-feedback">
+                                        Maximum of 30 characters
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['lastName'].valid && (registration.controls['lastName'].touched ) }">
+                                    <i class="icon-user"></i>
+                                    <input type="text" placeholder="Last Name*" formControlName="lastName" class="form-control" />
+                                    <div *ngIf="registration.get('lastName').hasError('required') && (registration.get('lastName').touched )" class="form-control-feedback">
+                                        Last Name is required
+                                    </div>
+                                    <div *ngIf="registration.get('lastName').hasError('maxlength') && registration.get('lastName').touched" class="form-control-feedback">
+                                        Maximum of 40 characters
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['email'].valid && (registration.controls['email'].touched ) }">
+                                    <i class="icon-envelope"></i>
+                                    <input type="email" name="email" class="form-control" formControlName="email" placeholder="Email*">
+                                    <div *ngIf="registration.get('email').hasError('required') && (registration.get('email').touched )" class="form-control-feedback">
+                                        Email is required
+                                    </div>
+                                    <div *ngIf="registration.get('email').hasError('maxlength') && registration.get('email').touched" class="form-control-feedback">
+                                        Maximum of 256 characters
+                                    </div>
+                                    <div *ngIf="registration.get('email').hasError('minlength') && registration.get('email').touched" class="form-control-feedback">
+                                        Minimum of 5 characters
+                                    </div>
+                                    <div *ngIf="registration.get('email').hasError('invalidEmail') && registration.get('email').touched" class="form-control-feedback">
+                                        Invalid Email
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['password'].valid && (registration.controls['password'].touched ) }">
+                                    <i class="icon-lock"></i>
+                                    <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password*">
+                                    <div *ngIf="registration.get('password').hasError('required') && (registration.get('password').touched )" class="form-control-feedback">
+                                        Password is required
+                                    </div>
+                                    <div *ngIf="registration.get('password').hasError('minlength') && registration.get('password').touched" class="form-control-feedback">
+                                        Minimum of 7 characters
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['confirmPassword'].valid && (registration.controls['confirmPassword'].touched ) }">
+                                    <i class="icon-lock"></i>
+                                    <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Retype Password*">
+                                    <div *ngIf="registration.get('confirmPassword').hasError('required') && (registration.get('confirmPassword').touched )" class="form-control-feedback">
+                                        Retype Password is required
+                                    </div>
+                                    <div *ngIf="registration.get('confirmPassword').hasError('minlength') && registration.get('confirmPassword').touched" class="form-control-feedback">
+                                        Minimum of 7 characters
+                                    </div>
+                                    <div *ngIf="registration.get('confirmPassword').hasError('equalTo') && registration.get('confirmPassword').touched" class="form-control-feedback">
+                                        Passwords do not match
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="tg-checkbox">
+                                        <input id="tg-agree" type="checkbox" name="agree" value="agree">
+                                        <label for="tg-agree">By registering, you accept our
+                                            <a href="javascript:void(0);">Terms &amp; Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button class="tg-btn" type="submit">Register</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                        <ul class="tg-sociallogingsignup">
+                            <li class="tg-googleplus">
+                                <a href="javascript:void(0);" (click)="onRegisterExternal('google')">
+                                    <i class="fa fa-google-plus"></i>
+                                    <span>Sign in with
+                                        <strong>“Google”</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="tg-facebook">
+                                <a href="javascript:void(0);" (click)="onRegisterExternal('facebook')">
+                                    <i class="fa fa-facebook"></i>
+                                    <span>Sign in with
+                                        <strong>“Google”</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="tg-linkedin">
+                                <a href="javascript:void(0);" (click)="onRegisterExternal('linkedin')">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span>Sign in with
+                                        <strong>“Google”</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="tg-twitter">
+                                <a href="javascript:void(0);" (click)="onRegisterExternal('twitter')">
+                                    <i class="fa fa-twitter"></i>
+                                    <span>Sign in with
+                                        <strong>“Google”</strong>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tg-haslayout" *ngIf="success">
+                <h2>You have successfully registered!</h2>
+                <p>You will recieve a confirmation email shortly. Please click on the link provided to verify your email.</p>
+            </div>
+        </div>
+        <!-- <div class="alert alert-danger mt-3 pb-0" role="alert" *ngIf="serverValidationErrors.length > 0">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <strong>Please fix the following issues</strong>
+            <ul>
+                <li *ngFor="let error of serverValidationErrors">{{error}}</li>
+            </ul>
+        </div>  -->
+    </div>
+</main>

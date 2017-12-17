@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HttpClient {

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Classified } from '../../classifieds/models/classified.model';
 import { Category } from '../../core/models/category.model';
 import { Country } from '../../core/models/country.model';
-import { ClassifiedService } from '../../classifieds/services/classified.service';
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
 import { UserService } from '../../core/services/user.service';
@@ -12,6 +10,8 @@ import { FilterService } from '../../core/services/filter.service';
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 import * as clean from 'lodash-clean';
+import { Classified } from 'app/core/models/classified.model';
+import { ClassifiedService } from 'app/core/services/classified.service';
 
 @Component({
     selector: 'inner-banner',

@@ -6,18 +6,22 @@ import { CurrencyService } from './services/currency.service';
 import { CountryService } from './services/country.service';
 import { FilterService } from './services/filter.service';
 import { MessageService } from './services/message.service';
+import { ClassifiedService } from './services/classified.service';
+import { AuthorizationValidator } from 'app/core/validation/authorization.validator';
 
 @NgModule({})
 
 export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: CoreModule,
-      providers: [
+      ngModule: CoreModule,    
+      providers: [        
+        AuthorizationValidator,
         ApiConfiguration,
         HttpClient,
         UserService,
-        FilterService,
+        FilterService,        
+        ClassifiedService,
         CurrencyService,
         CountryService,
         MessageService

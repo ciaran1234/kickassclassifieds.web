@@ -6,7 +6,7 @@ import { DynamicFormControlType } from '../models/dynamic-form-control-type.mode
 import { DynamicFormGroupModel } from '../models/dynamic-form-group.model';
 import { DynamicInputModel } from '../models/dynamic-input.model';
 import { CustomValidator } from '../../core/validation/custom-validation.validator';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export class DynamicFormService {
 

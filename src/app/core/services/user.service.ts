@@ -1,16 +1,17 @@
 import { ApiConfiguration } from '../../core/services/api-configuration.service';
 import { HttpClient } from './http-client.service';
-import { ConfirmResetPassword } from '../../account/models/confirm-reset-password.model';
-import { ResetPassword } from '../../account/models/reset-password.model';
+
+import { ResetPassword } from '../models/reset-password.model';
 import { Injectable } from '@angular/core';
-import { Signin } from '../../account/models/signin.model';
-import { Registration } from '../../account/models/registration.model';
+import { Signin } from '../models/signin.model';
+import { Registration } from '../models/registration.model';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
-import { ExternalLogin } from '../../account/models/external-login.model';
-import { User } from '../../account/models/user.model';
-import { Classified } from '../../classifieds/models/classified.model';
+import { ExternalLogin } from '../models/external-login.model';
+import { User } from '../models/user.model';
+import { Classified } from '../models/classified.model';
 import { BaseService } from './base.service';
+import { ConfirmResetPassword } from '../models/confirm-reset-password.model';
 
 @Injectable()
 export class UserService extends BaseService {

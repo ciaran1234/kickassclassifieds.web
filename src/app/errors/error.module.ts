@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders, ErrorHandler } from '@angular/core'
 
-class AppErrorHandler implements ErrorHandler {
+ export class AppErrorHandler implements ErrorHandler {
     handleError(error: any) {
         throw error;
     }

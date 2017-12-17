@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Category } from '../../core/models/category.model';
 import { Country } from '../../core/models/country.model';
+
 import { CountryService } from '../../core/services/country.service';
 import { CategoryService } from '../../core/services/category.service';
 import { UserService } from '../../core/services/user.service';
@@ -16,11 +18,11 @@ import { Classified } from 'app/core/models/classified.model';
 import { ClassifiedService } from 'app/core/services/classified.service';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './../views/home.component.html',
+    selector: 'app-landing-page',
+    templateUrl: '../views/landing-page.component.html',
 })
 
-export class HomeComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
     classifieds: Classified[];
     countries: Country[];
     categories: Category[];
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
 
     }
 
-    ngOnInit() {       
+    ngOnInit() {
         this.filterService.init();
 
         this.searchForm = this.fb.group({

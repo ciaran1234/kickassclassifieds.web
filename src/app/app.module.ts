@@ -9,34 +9,37 @@ import { CoreModule } from './core/core.module';
 import { UserService } from './core/services/user.service';
 import { CategoryService } from './core/services/category.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AccountModule } from './account/account.module';
-import { ClassifiedModule } from './classifieds/classifieds.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorRoutingModule, errorRoutedComponents } from './errors/error-routing.module';
+import { PublicModule } from './public/public.module';
 import { OwlModule } from 'ng2-owl-carousel';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+
 
 @NgModule({
   declarations: [
-    AppComponent,    
+    AppComponent,
     routingComponents,
-    errorRoutedComponents
+    errorRoutedComponents        
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     FormsModule,
     HttpModule,
-    CoreModule.forRoot(),  
+    CoreModule.forRoot(),
     NgbModule.forRoot(),
-    AppRoutingModule,
-    AccountModule,
-    ClassifiedModule,
-    ReactiveFormsModule,
-    ErrorRoutingModule,
     OwlModule,
-    LayoutModule
-  ],  
+    AppRoutingModule,    
+    ReactiveFormsModule,
+    ErrorRoutingModule,    
+    LayoutModule,    
+    PublicModule,
+    DashboardModule
+  ],
   providers: [
-    CategoryService
+    CategoryService,
+    NgbActiveModal
   ],
   bootstrap: [AppComponent]
 })

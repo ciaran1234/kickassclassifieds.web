@@ -1,5 +1,5 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export class CustomValidator {
 

@@ -6,7 +6,7 @@ import { DynamicSelectModel } from './dynamic-select.model';
 import { DynamicFormGroupModel } from './dynamic-form-group.model';
 import { DynamicFormService } from "../services/dynamic-form.service";
 import { FormGroup } from '@angular/forms';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export class DynamicFormControlFactory {
     static get(key: string, property: any, value?: any): DynamicFormControlModel {

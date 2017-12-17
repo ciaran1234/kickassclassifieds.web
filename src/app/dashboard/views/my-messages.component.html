@@ -1,0 +1,43 @@
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <form class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-dashboardbox">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>Offers/Messages</h2>
+                            </div>
+                            <div class="tg-dashboardholder tg-offersmessages tg-offersmessageswithsearch">
+                                <ul>
+                                    <li>
+                                        <fieldset>
+                                            <input type="search" name="search" class="form-control" placeholder="Search Here">
+                                            <i class="icon-magnifier"></i>
+                                        </fieldset>
+                                        <div class="tg-verticalscrollbar tg-dashboardscrollbar">
+                                            <div class="tg-ad" [ngClass]="{ 'tg-dotnotification': !message.read }" *ngFor="let message of messages | async" [routerLink]="['/dashboard/account/messages/details', message?.key]">
+                                                <figure>
+                                                    <img src="assets/images/ads/thumbnail/img-01.jpg" alt="image description">
+                                                </figure>
+                                                <h3>{{message?.subject}}
+                                                    <span class="small">{{message?.from?.firstName}} {{message?.from?.lastName}}</span>
+                                                </h3>
+                                                <p>{{message?.timestamp | date:'dd/MM/yyyy HH:mm'}}</p>                                              
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tg-chatarea">
+                                            <router-outlet></router-outlet>                                          
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</main>

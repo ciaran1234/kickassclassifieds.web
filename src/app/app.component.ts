@@ -1,6 +1,6 @@
 import { Component, LOCALE_ID, OnInit, Inject } from '@angular/core';
 import { UserService } from './core/services/user.service';
-import { User } from './account/models/user.model';
+import { User } from 'app/core/models/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
@@ -13,9 +13,7 @@ declare var websiteTemplate: any;
 })
 
 export class AppComponent implements OnInit {
-  user: User;
-  subscription: Subscription;
-  isCollapsed: boolean = true;
+ 
 
   languages = [
     { code: 'en', label: 'English' },
@@ -28,21 +26,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     $(function () {
-      websiteTemplate.init();
+      websiteTemplate.initializeTemplate();
     });
 
-    this.subscription = this.userService
-      .user.subscribe(user => this.user = user);
-
-    this.userService.checkIfUserLoggedIn();
+   
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  onSignout() {
-    this.userService.signout();
-    this.router.navigateByUrl('/')
-  }
+ 
 }

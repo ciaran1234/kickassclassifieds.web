@@ -1,0 +1,126 @@
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <ng-container *ngIf="user">
+            <form class="tg-formtheme tg-formdashboard" novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                            <div class="tg-dashboardbox">
+                                <div class="tg-dashboardboxtitle">
+                                    <h2>Profile Photo</h2>
+                                </div>
+
+                                <div class="tg-dashboardholder">
+                                    <ng-container *ngIf="user?.profileImageUrl">
+                                        <img *ngIf="user?.profileImageUrl" class="img-fluid mx-200" src="{{user?.profileImageUrl}}">
+                                        <label class="profile-image-change" for="profileImageUrl">(Change)</label>
+                                    </ng-container>
+                                    <div [hidden]="user?.profileImageUrl">
+                                        <label class="tg-fileuploadlabel" for="profileImageUrl">
+                                            <span>Drop files anywhere to upload</span>
+                                            <span>Or</span>
+                                            <span class="tg-btn">Select Files</span>
+                                            <span>Maximum upload file size: 500 KB</span>
+                                            <input id="profileImageUrl" class="tg-fileinput" type="file" name="profileImageUrl" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg, .gif">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                            <div class="tg-dashboardbox">
+                                <div class="tg-dashboardboxtitle">
+                                    <h2>Profile Detail</h2>
+                                </div>
+                                <div class="tg-dashboardholder">
+                                    <div class="form-group" [ngClass]="{ 'has-danger': !form.controls['firstName'].valid && (form.controls['firstName'].touched) }">
+                                        <input id="firstName" class="form-control" placeholder="First Name*" type="text" formControlName="firstName" />
+                                        <div class="form-control-feedback" *ngIf="form.get('firstName').hasError('required') && (form.get('firstName').touched)">
+                                            First Name is required
+                                        </div>
+                                        <div class="form-control-feedback" *ngIf="form.get('firstName').hasError('maxlength') && (form.get('firstName').touched)">
+                                            Max length of 30 characters for First Name
+                                        </div>
+                                    </div>
+                                    <div class="form-group" [ngClass]="{ 'has-danger': !form.controls['lastName'].valid && (form.controls['lastName'].touched) }">
+                                        <input id="lastName" class="form-control" placeholder="Last Name*" type="text" formControlName="lastName" />
+                                        <div class="form-control-feedback" *ngIf="form.get('lastName').hasError('required') && (form.get('lastName').touched)">
+                                            Last Name is required
+                                        </div>
+                                        <div class="form-control-feedback" *ngIf="form.get('lastName').hasError('maxlength') && (form.get('lastName').touched)">
+                                            Max length of 40 characters for Last Name
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon2">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            </span>
+                                            <input id="email" name="email" type="email" class="form-control" formControlName="email" placeholder="Email*" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" [ngClass]="{ 'has-danger': !form.controls['phoneNumber'].valid && (form.controls['phoneNumber'].touched) }">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="phone-addon">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </span>
+                                            <input id="phoneNumber" name="phoneNumber" type="tel" class="form-control" formControlName="phoneNumber" placeholder="Phone Number"
+                                            />
+                                        </div>
+                                        <div class="form-control-feedback" *ngIf="form.get('phoneNumber').hasError('maxlength') && (form.get('phoneNumber').touched)">
+                                            Max length of 15 characters for Phone Number
+                                        </div>
+                                    </div>
+                                    <button class="tg-btn" type="submit">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                            <div class="tg-dashboardbox">
+                                <div class="tg-dashboardboxtitle">
+                                    <h2>Change Password</h2>
+                                </div>
+                                <div class="tg-dashboardholder">
+                                    <div class="form-group">
+                                        <input type="password" name="currentpassword" class="form-control" placeholder="Current Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="newpassword" class="form-control" placeholder="New Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm New Password">
+                                    </div>
+                                    <button class="tg-btn" type="button">Change Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                            <div class="tg-dashboardbox">
+                                <div class="tg-dashboardboxtitle">
+                                    <h2>Social Logins</h2>
+                                </div>
+                                <div class="tg-dashboardholder">
+                                    <ul class="list-group" *ngFor="let externalLogin of externalLogins">
+                                        <li class="list-group-item">
+                                            <span class="fa-stack fa-lg">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-stack-1x fa-inverse" [ngClass]="'fa-'+externalLogin.loginProvider"></i>
+                                            </span>
+                                            <ng-container *ngIf="!externalLogin.providerKey">
+                                                <button type="button" class="btn btn-primary" (click)="onAddExternalLogin(externalLogin)"> Connect</button>
+                                            </ng-container>
+                                            <ng-container *ngIf="externalLogin.providerKey">
+                                                <button type="button" class="btn btn-danger" (click)="onRemoveExternalLogin(externalLogin)"> Disconnect</button>
+                                            </ng-container>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </ng-container>
+    </section>
+</main>

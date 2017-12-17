@@ -1,7 +1,7 @@
 var websiteTemplate = (function () {
 
 	return {
-		init: function () {
+		initializeTemplate: function () {
 			/*--------------------------------------
 			MOBILE MENU						
 	--------------------------------------*/
@@ -14,6 +14,8 @@ var websiteTemplate = (function () {
 			}
 
 			collapseMenu();
+
+
 
 			/*--------------------------------------
 					SHOW NUMBER						
@@ -284,7 +286,7 @@ var websiteTemplate = (function () {
 						distributeSeries: true
 					});
 			}
-			
+
 			/*--------------------------------------
 					POST SLIDER						
 			--------------------------------------*/
@@ -320,44 +322,8 @@ var websiteTemplate = (function () {
 					toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
 					image_advtab: true,
 				});
-			}
-			/*--------------------------------------
-					SORTING ADS						
-			--------------------------------------*/
-			if (jQuery('#tg-checkedall').length > 0) {
-				//select all checkboxes
-				jQuery('#tg-checkedall').on('change', function () {  //"select all" change 
-					jQuery('.tg-checkbox > input[type=checkbox]').prop('checked', jQuery(this).prop('checked')); //change all ".checkbox" checked status
-				});
-				//".checkbox" change 
-				jQuery('.checkbox').on('change', function () {
-					//uncheck "select all", if one of the listed checkbox item is unchecked
-					if (false == jQuery(this).prop('checked')) { //if this item is unchecked
-						jQuery('#tg-checkedall').prop('checked', false); //change "select all" checked status to false
-					}
-					//check "select all" if all checkbox items are checked
-					if (jQuery('.tg-checkbox > input[type=checkbox]:checked').length == jQuery('.tg-checkbox > input[type=checkbox]').length) {
-						jQuery('#tg-checkedall').prop('checked', true);
-					}
-				});
-			}
-			/*--------------------------------------
-					SORTING ADS						
-			--------------------------------------*/
-			if (jQuery('#tg-adstype').length > 0) {
-				var _clickedValue = jQuery('.tg-navtabledata ul li a');
-				_clickedValue.on('click', function (event) {
-					event.preventDefault();
-					var _datacategory = jQuery(this).data('category');
-					_clickedValue.parent('li').removeClass('tg-active');
-					jQuery(this).parent('li').addClass('tg-active');
-					jQuery('#tg-adstype tr').hide();
-					jQuery('#tg-adstype tr[data-category="' + _datacategory + '"]').fadeIn();
-					if (jQuery(this).attr("href") == "*") {
-						jQuery('#tg-adstype tr').fadeIn();
-					}
-				});
-			}
+			}		
+			
 			/*--------------------------------------
 					PACKAGE EXPIRY COUNTER			
 			--------------------------------------*/
@@ -468,18 +434,20 @@ var websiteTemplate = (function () {
 			/*--------------------------------------
 					PRODUCT GALLERY					
 			--------------------------------------*/
-			if (jQuery('#tg-productgallery').length > 0) {
-				var gallery = new $.ThumbnailGallery(jQuery('#tg-productgallery'), {
-					count: 9,
-					breakpoint: 600,
-					shadowStrength: 0.5,
-					imageType: 'jpg',
-					thumbImageType: 'jpg',
-					thumbImages: 'images/gallery/thumbs/thumb',
-					smallImages: 'images/gallery/small/image',
-					largeImages: 'images/gallery/large/image',
-				});
-			}
+
+			// if (jQuery('#tg-productgallery').length > 0) {
+
+			// 	var gallery = new $.ThumbnailGallery(jQuery('#tg-productgallery'), {
+			// 		count: 9,
+			// 		breakpoint: 600,
+			// 		shadowStrength: 0.5,
+			// 		imageType: 'jpg',
+			// 		thumbImageType: 'jpg',
+			// 		thumbImages: 'assets/images/gallery/thumbs/thumb',
+			// 		smallImages: 'assets/images/gallery/small/image',
+			// 		largeImages: 'assets/images/gallery/large/image',
+			// 	});
+			// }
 			/* -------------------------------------
 					PRETTY PHOTO GALLERY
 			-------------------------------------- */
@@ -518,6 +486,21 @@ var websiteTemplate = (function () {
 						568: { items: 3, center: false },
 						768: { items: 5, },
 					}
+				});
+			}
+		},
+		renderProductGallery: function () {			
+			if (jQuery('#tg-productgallery').length > 0) {			
+
+				var gallery = new $.ThumbnailGallery(jQuery('#tg-productgallery'), {
+					count: 9,
+					breakpoint: 600,
+					shadowStrength: 0.5,
+					imageType: 'jpg',
+					thumbImageType: 'jpg',
+					thumbImages: 'assets/images/gallery/thumbs/thumb',
+					smallImages: 'assets/images/gallery/small/image',
+					largeImages: 'assets/images/gallery/large/image'
 				});
 			}
 		}

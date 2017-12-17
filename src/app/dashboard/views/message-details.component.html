@@ -1,0 +1,21 @@
+<div class="tg-messages tg-verticalscrollbar tg-dashboardscrollbar tg-scroll-vertical" *ngIf="user">
+    <div [ngClass]="message.from._id !== user._id ? 'tg-offerermessage' : 'tg-memessage tg-readmessage'" *ngFor="let message of messages">
+        <figure>
+            <img src="assets/images/author/img-16.jpg" alt="image description">
+        </figure>
+        <div class="tg-description">
+            <p>{{message.body}}</p>
+            <div class="clearfix"></div>
+            <time>{{message.timestamp | date:'dd/MM/yyyy HH:mm'}}</time>
+        </div>
+    </div>  
+</div>
+<form novalidate (ngSubmit)="onSubmitted(form)" [formGroup]="form" class="tg-replaybox">
+    <textarea class="form-control" formControlName="body" placeholder="Type Message Here"></textarea>
+    <div class="tg-iconbox">
+        <i class="icon-thumbs-up"></i>
+        <i class="icon-thumbs-down"></i>
+        <i class="icon-smile"></i>
+        <button type="submit" class="btn btn-sm btn-primary">Send</button>
+    </div>
+</form>

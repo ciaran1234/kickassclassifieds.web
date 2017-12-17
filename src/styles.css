@@ -1,8 +1,3 @@
-.tg-ad figure img, .tg-ad figure a img {
-    width: 240px !important;
-    height: 200px;
-}
-
 div.tg-navigationarea {
     padding: 35px 0px 25px 0px;
 } 
@@ -23,10 +18,123 @@ span.iso-currency.EUR::after {
     content: "€"
 }
 
-.custom-file-control::before {
-    content: "Browse"
+.custom-file-input {
+    display: none;
 }
 
-.custom-file-control::after {
-    content: "Choose File"
+.tg-priceandlastupdate span.iso-currency {
+    display: inline;
 }
+
+
+/* Image Previewer*/
+.tg-themetag {
+    z-index: 1001;
+}
+
+.tg-ad figure a.ngx-gallery-thumbnail, .tg-ad figure img.ngx-gallery-thumbnail {
+    border-radius: unset;
+}
+
+.tg-photocount{
+    bottom: 74px;
+    z-index: 1001;
+}
+
+
+.tg-ad figure img, .tg-ad figure a img{
+    width: 240px;
+    height: 200px;
+}
+
+.ngx-gallery-active[_nghost-c3] {
+    background: rgba(0, 0, 0, 0.93) !important;
+}
+
+.ngx-gallery-preview-img{
+    height: auto !important;
+    width: auto !important;
+}
+
+.tg-thememodal.tg-categorymodal .tg-close {
+    top: -13px;
+    right: -13px;
+}
+
+.tg-thememodal.tg-categorymodal .tg-title {
+    text-align: left;
+}
+
+.tg-thememodal.tg-categorymodal .modal-dialog  {
+   max-width: 870px;
+   clear: both;
+   width: 100%;
+   padding: 20px;
+   overflow:  hidden;
+}
+
+.tg-thememodal.tg-categorymodal .modal-content  {
+    border: 0;
+    width: 100%;
+    float:  left;
+    box-shadow: none;
+    padding: 25px 30px 30px 30px;
+}
+
+.tg-hassubcategories{
+    cursor: pointer;
+}
+
+.tg-user img {
+    height: 60px;
+    width: 60px;
+}
+
+.profile-image-change {
+    color: #55acee;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.tg-userdp img {
+    height: 40px;
+    width: 40px;
+}
+
+
+.tg-ad.tg-dotnotification img {
+    width: 100%;
+    height: 100%;
+}
+
+.tg-ad figure img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.tg-offersmessages ul li {
+    width: 50%;
+}
+
+.tg-offersmessages .tg-ad p {
+    margin: 0;
+    width: auto;
+	color: #363b4d;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 25px;
+	overflow: hidden;
+	padding: 0 0 0 10px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
+}
+
+.tg-scroll-vertical {
+    overflow-y: auto;
+}
+
