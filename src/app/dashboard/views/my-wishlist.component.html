@@ -1,4 +1,102 @@
-<div class="container">
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <form class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-dashboardbox">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>My Favourites</h2>
+                            </div>
+                            <div class="tg-dashboardholder">
+                                <table id="tg-adstype" class="table tg-dashboardtable tg-myfavourites">
+                                    <thead>
+                                        <tr>                                          
+                                            <th>Photo</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Price &amp; Location</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let wish of wishlist">                                            
+                                            <td data-title="Photo">
+                                                <img src="{{wish.image?.path}}" alt="{{wish.title}}" style="max-width: 200px;">
+                                            </td>
+                                            <td data-title="Title">
+                                                <h3>{{wish.title}}</h3>
+                                                <span>Ad ID: {{wish._id}}</span>
+                                            </td>
+                                            <td data-title="Category">
+                                                <span class="tg-adcategories">{{wish.category?.name}}</span>
+                                            </td>
+                                            <td data-title="Price &amp; Location">
+                                                <h3>
+                                                    <span class="iso-currency" [ngClass]="wish.price?.ccy"></span>{{wish.price ? wish.price.value.$numberDecimal : 'N/A'}}</h3>
+                                                <address>location {{wish.state ? wish.state + ', ' : ''}} {{wish.region.name}}, {{wish.country.name}}</address>
+                                            </td>
+                                            <td data-title="Action">
+                                                <div class="tg-btnsactions">
+                                                    <a class="tg-btnaction tg-btnactionview" [routerLink]="['/classifieds/details', wish._id]">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a class="tg-btnaction tg-btnactiondelete" href="javascript:void(0);" (click)="onRemoveFromWishlist(wish)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="wishlist?.length == 0" data-category="sold">
+                                            <td colspan="6">
+                                                <h3 class="lead">No favourites found</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <nav class="tg-pagination">
+                                    <ul>
+                                        <li class="tg-prevpage">
+                                            <a href="#">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">3</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">4</a>
+                                        </li>
+                                        <li class="tg-active">
+                                            <a href="#">5</a>
+                                        </li>
+                                        <li>...</li>
+                                        <li>
+                                            <a href="#">10</a>
+                                        </li>
+                                        <li class="tg-nextpage">
+                                            <a href="#">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- <div class="container">
     <div class="row">
         <div class="col-sm-12">
             <h1>My Wishlist</h1>
@@ -31,4 +129,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

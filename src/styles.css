@@ -115,7 +115,11 @@ span.iso-currency.EUR::after {
 
 
 .tg-offersmessages ul li {
-    width: 50%;
+    width: 100%;
+}
+
+.tg-offersmessages ul li.opened {
+    width: 60%;
 }
 
 .tg-offersmessages .tg-ad p {
@@ -138,3 +142,14 @@ span.iso-currency.EUR::after {
     overflow-y: auto;
 }
 
+.dropdown-toggle::after {
+    content: none;
+}
+
+.empty-list {
+    background: url(/assets/images/pattern-01.png);
+}
+
+.form-control-feedback {
+    font-size: 14px;
+}

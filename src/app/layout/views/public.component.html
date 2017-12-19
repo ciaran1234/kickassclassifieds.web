@@ -12,7 +12,7 @@
                                 <a href="#" data-toggle="modal" data-target="#tg-modalpriceconverter">Price converter</a>
                             </li>
                         </ul>
-                        <div class="dropdown tg-themedropdown tg-userdropdown" [ngClass]="{'open': userDropDownIsOpen}" (click)="userDropDownIsOpen = !userDropDownIsOpen">
+                        <div ngbDropdown class="tg-themedropdown tg-userdropdown">
                             <ng-container *ngIf="!user else accountBlock">
                                 <a routerLink="/account/signin" class="tg-btndropdown">
                                     <span class="tg-userdp">
@@ -22,57 +22,28 @@
                                 </a>
                             </ng-container>
                             <ng-template #accountBlock>
-                                <a href="javascript:void(0);" id="tg-adminnav" class="tg-btndropdown" data-toggle="dropdown">
+                                <a id="tg-adminnav" class="tg-btndropdown" href="javascript:void(0);" ngbDropdownToggle>
                                     <span class="tg-userdp">
                                         <img src="{{user?.profileImageUrl || 'assets/images/author/img-01.jpg'}}" alt="image description">
                                     </span>
-                                    <span class="tg-name">Hi! {{user.firstName}}</span>
+                                    <span class="tg-name">Hi! {{user?.firstName}}</span>
                                     <span class="tg-role">User</span>
                                 </a>
-                                <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-adminnav">
-                                    <li>
-                                        <a href="dashboard.html">
-                                            <i class="icon-chart-bars"></i>
-                                            <span>Insights</span>
-                                        </a>
-                                    </li>
+                                <ul class="dropdown-menu tg-themedropdownmenu" ngbDropdownMenu aria-labelledby="tg-adminnav">
                                     <li>
                                         <a routerLink="/dashboard/account/me">
                                             <i class="icon-cog"></i>
                                             <span>Profile Settings</span>
                                         </a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="javascript:void(0);">
+                                    <li>
+                                        <a routerLink="/dashboard/account/classifieds">
                                             <i class="icon-layers"></i>
                                             <span>My Ads</span>
                                         </a>
-                                        <ul>
-                                            <li>
-                                                <a href="dashboard-myads.html">All Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Featured Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Active Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Inactive Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Sold Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Expired Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Deleted Ads</a>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li>
-                                        <a href="dashboard-postanad.html">
+                                        <a routerLink="/dashboard/classifieds/create">
                                             <i class="icon-layers"></i>
                                             <span>Dashboard Post Ad</span>
                                         </a>
@@ -80,34 +51,25 @@
                                     <li class="menu-item-has-children">
                                         <a href="javascript:void(0);">
                                             <i class="icon-envelope"></i>
-                                            <span>Offers/Messages</span>
+                                            <span>Messages</span>
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="dashboard-offermessages.html">Offer Received</a>
+                                                <a routerLink="/dashboard/account/messages/received">Messages Received</a>
                                             </li>
                                             <li>
-                                                <a href="dashboard-offermessages.html">Offer Sent</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-offermessages.html">Trash</a>
+                                                <a routerLink="/dashboard/account/messages/sent">Messages Sent</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="dashboard-payments.html">
-                                            <i class="icon-cart"></i>
-                                            <span>Payments</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-myfavourites.html">
+                                        <a routerLink="/dashboard/account/favourites">
                                             <i class="icon-heart"></i>
                                             <span>My Favourite</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="dashboard-privacy-setting.html">
+                                        <a routerLink="/dashboard/account/privacy">
                                             <i class="icon-star"></i>
                                             <span>Privacy Settings</span>
                                         </a>
@@ -121,6 +83,28 @@
                                 </ul>
                             </ng-template>
                         </div>
+                        <!-- <div class="dropdown tg-themedropdown tg-userdropdown" [ngClass]="{'open': userDropDownIsOpen}" (click)="userDropDownIsOpen = !userDropDownIsOpen">
+                            <ng-container *ngIf="!user else accountBlock">
+                                <a routerLink="/account/signin" class="tg-btndropdown">
+                                    <span class="tg-userdp">
+                                        <img src="assets/images/author/img-01.jpg" alt="image description">
+                                    </span>
+                                    <span class="tg-name">Login</span>
+                                </a>
+                            </ng-container>
+                            <ng-template #accountBlock>
+                                <a href="javascript:void(0);" id="tg-adminnav" class="tg-btndropdown">
+                                    <span class="tg-userdp">
+                                        <img src="{{user?.profileImageUrl || 'assets/images/author/img-01.jpg'}}" alt="image description">
+                                    </span>
+                                    <span class="tg-name">Hi! {{user.firstName}}</span>
+                                    <span class="tg-role">User</span>
+                                </a>
+                                <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-adminnav">                                 
+                                  
+                                </ul>
+                            </ng-template>
+                        </div> -->
                     </div>
                 </div>
             </div>

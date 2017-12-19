@@ -5,4 +5,5 @@ export class Message {
     public from: any;
     public to: any;
     public timestamp: Date;
+    public read: Boolean;
 }

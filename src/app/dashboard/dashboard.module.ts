@@ -18,25 +18,28 @@ import { DynamicFormService } from '../dynamic-forms/services/dynamic-form.servi
 import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-control.directive';
 import { FileUploadModule } from 'ng2-file-upload';
 import { OwlModule } from 'ng2-owl-carousel';
+import { MyPrivacySettingsComponent } from 'app/dashboard/components/my-privacy-settings.component';
+
 @NgModule({
-    imports: [CommonModule,       
+    imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule,               
+        RouterModule,
         NgbModule.forRoot(),
         OwlModule,
         FileUploadModule],
     declarations: [
         ImagePreview,
         DynamicFormControl,
-        CreateClassifiedComponent, 
-        EditClassifiedComponent,         
+        CreateClassifiedComponent,
+        EditClassifiedComponent,
         ClassifiedFormComponent,
-        MeComponent, 
-        MessageDetailsComponent, 
-        MyClassifiedsComponent, 
-        MyMessagesComponent, 
-        MyWishListComponent],
+        MeComponent,
+        MessageDetailsComponent,
+        MyClassifiedsComponent,
+        MyMessagesComponent,
+        MyWishListComponent,
+        MyPrivacySettingsComponent],
     exports: [],
     providers: [DynamicFormService]
 })

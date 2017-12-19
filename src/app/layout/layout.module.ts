@@ -5,9 +5,10 @@ import { InnerBannerComponent } from './components/inner-banner.component';
 import { PublicComponent } from 'app/layout/components/public.component';
 import { DashboardComponent } from 'app/layout/components/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [CommonModule, ReactiveFormsModule, RouterModule],
+    imports: [CommonModule, ReactiveFormsModule, NgbModule.forRoot(), RouterModule],
     declarations: [PublicComponent, DashboardComponent, InnerBannerComponent],
     exports: [InnerBannerComponent]
 })

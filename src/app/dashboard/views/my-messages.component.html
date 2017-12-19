@@ -10,13 +10,13 @@
                             </div>
                             <div class="tg-dashboardholder tg-offersmessages tg-offersmessageswithsearch">
                                 <ul>
-                                    <li>
+                                    <li [ngClass]="{'opened': messageOpened}">
                                         <fieldset>
                                             <input type="search" name="search" class="form-control" placeholder="Search Here">
                                             <i class="icon-magnifier"></i>
                                         </fieldset>
                                         <div class="tg-verticalscrollbar tg-dashboardscrollbar">
-                                            <div class="tg-ad" [ngClass]="{ 'tg-dotnotification': !message.read }" *ngFor="let message of messages | async" [routerLink]="['/dashboard/account/messages/details', message?.key]">
+                                            <div class="tg-ad" (click)="messageOpened = true" [ngClass]="{ 'tg-dotnotification': !message.read }" *ngFor="let message of messages | async" (click)="onOpenMessage(message)">
                                                 <figure>
                                                     <img src="assets/images/ads/thumbnail/img-01.jpg" alt="image description">
                                                 </figure>
@@ -25,11 +25,14 @@
                                                 </h3>
                                                 <p>{{message?.timestamp | date:'dd/MM/yyyy HH:mm'}}</p>                                              
                                             </div>
+                                            <div *ngIf="(messages | async)?.length==0" class="jumbotron empty-list">
+                                                <h3>No Messages Found</h3>
+                                            </div>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="tg-chatarea">
-                                            <router-outlet></router-outlet>                                          
+                                        <div class="tg-chatarea" *ngIf="messageOpened">
+                                            <account-message-details [key]="selectedMessageKey" [messages]="selectedMessage"></account-message-details>                                        
                                         </div>
                                     </li>
                                 </ul>

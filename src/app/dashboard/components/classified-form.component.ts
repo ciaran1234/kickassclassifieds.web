@@ -70,7 +70,7 @@ export class ClassifiedFormComponent extends FormComponent implements OnInit {
 
     fileOverAnother(e: any): void {
         this.hasAnotherDropZoneOver = e;
-    }
+    }  
 
     ngOnInit() {
         this.detailsFormGroup = this.formService.createFormGroup(this.formModel);

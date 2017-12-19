@@ -14,7 +14,6 @@ import { ApiConfiguration } from '../../core/services/api-configuration.service'
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 import { Classified } from 'app/core/models/classified.model';
 import { ClassifiedService } from 'app/core/services/classified.service';
-import 'rxjs';
 
 @Component({
   selector: 'classified-list',
@@ -22,7 +21,6 @@ import 'rxjs';
 })
 
 export class ClassifiedListComponent implements OnInit {
-
   classifieds: Observable<Classified[]>;
   countries: Country[];
   categories: Category[];

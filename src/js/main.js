@@ -3,21 +3,6 @@ var websiteTemplate = (function () {
 	return {
 		initializeTemplate: function () {
 			/*--------------------------------------
-			MOBILE MENU						
-	--------------------------------------*/
-			function collapseMenu() {
-				jQuery('.tg-navigation ul li.menu-item-has-children, .tg-navdashboard ul li.menu-item-has-children, .tg-navigation ul li.menu-item-has-mega-menu').prepend('<span class="tg-dropdowarrow"><i class="fa fa-angle-down"></i></span>');
-				jQuery('.tg-navigation ul li.menu-item-has-children span, .tg-navdashboard ul li.menu-item-has-children span, .tg-navigation ul li.menu-item-has-mega-menu span').on('click', function () {
-					jQuery(this).parent('li').toggleClass('tg-open');
-					jQuery(this).next().next().slideToggle(300);
-				});
-			}
-
-			collapseMenu();
-
-
-
-			/*--------------------------------------
 					SHOW NUMBER						
 			--------------------------------------*/
 			var _clickelement = jQuery('.tg-btnphone');
@@ -158,17 +143,7 @@ var websiteTemplate = (function () {
 					jQuery('.tg-statistics > li > h3').countTo();
 				});
 			}
-			/*--------------------------------------
-					THEME COLLAPSE					
-			--------------------------------------*/
-			if (jQuery('#tg-narrowsearchcollapse').length > 0) {
-				var _openFirst = jQuery('#tg-narrowsearchcollapse');
-				_openFirst.collapse({
-					open: function () { this.slideDown(300); },
-					close: function () { this.slideUp(300); },
-				});
-				_openFirst.trigger('open');
-			}
+		
 			/*--------------------------------------
 					FEE RANGE SLIDER				
 			--------------------------------------*/
@@ -350,6 +325,7 @@ var websiteTemplate = (function () {
 					}
 				}, 1000);
 			}
+			
 			/*--------------------------------------
 					COMMING SOON COUNTER			
 			--------------------------------------*/
@@ -462,33 +438,7 @@ var websiteTemplate = (function () {
 				autoplay_slideshow: false,
 				social_tools: false
 			});
-		},
-		loadCategorySlider: function () {
-			/*--------------------------------------
-					POST SLIDER						
-			--------------------------------------*/
-			if (jQuery('#tg-categoriesslider').length > 0) {
-				var _tg_postsslider = jQuery('#tg-categoriesslider');
-				_tg_postsslider.owlCarousel({
-					items: 5,
-					nav: true,
-					loop: true,
-					dots: false,
-					center: true,
-					autoplay: false,
-					dotsClass: 'tg-sliderdots',
-					navClass: ['tg-prev', 'tg-next'],
-					navContainerClass: 'tg-slidernav',
-					navText: ['<span class="icon-chevron-left"></span>', '<span class="icon-chevron-right"></span>'],
-					responsive: {
-						0: { items: 1, center: false },
-						480: { items: 2, center: false },
-						568: { items: 3, center: false },
-						768: { items: 5, },
-					}
-				});
-			}
-		},
+		},	
 		renderProductGallery: function () {			
 			if (jQuery('#tg-productgallery').length > 0) {			
 

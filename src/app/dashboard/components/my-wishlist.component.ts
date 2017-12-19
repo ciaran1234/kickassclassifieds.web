@@ -18,14 +18,25 @@ export class MyWishListComponent extends BaseComponent implements OnInit {
 
     constructor(protected router: Router, private userService: UserService) {
         super(router);
-     }
+    }
 
     ngOnInit() {
         this.subscription = this.userService
             .user.subscribe(user => this.user = user);
 
-            this.userService.getWishlist()
-                .then(wishlist => this.wishlist = wishlist)
-                .catch(error => this.handleError(error));
+        this.getWishlist();
+    }
+
+    onRemoveFromWishlist(classified: Classified) {
+        this.userService.removeFromWishlist(classified._id)
+            .then(user => { this.getWishlist(); })
+            .catch(error => alert(error));
+    }
+
+
+    getWishlist() {
+        this.userService.getWishlist()
+            .then(wishlist => this.wishlist = wishlist)
+            .catch(error => this.handleError(error));
     }
 }

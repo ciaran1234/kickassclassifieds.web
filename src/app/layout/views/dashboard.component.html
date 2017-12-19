@@ -197,26 +197,31 @@
                                 <span>My Ads</span>
                             </a>
                         </li>
-                        <li routerLinkActive="tg-active">
-                            <a routerLink="account/messages">
+                        <li class="menu-item-has-children" routerLinkActive="tg-active">
+                            <span class="tg-dropdowarrow">
+                                <i class="fa fa-angle-down"></i>
+                            </span>
+                            <a href="javascript:void(0);">
                                 <i class="icon-envelope"></i>
                                 <span>Messages</span>
-                            </a>                          
-                        </li>
-                        <li>
-                            <a href="dashboard-payments.html">
-                                <i class="icon-cart"></i>
-                                <span>Payments</span>
                             </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a routerLink="account/messages/received">Received</a>
+                                </li>
+                                <li>
+                                    <a routerLink="account/messages/sent">Sent</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="dashboard-myfavourites.html">
+                        <li routerLinkActive="tg-active">
+                            <a routerLink="account/favourites">
                                 <i class="icon-heart"></i>
                                 <span>My Favourites</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="dashboard-profile-setting.html">
+                        <li routerLinkActive="tg-active">
+                            <a routerLink="account/privacy">
                                 <i class="icon-star"></i>
                                 <span>Privacy Settings</span>
                             </a>

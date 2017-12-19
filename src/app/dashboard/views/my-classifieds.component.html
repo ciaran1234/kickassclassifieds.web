@@ -1,4 +1,4 @@
-<main id="tg-main" class="tg-main tg-haslayout">  
+<main id="tg-main" class="tg-main tg-haslayout">
     <section class="tg-dbsectionspace tg-haslayout">
         <div class="row">
             <form class="tg-formtheme tg-formdashboard">
@@ -58,13 +58,7 @@
                                 </div>
                                 <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
                                     <thead>
-                                        <tr>
-                                            <th>
-                                                <span class="tg-checkbox">
-                                                    <input id="tg-checkedall" type="checkbox" name="myads" value="checkall">
-                                                    <label for="tg-checkedall"></label>
-                                                </span>
-                                            </th>
+                                        <tr>                                          
                                             <th>Photo</th>
                                             <th>Title</th>
                                             <th>Category</th>
@@ -76,13 +70,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let classified of classifieds">
-                                            <td data-title="">
-                                                <span class="tg-checkbox">
-                                                    <input id="tg-adone" type="checkbox" name="myads" value="myadone">
-                                                    <label for="tg-adone"></label>
-                                                </span>
-                                            </td>
+                                        <tr *ngFor="let classified of classifieds">                                          
                                             <td data-title="Photo">
                                                 <img src="{{classified.images.length ? classified.images[0].path : 'assets/images/thumbnail/img-06.jpg'}}" alt="image description">
                                             </td>
@@ -98,8 +86,10 @@
                                                 <span class="tg-adstatus tg-adstatusactive">active</span>
                                             </td>
                                             <td data-title="Price &amp; Location">
-                                                <h3><span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{classified.price ? classified.price.value.$numberDecimal : 'N/A'}}</h3>
-                                                <address>location {{classified.state ? classified.state + ', ' : ''}} {{classified.region.name}}, {{classified.country.name}}</address>
+                                                <h3>
+                                                    <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{classified.price ? classified.price.value.$numberDecimal : 'N/A'}}</h3>
+                                                <address>location {{classified.state ? classified.state + ', ' : ''}} {{classified.region.name}},
+                                                    {{classified.country.name}}</address>
                                             </td>
                                             <td data-title="Date">
                                                 <time datetime="2017-08-08">{{classified.created | date : 'dd-MM-yyyy'}}</time>
@@ -118,7 +108,12 @@
                                                     </a>
                                                 </div>
                                             </td>
-                                        </tr>                                     
+                                        </tr>
+                                        <tr *ngIf="classifieds?.length == 0" data-category="sold">
+                                            <td colspan="8">
+                                                <h3 class="lead">No Ads found</h3>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <nav class="tg-pagination">
@@ -160,5 +155,5 @@
                 </fieldset>
             </form>
         </div>
-    </section>  
+    </section>
 </main>

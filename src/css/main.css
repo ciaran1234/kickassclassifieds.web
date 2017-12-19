@@ -1148,8 +1148,8 @@ li.tg-rss a { background:#ff6600; }
 	font-size: 16px;
 	text-align: left;
 }
-.tg-themedropdown.open .tg-themedropdownmenu,
-.tg-themedropdownmenu li.menu-item-has-children:hover ul{
+.tg-themedropdown.show .tg-themedropdownmenu,
+.tg-themedropdownmenu li.menu-item-has-children:hover ul {
 	top: 52px;
 	opacity: 1;
 	visibility: visible;
@@ -2791,7 +2791,7 @@ li.tg-rss a { background:#ff6600; }
 	text-align: right;
 	position: absolute;
 }
-.tg-collapsetitle.open a span:before{content: '\f106';}
+.tg-collapsetitle.show a span:before{content: '\f106';}
 .tg-themecollapsecontent{
 	width: 100%;
 	float: left;
