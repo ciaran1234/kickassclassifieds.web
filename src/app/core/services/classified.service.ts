@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { Image } from '../models/image.model';
 import 'rxjs/add/operator/toPromise';
+import { PagedList } from 'app/core/models/paged-list';
 
 @Injectable()
 export class ClassifiedService extends BaseService {
@@ -23,11 +24,11 @@ export class ClassifiedService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
-    getAll(): Observable<Classified[]> {
-        return this.httpClient.get(this.apiConfiguration.classifieds)
+    getAll(top?: Number, skip?: Number): Observable<PagedList<Classified>> {
+        return this.httpClient.get(this.apiConfiguration.classifieds + '?top=' + top + '&skip=' + skip)
             .map(res => res.json() as Classified[])
             .catch(err => this.handleError(err));
-    }
+    }    
 
     create(classified: Classified): Promise<Classified> {
         return this.httpClient.post(this.apiConfiguration.classifieds, classified)

@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         this.countryService.getAll().then(countries => this.countries = countries);
 
         this.classifiedService.getAll().toPromise()
-            .then(classifieds => this.classifieds = classifieds)
+            .then(result => this.classifieds = result.items)
             .catch(error => alert(error));
     }
 

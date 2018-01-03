@@ -29,7 +29,7 @@
                                     <span class="tg-name">Hi! {{user?.firstName}}</span>
                                     <span class="tg-role">User</span>
                                 </a>
-                                <ul class="dropdown-menu tg-themedropdownmenu" ngbDropdownMenu aria-labelledby="tg-adminnav">
+                                <ul class="dropdown-menu tg-themedropdownmenu navbar-nav mr-right" ngbDropdownMenu aria-labelledby="tg-adminnav">
                                     <li>
                                         <a routerLink="/dashboard/account/me">
                                             <i class="icon-cog"></i>
@@ -83,28 +83,6 @@
                                 </ul>
                             </ng-template>
                         </div>
-                        <!-- <div class="dropdown tg-themedropdown tg-userdropdown" [ngClass]="{'open': userDropDownIsOpen}" (click)="userDropDownIsOpen = !userDropDownIsOpen">
-                            <ng-container *ngIf="!user else accountBlock">
-                                <a routerLink="/account/signin" class="tg-btndropdown">
-                                    <span class="tg-userdp">
-                                        <img src="assets/images/author/img-01.jpg" alt="image description">
-                                    </span>
-                                    <span class="tg-name">Login</span>
-                                </a>
-                            </ng-container>
-                            <ng-template #accountBlock>
-                                <a href="javascript:void(0);" id="tg-adminnav" class="tg-btndropdown">
-                                    <span class="tg-userdp">
-                                        <img src="{{user?.profileImageUrl || 'assets/images/author/img-01.jpg'}}" alt="image description">
-                                    </span>
-                                    <span class="tg-name">Hi! {{user.firstName}}</span>
-                                    <span class="tg-role">User</span>
-                                </a>
-                                <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-adminnav">                                 
-                                  
-                                </ul>
-                            </ng-template>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -123,15 +101,18 @@
                             <span>post an ad</span>
                         </a>
                         <nav id="tg-nav" class="tg-nav navbar navbar-toggleable-md">
-                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#tg-navigation" aria-label="Toggle navigation"
-                                [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" [ngClass]="{'collapsed': isCollapsed}">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#tg-navigation" aria-label="Toggle navigation"
+                                    [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" [ngClass]="{'collapsed': isCollapsed}">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="navbar-toggler-icon"></span>
+                                    <span class="navbar-toggler-icon"></span>
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </div>
+
                             <div id="tg-navigation" [ngClass]="{'collapse': isCollapsed}" class="navbar-collapse tg-navigation">
-                                <ul>
+                                <ul class="navbar-nav">
                                     <li class="menu-item" routerLink="/" routerLinkActive="current-menu-item">
                                         <a href="javascript:void(0);">Home</a>
                                     </li>

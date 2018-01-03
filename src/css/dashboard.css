@@ -629,7 +629,7 @@ input[type=file].tg-fileinput{display: none;}
 /*==============================================
 			Dashboard Main						
 ==============================================*/
-.tg-main{
+.dashboard .tg-main {
 	min-height: 731px;
 	padding: 20px 60px;
 }

@@ -153,3 +153,30 @@ span.iso-currency.EUR::after {
 .form-control-feedback {
     font-size: 14px;
 }
+
+@media(max-width:768px){
+.tg-nav {
+    float: right
+}
+
+.tg-navigation {
+position:  relative;
+
+}
+}
+
+.navbar-toggle .navbar-toggler-icon {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background: #fff;
+    margin-bottom: 4px;
+}
+
+.navbar-toggle span:last-of-type {
+    margin-bottom:  0px;
+}
+
+
+

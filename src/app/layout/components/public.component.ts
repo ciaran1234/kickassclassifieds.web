@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PublicComponent implements OnInit {
     newsletterForm: FormGroup;
     userDropDownIsOpen: boolean = false;
-    isCollapsed: boolean = false;
+    isCollapsed: boolean = true;
     user: User;
     subscription: Subscription;
 

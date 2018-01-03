@@ -14,6 +14,7 @@ import { ApiConfiguration } from '../../core/services/api-configuration.service'
 import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 import { Classified } from 'app/core/models/classified.model';
 import { ClassifiedService } from 'app/core/services/classified.service';
+import { PagedList } from 'app/core/models/paged-list';
 
 @Component({
   selector: 'classified-list',
@@ -21,28 +22,32 @@ import { ClassifiedService } from 'app/core/services/classified.service';
 })
 
 export class ClassifiedListComponent implements OnInit {
-  classifieds: Observable<Classified[]>;
+  classifieds: PagedList<Classified>;
   countries: Country[];
   categories: Category[];
   currencies: Currency[];
   searchForm: FormGroup;
+  private isPaginating: boolean = false;
 
   constructor(private classifiedService: ClassifiedService,
     private categoryService: CategoryService,
     private countryService: CountryService,
     private currencyService: CurrencyService,
-    private filterService: FilterService<ClassifiedFilter, Classified[]>,
+    private filterService: FilterService<ClassifiedFilter, PagedList<Classified>>,
     private apiConfiguration: ApiConfiguration,
     private userService: UserService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) { }
 
+
   ngOnInit() {
     this.filterService.init();
 
     this.searchForm = this.fb.group({
       q: [this.filterService.filter.q],
+      top: [this.filterService.filter.top || 12],
+      skip: [this.filterService.filter.skip || 0],
       category: [this.filterService.filter.category || ''],
       country: [this.filterService.filter.country || ''],
       currency: [this.filterService.filter.currency || '840'],
@@ -55,11 +60,32 @@ export class ClassifiedListComponent implements OnInit {
     this.countryService.getAll().then(countries => this.countries = countries);
     this.currencyService.getAll().then(currencies => this.currencies = currencies);
 
-    this.classifieds = this.searchForm.valueChanges
-      .debounceTime(500).distinctUntilChanged().startWith(null)
+
+    this.searchForm.valueChanges
+      .debounceTime(500).distinctUntilChanged().startWith(this.searchForm.value as ClassifiedFilter)
       .switchMap((filter: ClassifiedFilter) => {
+        if (this.isPaginating) {
+          this.isPaginating = false;
+        }
+        else {
+          filter.skip = 0;
+        }
+
         return this.filterService.query(filter, this.apiConfiguration.classifieds);
-      }).publish().refCount();
+      }).subscribe(result => { this.classifieds = result });
+  }
+
+  counter(i: number) {
+    let n = Math.ceil((i || 0) / this.searchForm.get('top').value); 
+    return new Array(n);
+  }
+
+  onPageChanged(page: Number) {
+
+
+
+    this.isPaginating = true;
+    this.searchForm.get('skip').setValue(page);
   }
 
   onFavourite(event, classified) {

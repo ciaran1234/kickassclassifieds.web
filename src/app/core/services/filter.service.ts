@@ -17,18 +17,19 @@ export class FilterService<TFilter extends Filter, TResponse> {
     ) { }
 
     init() {
-        this.filter = new Filter() as TFilter;
-
+        this.filter = new Filter() as TFilter;        
+       
         this.querySubscription = this.activedRoute
             .queryParams
-            .subscribe(params => {
+            .subscribe(params => {           
+
                 for (let property in params) {
                     this.filter[property] = params[property];
-                }
+                }             
             });
     }
 
-    query(filter: TFilter, url: string): Observable<TResponse> {
+    query(filter: TFilter, url: string): Observable<TResponse> {      
         if (filter) {
             this.filter = filter;
         }
@@ -42,7 +43,6 @@ export class FilterService<TFilter extends Filter, TResponse> {
         });
 
         let queryString = this.buildQueryString(cleanFilter);
-
         return this.httpClient.get(filteredUrl + queryString).map(response => response.json() as TResponse);
     }
 
