@@ -6,6 +6,8 @@ import { SigninComponent } from "app/public/components/signin.component";
 import { RegistrationComponent } from "app/public/components/registration.component";
 import { ConfirmAccountComponent } from "app/public/components/confirm-account.component";
 import { ExternalSigninComponent } from "app/public/components/external-signin.component";
+import { ResetPasswordComponent } from "app/public/components/reset-password.component";
+import { ConfirmResetPasswordComponent } from "app/public/components/confirm-reset-password.component";
 
 export const PUBLIC_ROUTES: Routes = [
     { path: '', component: LandingPageComponent, pathMatch: 'full' },
@@ -14,5 +16,7 @@ export const PUBLIC_ROUTES: Routes = [
     { path: 'account/signin', component: SigninComponent },
     { path: 'account/register', component: RegistrationComponent },
     { path: 'account/confirm', component: ConfirmAccountComponent },
-    { path: 'account/externalSignin', component: ExternalSigninComponent }
+    { path: 'account/confirmResetPassword', component: ConfirmResetPasswordComponent },
+    { path: 'account/externalSignin', component: ExternalSigninComponent },
+    { path: 'account/resetPassword', component: ResetPasswordComponent }
 ];

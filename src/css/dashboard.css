@@ -1127,13 +1127,13 @@ input[type=file].tg-fileinput{display: none;}
 	color: #666;
 	text-decoration:line-through;
 }
-.tg-footer{
+.dashboard .tg-footer{
 	position: relative;
 	padding: 15px 60px;
 	background: none !important;
 	border-top: 1px solid #d5d5d5;
 }
-.tg-footer:before{
+.dashboard .tg-footer:before{
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -1142,30 +1142,30 @@ input[type=file].tg-fileinput{display: none;}
 	background: #fff;
 	position: absolute;
 }
-.tg-footernav{
+.dashboard .tg-footernav{
 	padding: 0;
 	width: auto;
 	background: none;
 	line-height: 20px;
 }
-.tg-footernav:before{display: none;}
-.tg-footernav ul{
+.dashboard .tg-footernav:before{display: none;}
+.dashboard .tg-footernav ul{
 	width: 100%;
 	float: left;
 	list-style: none;
 	line-height: inherit;
 }
-.tg-footernav ul li{
+.dashboard .tg-footernav ul li{
 	float: left;
 	line-height: inherit;
 	list-style-type: none;
 }
-.tg-footernav ul li:first-child{padding-left: 0;}
-.tg-footernav ul li a{
+.dashboard .tg-footernav ul li:first-child{padding-left: 0;}
+.dashboard .tg-footernav ul li a{
 	color: #666;
 	display: block;
 }
-.tg-copyright{
+.dashboard .tg-copyright{
 	padding: 0;
 	width: auto;
 	float: right;
