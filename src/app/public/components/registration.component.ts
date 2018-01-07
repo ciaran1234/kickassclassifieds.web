@@ -32,6 +32,7 @@ export class RegistrationComponent extends FormComponent implements OnInit {
             lastName: ['', [Validators.required, Validators.maxLength(40)]],
             email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(256), CustomValidator.validEmail()]],
             password: ['', [Validators.required, Validators.minLength(6)]],
+            phoneNumber: ['', [Validators.minLength(4), Validators.maxLength(15)]],
             confirmPassword: ['', [Validators.required, Validators.minLength(6), CustomValidator.equalTo('password')]]
         });
     }
@@ -39,12 +40,12 @@ export class RegistrationComponent extends FormComponent implements OnInit {
     onSubmit({ value, valid }: { value: Registration, valid: boolean }) {
         this.markFormAsSubmitted(this.registration);
 
-       if (valid) {
+        if (valid) {
             value.confirmationUrl = location.protocol + '//' + location.host + '/account/confirm';
             this.userService.register(value)
                 .then(response => this.success = response)
-                .catch(error => this.handleError(error));            
-       }
+                .catch(error => this.handleError(error));
+        }
     }
 
     onRegisterExternal(provider: string): void {

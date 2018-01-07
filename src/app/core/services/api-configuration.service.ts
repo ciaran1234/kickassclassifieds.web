@@ -62,6 +62,7 @@ export class ApiConfiguration {
     categoryDetails(id: string) {
         return this.categories + id;
     }
+    
     subCategories(id: string) {
         return this.categories + id + '/subcategories';
     }

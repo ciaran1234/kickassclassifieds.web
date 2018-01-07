@@ -25,7 +25,6 @@ import { CustomValidator } from 'app/core/validation/custom-validation.validator
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 import { OwlCarousel } from 'ng2-owl-carousel';
 
-
 @Component({
     selector: 'classified-form',
     templateUrl: '../views/classified-form.component.html'
@@ -235,14 +234,15 @@ export class ClassifiedFormComponent extends FormComponent implements OnInit {
             this.form.get('advertiser').get('firstName').setValue('');
             this.form.get('advertiser').get('lastName').setValue('');
             this.form.get('advertiser').get('email').setValue('');
+            this.form.get('advertiser').get('phoneNumber').setValue('');
         }
         else {
             this.form.get('advertiser').get('firstName').setValue(this.user.firstName);
             this.form.get('advertiser').get('lastName').setValue(this.user.lastName);
             this.form.get('advertiser').get('email').setValue(this.user.email);
+            this.form.get('advertiser').get('phoneNumber').setValue(this.user.phoneNumber);
         }
     }
-
 
     removeImage(image: Image) {
         this.imagesToDelete.push(image);

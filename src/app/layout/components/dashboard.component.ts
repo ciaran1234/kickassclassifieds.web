@@ -13,13 +13,13 @@ import * as $ from 'jquery';
 export class DashboardComponent implements OnInit {
     user: User;
     subscription: Subscription;
-    isCollapsed: boolean = false;
+    isCollapsed: boolean = true;
+    isSidebarCollapsed: boolean = false;
 
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit() {
         this.collapseMenu();
-
         this.subscription = this.userService
             .user.subscribe((user: User) => {
                 if (!user) {
@@ -36,10 +36,23 @@ export class DashboardComponent implements OnInit {
 
     onSignout() {
         this.userService.signout();
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/');
     }
 
-    collapseMenu() {      
+    onSideMenuToggled() {
+        this.isSidebarCollapsed = !this.isSidebarCollapsed;
+        this.isCollapsed = true;
+    }
+
+    onTopMenuToggled() {
+        this.isCollapsed = !this.isCollapsed;
+
+        if(this.isCollapsed === false) {
+            this.isSidebarCollapsed = false;
+        }
+    }
+
+    collapseMenu() {
         $('.tg-navigation ul li.menu-item-has-children, .tg-navdashboard ul li.menu-item-has-children, .tg-navigation ul li.menu-item-has-mega-menu').on('click', function () {
             $(this).toggleClass('tg-open');
             $(this).children('span').next().next().slideToggle(150);

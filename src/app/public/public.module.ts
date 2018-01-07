@@ -16,17 +16,19 @@ import { ConfirmResetPasswordComponent } from 'app/public/components/confirm-res
 import { ExternalSigninComponent } from 'app/public/components/external-signin.component';
 import { ResetPasswordComponent } from 'app/public/components/reset-password.component';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { LayoutModule } from 'app/layout/layout.module';
 
 @NgModule({
     imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule,      
-        LayoutModule,      
-        OwlModule,          
+        RouterModule,
+        LayoutModule,
+        OwlModule,
         NgbModule.forRoot(),
-        NgxGalleryModule],
+        NgxGalleryModule,
+        NgxPaginationModule],
     declarations: [LandingPageComponent,
         ClassifiedListComponent,
         ClassifiedDetailsComponent,

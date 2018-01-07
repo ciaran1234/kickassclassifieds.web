@@ -185,8 +185,9 @@
                         </div>
                     </div>
                     <div class="tg-ads">
-                        <div class="row">                                            
-                            <div *ngFor="let classified of classifieds?.items" class="col-xs-6 col-sm-12 col-md-6 col-lg-4 tg-verticaltop">
+                        <div class="row">
+                            <div *ngFor="let classified of classifieds?.data  | paginate: { id: 'server', itemsPerPage: searchForm.get('top').value, currentPage: p, totalItems: classifieds?.count }"
+                                class="col-xs-6 col-sm-12 col-md-6 col-lg-4 tg-verticaltop">
                                 <div class="tg-ad tg-verifiedad">
                                     <figure>
                                         <span class="tg-themetag tg-featuretag">featured</span>
@@ -213,7 +214,8 @@
                                                 <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{classified.price ? classified.price.value.$numberDecimal : 'N/A'}}</h4>
                                         </div>
                                         <address>{{classified?.state ? classified?.state + ', ' : ''}} {{classified.region.name}},
-                                            {{classified.country.name}}</address>
+                                            {{classified.country.name}}
+                                        </address>
                                         <div class="tg-phonelike">
                                             <a class="tg-btnphone" href="javascript:void(0);">
                                                 <i class="icon-phone-handset"></i>
@@ -229,42 +231,12 @@
                                 </div>
                             </div>
                             <div *ngIf="classifieds?.count === 0" class="col empty-list">
-                               <h2 class="pt-3 pb-3">No Items Found</h2>
+                                <h2 class="pt-3 pb-3">No Adverts Found</h2>
                             </div>
                         </div>
-                    </div>
+                    </div>                 
                     <nav class="tg-pagination" *ngIf="classifieds?.count > 0">
-                        <ul>
-                            <li class="tg-prevpage" >
-                                <a href="#">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
-                           <li [ngClass]="{'tg-active': i === searchForm.get('skip').value }" *ngFor="let in of counter(classifieds.count); let i = index">
-                                <a (click)="onPageChanged(i)" href="javascript:void(0);">{{i + 1}}</a>
-                            </li>
-                            <!--  <li>
-                                <a (click)="onPageChanged(1)" href="javascript:void(0);">2</a>
-                            </li>
-                            <li>
-                                <a (click)="onPageChanged(2)" href="javascript:void(0);">3</a>
-                            </li>
-                            <li>
-                                <a (click)="onPageChanged(3)" href="javascript:void(0);">4</a>
-                            </li>
-                            <li class="tg-active">
-                                <a (click)="onPageChanged(4)" href="javascript:void(0);">5</a>
-                            </li> -->
-                            <!-- <li>...</li>
-                            <li>
-                                <a href="#">{{classifieds.count}}</a>
-                            </li> -->
-                            <li class="tg-nextpage">
-                                <a href="#">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li> 
-                        </ul>
+                        <pagination-controls (pageChange)="getPage($event)" id="server" previousLabel="" nextLabel=""></pagination-controls>                       
                     </nav>
                 </div>
             </div>

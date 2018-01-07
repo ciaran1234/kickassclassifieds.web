@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                             <div class="form-group" [ngClass]="{ 'has-danger': form.get('advertiser').get('phoneNumber').invalid && (form.get('advertiser').get('phoneNumber').touched) }">
-                                <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="Phone*">
+                                <input type="text" name="phoneNumber" formControlName="phoneNumber"  class="form-control" placeholder="Phone*">
                                  <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('required') && (form.get('advertiser').get('phoneNumber').touched )" class="form-control-feedback">
                                     Phone number is required
                                 </div>

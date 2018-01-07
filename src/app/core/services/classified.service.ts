@@ -44,6 +44,12 @@ export class ClassifiedService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
+    delete(id: String): Promise<void> {
+        return this.httpClient.delete(this.apiConfiguration.classifieds + id)
+        .toPromise()
+        .catch(error => this.handleError(error));
+    }
+
     deleteImages(id: string, images: Image[]): Promise<boolean> {
         return this.httpClient.delete(this.apiConfiguration.classifiedImageUpload(id), { body: images })
             .toPromise()

@@ -13,7 +13,7 @@
                             </li>
                         </ul>
                         <div ngbDropdown class="tg-themedropdown tg-userdropdown">
-                            <ng-container *ngIf="!user else accountBlock">
+                            <ng-container *ngIf="!user else userSettingsBlock">
                                 <a routerLink="/account/signin" class="tg-btndropdown">
                                     <span class="tg-userdp">
                                         <img src="assets/images/author/img-01.jpg" alt="image description">
@@ -21,7 +21,7 @@
                                     <span class="tg-name">Login</span>
                                 </a>
                             </ng-container>
-                            <ng-template #accountBlock>
+                            <ng-template #userSettingsBlock>
                                 <a id="tg-adminnav" class="tg-btndropdown" href="javascript:void(0);" ngbDropdownToggle>
                                     <span class="tg-userdp">
                                         <img src="{{user?.profileImageUrl || 'assets/images/author/img-01.jpg'}}" alt="image description">
@@ -89,107 +89,65 @@
         </div>
         <div class="tg-navigationarea">
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <strong class="tg-logo">
-                            <a routerLink="/" routerLinkActive="active">
-                                <img src="assets/images/logo.png" alt="company logo here">
-                            </a>
-                        </strong>
-                        <a class="tg-btn" routerLink="/dashboard/classifieds/create">
-                            <i class="icon-bookmark"></i>
-                            <span>post an ad</span>
-                        </a>
-                        <nav id="tg-nav" class="tg-nav navbar navbar-toggleable-md">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#tg-navigation" aria-label="Toggle navigation"
-                                    [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" [ngClass]="{'collapsed': isCollapsed}">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="navbar-toggler-icon"></span>
-                                    <span class="navbar-toggler-icon"></span>
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                            </div>
-
-                            <div id="tg-navigation" [ngClass]="{'collapse': isCollapsed}" class="navbar-collapse tg-navigation">
-                                <ul class="navbar-nav">
-                                    <li class="menu-item" routerLink="/" routerLinkActive="current-menu-item">
-                                        <a href="javascript:void(0);">Home</a>
-                                    </li>
-                                    <li class="menu-item" routerLink="/classifieds" routerLinkActive="current-menu-item">
-                                        <a href="javascript:void(0);">Listings</a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="javascript:void(0);">Dashboard</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="dashboard.html">Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myads.html">Dashboard My Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-myfavourites.html">Dashboard Favorites</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-offermessages.html">Dashboard Offer Message</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-payments.html">Dashboard Payment</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-postanad.html">Dashboard Post Ad</a>
-                                            </li>
-                                            <li>
-                                                <a href="dashboard-privacy-setting.html">Dashboard privacy Setting</a>
-                                            </li>
-                                            <li>
-                                                <a routerLink="/dashboard/account/me">Dashboard Profile Setting</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="javascript:void(0);">Pages</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="aboutus.html">About</a>
-                                            </li>
-                                            <li>
-                                                <a href="contactus.html">Contact Us</a>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="javascript:void(0);">News</a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="newsgrid.html">News grid</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="newslist.html">News list</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="newsdetail.html">News detail</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="404error.html">404 Error</a>
-                                            </li>
-                                            <li>
-                                                <a href="comingsoon.html">Coming Soon</a>
-                                            </li>
-                                            <li>
-                                                <a routerLink="/account/register">Register</a>
-                                            </li>
-                                            <li>
-                                                <a routerLink="/account/signin" routerLinkActive="current-menu-item">Login</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
+                <nav class="navbar navbar-toggleable-md navbar-light">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" aria-controls="exCollapsingNavbar2" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-label="Toggle navigation" [attr.aria-expanded]="!isCollapsed"
+                        (click)="isCollapsed = !isCollapsed" [ngClass]="{'collapsed': isCollapsed}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="tg-logo" routerLink="/" routerLinkActive="active" i18n="Brand Link">
+                        <img src="assets/images/logo.png" alt="company logo here">
+                    </a>
+                    <div class="navbar-collapse" id="bs-example-navbar-collapse-1" [ngClass]="{'collapse': isCollapsed}">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" routerLink="/" routerLinkActive="active" i18n="Login link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" routerLink="/classifieds" routerLinkActive="active" i18n="Registration link">Listings</a>
+                            </li>
+                            <ng-container *ngIf="!user else accountBlock">
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/account/signin" routerLinkActive="active" i18n="Login link">Signin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/account/register" routerLinkActive="active" i18n="Registration link">Register</a>
+                                </li>
+                            </ng-container>
+                            <ng-template #accountBlock>
+                                <li class="nav-item dropdown" ngbDropdown>
+                                    <a href="javascript:void(0)" class="nav-link dropdown-toggle" id="accountMenu" ngbDropdownToggle i18n="message|description"
+                                        i18n="My Account Link">My Account</a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountMenu">
+                                        <a id="myAccountSettings" class="dropdown-item" routerLink="/account/me" routerLinkActive="active" i18n="Account Settings">Settings</a>
+                                        <a id="myAdverts" class="dropdown-item" routerLink="/account/classifieds" routerLinkActive="active" i18n="My Account Adverts">My Adverts</a>
+                                        <a id="myMessages" class="dropdown-item" routerLink="/account/messages" routerLinkActive="active" i18n="My Account Messages">Messages</a>
+                                        <a id="myWishlist" class="dropdown-item" routerLink="/account/wishlist" routerLinkActive="active" i18n="Account Wishlist">Wishlist</a>
+                                        <a id="logout" class="dropdown-item" href="javascript:void(0)" (click)="onSignout()" i18n="Logout link">Logout</a>
+                                    </div>
+                                </li>
+                            </ng-template>
+                            <li class="nav-item dropdown" ngbDropdown>
+                                <a href="javascript:void(0)" class="nav-link dropdown-toggle" id="languageMenu" ngbDropdownToggle i18n="message|description">Lang</a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageMenu">
+                                    <ng-template ngFor let-lang [ngForOf]="languages">
+                                        <span *ngIf="lang.code !== localeId">
+                                            <a href="/{{lang.code}}/" class="dropdown-item">{{lang.label}}</a>
+                                        </span>
+                                    </ng-template>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mr-right">
+                            <li class="nav-item">
+                                <a [ngClass]="{'tg-btn': isCollapsed, 'nav-link': !isCollapsed }" routerLink="/dashboard/classifieds/create">
+                                    <i *ngIf="isCollapsed" class="icon-bookmark"></i>
+                                    <span>Post An Ad</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                </nav>         
             </div>
         </div>
     </header>

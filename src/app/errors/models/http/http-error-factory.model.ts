@@ -12,7 +12,7 @@ export class HttpErrorFactory {
                 error = new BadRequestError(messages);
                 break;
             case 401:
-                error = new UnauthorizedError();
+                error = new UnauthorizedError();               
                 break;
             case 500:              
                 error = new InternalServerError();

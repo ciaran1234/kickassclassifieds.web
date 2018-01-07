@@ -11,7 +11,7 @@
                             <div class="tg-dashboardholder">
                                 <table id="tg-adstype" class="table tg-dashboardtable tg-myfavourites">
                                     <thead>
-                                        <tr>                                          
+                                        <tr>
                                             <th>Photo</th>
                                             <th>Title</th>
                                             <th>Category</th>
@@ -20,7 +20,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let wish of wishlist">                                            
+                                        <tr *ngFor="let wish of wishlist?.data | paginate: { id: 'server', itemsPerPage: form.get('top').value, currentPage: p, totalItems: wishlist?.count }">
                                             <td data-title="Photo">
                                                 <img src="{{wish.image?.path}}" alt="{{wish.title}}" style="max-width: 200px;">
                                             </td>
@@ -47,45 +47,15 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr *ngIf="wishlist?.length == 0" data-category="sold">
+                                        <tr *ngIf="wishlist?.count == 0" data-category="sold">
                                             <td colspan="6">
                                                 <h3 class="lead">No favourites found</h3>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav class="tg-pagination">
-                                    <ul>
-                                        <li class="tg-prevpage">
-                                            <a href="#">
-                                                <i class="fa fa-angle-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">4</a>
-                                        </li>
-                                        <li class="tg-active">
-                                            <a href="#">5</a>
-                                        </li>
-                                        <li>...</li>
-                                        <li>
-                                            <a href="#">10</a>
-                                        </li>
-                                        <li class="tg-nextpage">
-                                            <a href="#">
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <nav class="tg-pagination" *ngIf="wishlist?.count > 0">
+                                    <pagination-controls (pageChange)="getPage($event)" id="server" previousLabel="" nextLabel=""></pagination-controls>
                                 </nav>
                             </div>
                         </div>

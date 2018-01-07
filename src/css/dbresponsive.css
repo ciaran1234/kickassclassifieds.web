@@ -224,7 +224,7 @@
 @media (max-width:568px){
 	.tg-dashboardheader{padding: 20px 30px;}
 	.tg-dashboardbanner{padding: 30px;}
-	.tg-main{padding: 20px 30px;}
+	.dashboard .tg-main{padding: 20px 30px;}
 	.tg-footer{padding: 15px 30px;}
 	.tg-footernav ul li {width: auto;}
 	.tg-alert{padding: 10px;}
@@ -264,7 +264,7 @@
 	.tg-wrapper.dashboard.tg-openmenu {padding-left: 0;}
 	.tg-dashboardheader{padding: 20px 15px;}
 	.tg-dashboardbanner{padding: 30px 15px;}
-	.tg-main{padding: 20px 15px;}
+    .dashboard	.tg-main{padding: 20px 15px;}
 	.tg-footer{padding: 15px;}
 	.tg-wrapper.dashboard {padding-left: 0;}
 	.tg-pkgexpirycounter ul li{width: 100%;}

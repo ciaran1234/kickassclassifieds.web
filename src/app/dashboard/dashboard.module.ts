@@ -19,13 +19,14 @@ import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-con
 import { FileUploadModule } from 'ng2-file-upload';
 import { OwlModule } from 'ng2-owl-carousel';
 import { MyPrivacySettingsComponent } from 'app/dashboard/components/my-privacy-settings.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
     imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
         NgbModule.forRoot(),
+        NgxPaginationModule,
         OwlModule,
         FileUploadModule],
     declarations: [

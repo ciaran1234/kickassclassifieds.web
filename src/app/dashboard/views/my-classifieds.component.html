@@ -1,7 +1,9 @@
 <main id="tg-main" class="tg-main tg-haslayout">
     <section class="tg-dbsectionspace tg-haslayout">
         <div class="row">
-            <form class="tg-formtheme tg-formdashboard">
+            <form class="tg-formtheme tg-formdashboard" [formGroup]="form">
+                <input type="hidden" name="top" formControlName="top" />
+                <input type="hidden" name="skip" formControlName="skip" />
                 <fieldset>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-dashboardbox">
@@ -39,11 +41,11 @@
                                         <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 pull-left">
                                             <div class="form-group tg-sortby">
                                                 <span>Sort by:</span>
-                                                <div class="tg-select">
-                                                    <select>
-                                                        <option>Most Recent</option>
-                                                        <option>Most Recent</option>
-                                                        <option>Most Recent</option>
+                                                <div class="tg-select">                                                 
+                                                    <select formControlName="sort">
+                                                        <option [ngValue]="'created'">Most Recent</option>
+                                                        <option [ngValue]="'title'">Title</option>
+                                                        <option [ngValue]="'category.name'">Category</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -51,14 +53,14 @@
                                         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 pull-right">
                                             <div class="form-group tg-inputwithicon">
                                                 <i class="icon-magnifier"></i>
-                                                <input type="search" name="search" class="form-control" placeholder="Search Here">
+                                                <input type="search" name="search" formControlName="q" class="form-control" placeholder="Search Here">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
                                     <thead>
-                                        <tr>                                          
+                                        <tr>
                                             <th>Photo</th>
                                             <th>Title</th>
                                             <th>Category</th>
@@ -70,9 +72,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let classified of classifieds">                                          
+                                        <tr *ngFor="let classified of classifieds?.data | paginate: { id: 'server', itemsPerPage: form.get('top').value, currentPage: p, totalItems: classifieds?.count }">
                                             <td data-title="Photo">
-                                                <img src="{{classified.images.length ? classified.images[0].path : 'assets/images/thumbnail/img-06.jpg'}}" style="max-width: 200px;" alt="image description">
+                                                <img src="{{classified.images?.length ? classified.images[0].path : 'assets/images/thumbnail/img-06.jpg'}}" style="max-width: 200px;"
+                                                    alt="image description">
                                             </td>
                                             <td data-title="Title">
                                                 <h3>{{classified.title}}</h3>
@@ -89,7 +92,8 @@
                                                 <h3>
                                                     <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{classified.price ? classified.price.value.$numberDecimal : 'N/A'}}</h3>
                                                 <address>location {{classified.state ? classified.state + ', ' : ''}} {{classified.region.name}},
-                                                    {{classified.country.name}}</address>
+                                                    {{classified.country.name}}
+                                                </address>
                                             </td>
                                             <td data-title="Date">
                                                 <time datetime="2017-08-08">{{classified.created | date : 'dd-MM-yyyy'}}</time>
@@ -103,52 +107,22 @@
                                                     <a class="tg-btnaction tg-btnactionedit" [routerLink]="['/dashboard/classifieds/edit', classified._id]">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <a class="tg-btnaction tg-btnactiondelete" href="javascript:void(0);">
+                                                    <a (click)="onRemoveClassified(classified._id)" class="tg-btnaction tg-btnactiondelete" href="javascript:void(0);">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr *ngIf="classifieds?.length == 0" data-category="sold">
+                                        <tr *ngIf="classifieds?.count == 0" data-category="sold">
                                             <td colspan="8">
                                                 <h3 class="lead">No Ads found</h3>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav class="tg-pagination">
-                                    <ul>
-                                        <li class="tg-prevpage">
-                                            <a href="#">
-                                                <i class="fa fa-angle-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">4</a>
-                                        </li>
-                                        <li class="tg-active">
-                                            <a href="#">5</a>
-                                        </li>
-                                        <li>...</li>
-                                        <li>
-                                            <a href="#">10</a>
-                                        </li>
-                                        <li class="tg-nextpage">
-                                            <a href="#">
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <nav class="tg-pagination" *ngIf="classifieds?.count > 0">
+                                    <pagination-controls (pageChange)="onPageChanged($event)" id="server" previousLabel="" nextLabel=""></pagination-controls>
+                                </nav>                             
                             </div>
                         </div>
                     </div>

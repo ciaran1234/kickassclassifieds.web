@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Country } from '../../core/models/country.model';
 import { Category } from '../../core/models/category.model';
 import { Currency } from '../../core/models/currency.model';
@@ -22,7 +22,10 @@ import { PagedList } from 'app/core/models/paged-list';
 })
 
 export class ClassifiedListComponent implements OnInit {
+  p: number = 1;
   classifieds: PagedList<Classified>;
+  total: number;
+  loading: boolean;
   countries: Country[];
   categories: Category[];
   currencies: Currency[];
@@ -39,7 +42,6 @@ export class ClassifiedListComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) { }
-
 
   ngOnInit() {
     this.filterService.init();
@@ -60,32 +62,17 @@ export class ClassifiedListComponent implements OnInit {
     this.countryService.getAll().then(countries => this.countries = countries);
     this.currencyService.getAll().then(currencies => this.currencies = currencies);
 
-
     this.searchForm.valueChanges
-      .debounceTime(500).distinctUntilChanged().startWith(this.searchForm.value as ClassifiedFilter)
-      .switchMap((filter: ClassifiedFilter) => {
-        if (this.isPaginating) {
-          this.isPaginating = false;
-        }
-        else {
-          filter.skip = 0;
-        }
-
+      .debounceTime(300).distinctUntilChanged().startWith(this.searchForm.value as ClassifiedFilter)
+      .switchMap((filter: ClassifiedFilter) => {      
+        this.p = this.searchForm.get('skip').value + 1;
         return this.filterService.query(filter, this.apiConfiguration.classifieds);
       }).subscribe(result => { this.classifieds = result });
   }
 
-  counter(i: number) {
-    let n = Math.ceil((i || 0) / this.searchForm.get('top').value); 
-    return new Array(n);
-  }
-
-  onPageChanged(page: Number) {
-
-
-
-    this.isPaginating = true;
-    this.searchForm.get('skip').setValue(page);
+  getPage(page: number) {
+    this.loading = true; 
+    this.searchForm.get('skip').setValue(page - 1);
   }
 
   onFavourite(event, classified) {

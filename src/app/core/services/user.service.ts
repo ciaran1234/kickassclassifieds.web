@@ -22,7 +22,6 @@ export class UserService extends BaseService {
     }
 
     private _user = new BehaviorSubject<User>(null); //globally available observable
-
     user = this._user.asObservable();
 
     onUserChanged(user: User) {
@@ -69,6 +68,13 @@ export class UserService extends BaseService {
 
     confirmAccount(token: string, userId: string): Promise<boolean> {
         return this.httpClient.post(this.apiConfiguration.confirmAccount, { token: token, userId: userId })
+            .toPromise()
+            .then(response => true)
+            .catch(error => this.handleError(error));
+    }
+
+    deleteAccount(): Promise<boolean> {
+        return this.httpClient.delete(this.apiConfiguration.users)
             .toPromise()
             .then(response => true)
             .catch(error => this.handleError(error));
@@ -131,7 +137,7 @@ export class UserService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
-    getWishlist() : Promise<Classified[]> {
+    getWishlist(): Promise<Classified[]> {
         return this.httpClient.get(this.apiConfiguration.userWishlist)
             .toPromise()
             .then(response => response.json() as Classified[])
@@ -145,11 +151,11 @@ export class UserService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
-    removeFromWishlist(classifiedId: string) : Promise<User> {
+    removeFromWishlist(classifiedId: string): Promise<User> {
         return this.httpClient.delete(this.apiConfiguration.userWishlist + classifiedId, null)
-        .toPromise()
-        .then(response => response.json() as User)
-        .catch(error => this.handleError(error));
+            .toPromise()
+            .then(response => response.json() as User)
+            .catch(error => this.handleError(error));
     }
 
     private storeToken(token: string) {

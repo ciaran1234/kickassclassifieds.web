@@ -1,4 +1,5 @@
 import { ExternalLogin } from './external-login.model';
+import { Settings } from 'app/core/models/settings.model';
 
 export class User {
     _id: string;
@@ -8,4 +9,5 @@ export class User {
     phoneNumber: String;
     profileImageUrl: String;
     externalLogins: ExternalLogin[];
+    settings: Settings;
 }

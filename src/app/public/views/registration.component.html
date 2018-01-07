@@ -45,6 +45,16 @@
                                         Invalid Email
                                     </div>
                                 </div>
+                                <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': registration.get('phoneNumber').invalid && (registration.get('phoneNumber').touched) }">
+                                    <i class="icon-phone"></i>
+                                    <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="Phone*">
+                                    <div *ngIf="registration.get('phoneNumber').hasError('maxlength') && registration.get('phoneNumber').touched" class="form-control-feedback">
+                                        Maximum of 15 characters
+                                    </div>
+                                    <div *ngIf="registration.get('phoneNumber').hasError('minlength') && registration.get('phoneNumber').touched" class="form-control-feedback">
+                                        Minimum of 4 characters
+                                    </div>
+                                </div>
                                 <div class="form-group tg-inputwithicon" [ngClass]="{ 'has-danger': !registration.controls['password'].valid && (registration.controls['password'].touched ) }">
                                     <i class="icon-lock"></i>
                                     <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password*">

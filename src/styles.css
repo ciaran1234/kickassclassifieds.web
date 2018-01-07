@@ -56,7 +56,7 @@ span.iso-currency.EUR::after {
     width: auto !important;
 }
 
-.tg-thememodal.tg-categorymodal .tg-close {
+.tg-thememodal.tg-categorymodal .tg-close, .tg-thememodal.tg-modaldeleteconfirmation .tg-close {
     top: -13px;
     right: -13px;
 }
@@ -96,12 +96,10 @@ span.iso-currency.EUR::after {
     cursor: pointer;
 }
 
-
 .tg-userdp img {
     height: 40px;
     width: 40px;
 }
-
 
 .tg-ad.tg-dotnotification img {
     width: 100%;
@@ -113,13 +111,14 @@ span.iso-currency.EUR::after {
     height: 100%;
 }
 
-
 .tg-offersmessages ul li {
     width: 100%;
 }
 
-.tg-offersmessages ul li.opened {
-    width: 60%;
+@media(min-width: 992px){
+    .tg-offersmessages ul li.opened {
+        width: 60%;
+    }
 }
 
 .tg-offersmessages .tg-ad p {
@@ -179,4 +178,52 @@ position:  relative;
 }
 
 
+.ngx-pagination a, .ngx-pagination button {
+    padding: 0 !important;   
+}
 
+.ngx-pagination a:hover, .ngx-pagination button:hover {
+    color: #fff !important;   
+}
+
+.ngx-pagination .disabled {
+    padding: 0 !important;  
+}
+
+.ngx-pagination .current {
+    padding: 0 !important;   
+    background: #00cc67 !important;
+}
+
+.ngx-pagination .pagination-next a, .ngx-pagination .pagination-previous a {
+    background: #484848;
+    color: #fff;
+}
+
+.ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after {
+    margin-left: 0px  !important;   
+}
+
+.ngx-pagination .pagination-previous a::before, .ngx-pagination .pagination-previous.disabled::before {
+    margin-right: 0px  !important;   
+}
+
+.navbar-nav li {
+    list-style-type: none;
+}
+
+.nav-link  {
+   color: #484848;
+}
+
+.navbar-collapse:not(.collapsed) ul li {
+    text-align: left;
+}
+
+.tg-twocolumns {
+    width: auto;
+}
+
+.tg-dashboardheader {
+    min-height: 75px;
+}

@@ -60,7 +60,7 @@ export class LandingPageComponent implements OnInit {
         this.countryService.getAll().then(countries => this.countries = countries);
 
         this.classifiedService.getAll(8, 0).toPromise()
-            .then(result => this.classifieds = result.items)
+            .then(result => this.classifieds = result.data)
             .catch(error => alert(error));
     }
 

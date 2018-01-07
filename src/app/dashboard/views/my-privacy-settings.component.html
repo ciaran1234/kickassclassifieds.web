@@ -1,16 +1,10 @@
-<!--************************************
-				Main Start
-		*************************************-->
 <main id="tg-main" class="tg-main tg-haslayout">
-    <!--************************************
-                        Section Start
-                *************************************-->
     <section class="tg-dbsectionspace tg-haslayout">
         <div class="row">
-            <form class="tg-formtheme tg-formdashboard">
-                <fieldset>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                <ng-container *ngIf="user">
+                    <form class="tg-formtheme tg-formdashboard" novalidate (ngSubmit)="onSettingsSubmitted(settingsForm)" [formGroup]="settingsForm">
+                        <fieldset>
                             <div class="tg-dashboardbox tg-privacysetting">
                                 <div class="tg-dashboardboxtitle">
                                     <h2>Privacy Settings</h2>
@@ -19,67 +13,79 @@
                                     <ul>
                                         <li>
                                             <div class="tg-checkbox">
-                                                <input id="tg-privacysettingsone" type="checkbox" name="privacy settings" value="yes" checked>
+                                                <input id="tg-privacysettingsone" formControlName="publicProfilePicture" type="checkbox" name="privacy settings" value="yes" [checked]="user.settings.publicProfilePicture">
                                                 <label for="tg-privacysettingsone">Make my profile photo public</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="tg-checkbox">
-                                                <input id="tg-privacysettingstwo" type="checkbox" name="privacy settings" value="yes" checked>
+                                                <input id="tg-privacysettingstwo" formControlName="receiveNewsletter" [checked]="user.settings.receiveNewsletter" type="checkbox" name="privacy settings" value="yes"
+                                                    checked>
                                                 <label for="tg-privacysettingstwo">I want to receive monthly newsletter</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="tg-checkbox">
-                                                <input id="tg-privacysettingsthree" type="checkbox" name="privacy settings" value="no">
+                                                <input id="tg-privacysettingsthree" formControlName="receiveEmailNotifications" [checked]="user.settings.receiveEmailNotifications" type="checkbox" name="privacy settings"
+                                                    value="no">
                                                 <label for="tg-privacysettingsthree">I want to receive e-mail notifications of offers/messages</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="tg-checkbox">
-                                                <input id="tg-privacysettingsfour" type="checkbox" name="privacy settings" value="yes" checked>
-                                                <label for="tg-privacysettingsfour">I want to receive e-mail alerts about new listings</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="tg-checkbox">
-                                                <input id="tg-privacysettingsfive" type="checkbox" name="privacy settings" value="no">
-                                                <label for="tg-privacysettingsfive">Enable offers/messages option in all my ads Post</label>
                                             </div>
                                         </li>
                                     </ul>
                                     <button class="tg-btn" type="buttton">Update</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                            <div class="tg-dashboardbox tg-deleteaccount">
-                                <div class="tg-dashboardboxtitle">
-                                    <h2>Delete Account</h2>
-                                </div>
-                                <div class="tg-dashboardholder">
-                                    <div class="form-group">
-                                        <div class="tg-select">
-                                            <select>
-                                                <option>Select Reason</option>
-                                                <option>Select Reason</option>
-                                                <option>Select Reason</option>
-                                            </select>
-                                        </div>
+                        </fieldset>
+                    </form>
+                </ng-container>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                <form class="tg-formtheme tg-formdashboard" novalidate (ngSubmit)="onDeleteFormSubmitted(deleteForm, content)" [formGroup]="deleteForm">
+                    <fieldset>
+                        <div class="tg-dashboardbox tg-deleteaccount">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>Delete Account</h2>
+                            </div>
+                            <div class="tg-dashboardholder">
+                                <div class="form-group" [ngClass]="{ 'has-danger': !deleteForm.controls['reason'].valid && (deleteForm.controls['reason'].touched) }">
+                                    <div class="tg-select">
+                                        <select formControlName="reason">
+                                            <option value="">Select Reason</option>
+                                            <option *ngFor="let reason of reasons" [value]="reason">{{reason}}</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <textarea name="description" class="form-control" placeholder="Description*"></textarea>
+                                    <div class="form-control-feedback" *ngIf="deleteForm.get('reason').hasError('required') && (deleteForm.get('reason').touched)">
+                                        Reason is required
                                     </div>
-                                    <button class="tg-btn" type="button" data-toggle="modal" data-target="#tg-modaldeleteconfirmation">Delete</button>
                                 </div>
+                                <div class="form-group" [ngClass]="{ 'has-danger': !deleteForm.controls['description'].valid && (deleteForm.controls['description'].touched) }">
+                                    <textarea class="form-control" placeholder="Description" formControlName="description" maxlength="2000"></textarea>
+                                    <div class="form-control-feedback" *ngIf="deleteForm.get('description').hasError('required') && (deleteForm.get('description').touched)">
+                                        Description is required
+                                    </div>
+                                    <div class="form-control-feedback" *ngIf="deleteForm.get('description').hasError('maxlength') && (deleteForm.get('description').touched)">
+                                        Max length of 2000 characters for Description
+                                    </div>
+                                </div>
+                                <button class="tg-btn" type="submit">Delete</button>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-            </form>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </section>
-    <!--************************************
-                        Section End
-                *************************************-->
 </main>
+<ng-template #content let-c="close" let-d="dismiss">
+    <button type="button" class="tg-close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div class="modal-content tg-thememodalcontent">
+        <h2>Are You Sure You Want To Delete?</h2>
+        <p>After deleting your Account you will lose all your Ads, Favorites and Offers/Messages.</p>
+        <div class="tg-btnsactions">
+            <button class="tg-btn" type="button" (click)="onAccountDeleted()">Yes! Delete Now</button>
+            <button class="tg-btn" type="button" (click)="d('Cross click')">No! Go Back</button>
+        </div>
+    </div>
+</ng-template>

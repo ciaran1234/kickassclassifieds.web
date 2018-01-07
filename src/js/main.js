@@ -242,14 +242,14 @@ var websiteTemplate = (function () {
 			/*--------------------------------------
 					DASHBOARD MENU					
 			--------------------------------------*/
-			if (jQuery('#tg-btnmenutoggle').length > 0) {
-				jQuery("#tg-btnmenutoggle").on('click', function (event) {
-					event.preventDefault();
-					jQuery('#tg-wrapper').toggleClass('tg-openmenu');
-					jQuery('body').toggleClass('tg-noscroll');
-					jQuery('.tg-navdashboard ul.sub-menu').hide();
-				});
-			}
+			// if (jQuery('#tg-btnmenutoggle').length > 0) {
+			// 	jQuery("#tg-btnmenutoggle").on('click', function (event) {
+			// 		event.preventDefault();
+			// 		jQuery('#tg-wrapper').toggleClass('tg-openmenu');
+			// 		jQuery('body').toggleClass('tg-noscroll');
+			// 		jQuery('.tg-navdashboard ul.sub-menu').hide();
+			// 	});
+			// }
 			/*--------------------------------------
 					TOTAL VIEWS CHART				
 			--------------------------------------*/
