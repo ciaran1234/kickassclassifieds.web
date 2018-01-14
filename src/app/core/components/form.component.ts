@@ -22,8 +22,8 @@ export class FormComponent extends BaseComponent {
     protected handleBadRequest(error: BadRequestError) {
         this.serverValidationErrors.length = 0;
 
-        for (let i in error.validationMessages) {          
-            this.serverValidationErrors.push(error.validationMessages[i]);
+        for (let i in error.messages) {          
+            this.serverValidationErrors.push(error.messages[i]);
         }
     }
 

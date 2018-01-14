@@ -227,3 +227,17 @@ position:  relative;
 .tg-dashboardheader {
     min-height: 75px;
 }
+
+.tg-currentandtotalslides {
+    margin-top: 15px;
+    margin-left: -29px;  
+    padding: 0px;
+}
+
+.tg-formreportthisad .tg-radio input[type=radio] + label:after {
+    top: 4px;
+}
+
+.alert.alert-danger ul li {
+    font-size: 14px;
+}

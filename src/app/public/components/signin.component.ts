@@ -15,6 +15,7 @@ export class SigninComponent implements OnInit {
     login: FormGroup;
     submitted: boolean = false;
     private returnUrl: string;
+    messages: Array<string> = [];
 
 
     constructor(private fb: FormBuilder,
@@ -39,6 +40,7 @@ export class SigninComponent implements OnInit {
         if (valid) {
             this.userService.signin(value)
                 .then(response => {
+                    this.messages.length = 0;
 
                     if (this.returnUrl) {
                         this.router.navigate([this.returnUrl]);
@@ -47,7 +49,10 @@ export class SigninComponent implements OnInit {
                         this.router.navigate(['/classifieds']);
                     }
                 })
-                .catch(error => alert(error.message || 'invalid username or password'));
+                .catch(error => { 
+                    this.messages.length = 0;
+                    this.messages = error.messages; 
+                });
         }
     }
 

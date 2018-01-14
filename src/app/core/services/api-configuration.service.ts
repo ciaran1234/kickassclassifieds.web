@@ -47,6 +47,7 @@ export class ApiConfiguration {
 
     //classified
     readonly classifieds = this.schema + this.hostApi + this.classifiedUrl;
+    readonly reportClassifieds = this.classifieds + 'report/'; 
 
     classifiedDetails(id: string) {
         return this.classifieds + id;

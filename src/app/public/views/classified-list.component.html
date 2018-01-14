@@ -210,7 +210,8 @@
                                         </time>
                                         <div class="tg-adprice">
                                             <h4>
-                                                <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{classified.price ? classified.price.value.$numberDecimal : 'N/A'}}</h4>
+                                                <span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ !classified?.hidePrice ? ((classified?.price?.value.$numberDecimal | number : '1.2-2') || 'N/A') : 'Price On Call' }}
+                                            </h4>
                                         </div>
                                         <address>{{classified?.state ? classified?.state + ', ' : ''}} {{classified.region.name}},
                                             {{classified.country.name}}

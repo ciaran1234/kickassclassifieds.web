@@ -13,9 +13,9 @@ import { PagedList } from 'app/core/models/paged-list';
 export class ClassifiedService extends BaseService {
 
     constructor(private httpClient: HttpClient,
-        private apiConfiguration: ApiConfiguration) { 
-            super();
-        }
+        private apiConfiguration: ApiConfiguration) {
+        super();
+    }
 
     get(id: string): Promise<Classified> {
         return this.httpClient.get(this.apiConfiguration.classifiedDetails(id))
@@ -28,7 +28,7 @@ export class ClassifiedService extends BaseService {
         return this.httpClient.get(this.apiConfiguration.classifieds + '?top=' + top + '&skip=' + skip)
             .map(res => res.json() as Classified[])
             .catch(err => this.handleError(err));
-    }    
+    }
 
     create(classified: Classified): Promise<Classified> {
         return this.httpClient.post(this.apiConfiguration.classifieds, classified)
@@ -46,8 +46,14 @@ export class ClassifiedService extends BaseService {
 
     delete(id: String): Promise<void> {
         return this.httpClient.delete(this.apiConfiguration.classifieds + id)
-        .toPromise()
-        .catch(error => this.handleError(error));
+            .toPromise()
+            .catch(error => this.handleError(error));
+    }
+
+    report(reason: any): Promise<void> {
+        return this.httpClient.post(this.apiConfiguration.reportClassifieds, reason)
+            .toPromise()
+            .catch(error => this.handleError(error));
     }
 
     deleteImages(id: string, images: Image[]): Promise<boolean> {
