@@ -3,7 +3,7 @@ import { HttpClient } from './http-client.service';
 import { BaseService } from './base.service';
 import { ApiConfiguration } from './api-configuration.service';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { MessageForm } from '../models/message-form.model';
 import { Message } from '../models/message.model';
 

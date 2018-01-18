@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../core/services/message.service';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { Message } from '../../core/models/message.model';
 import { ActivatedRoute } from '@angular/router';
 
