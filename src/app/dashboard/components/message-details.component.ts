@@ -42,14 +42,14 @@ export class MessageDetailsComponent extends FormComponent implements OnInit {
             });
 
         this.form = this.fb.group({
-            key: [this.key],
+            _id: [this.key],
             body: ['', Validators.required]
         });
     }
 
     ngOnChanges() {   
         if (this.form) {
-            this.form.get('key').setValue(this.key);
+            this.form.get('_id').setValue(this.key);
         }
     }
 
@@ -60,8 +60,8 @@ export class MessageDetailsComponent extends FormComponent implements OnInit {
             this.messageService.reply(value)
                 .then(reply => {
                     this.form.reset();
-                    this.form.get('key').setValue(this.key);
-                    this.messages.push(reply);
+                    this.form.get('_id').setValue(this.key);                  
+                    this.messages.push(reply.messages[reply.messages.length -1]);
                 })
                 .catch(error => this.handleError(error));
         }

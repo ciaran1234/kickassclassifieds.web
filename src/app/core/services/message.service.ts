@@ -14,10 +14,10 @@ export class MessageService extends BaseService {
         super();
     }
 
-    get(key: string): Promise<Message[]> {
-        return this.httpClient.get(this.apiConfiguration.messageDetails(key))
+    get(id: string): Promise<Message> {
+        return this.httpClient.get(this.apiConfiguration.messageDetails(id))
             .toPromise()
-            .then(response => response.json() as Message[])
+            .then(response => response.json() as Message)
             .catch(error => this.handleError(error));
     }
 
@@ -47,8 +47,8 @@ export class MessageService extends BaseService {
             .catch(error => this.handleError(error));
     }
 
-    markAsRead(key: string): Promise<boolean> {
-        return this.httpClient.patch(this.apiConfiguration.markMessageAsRead(key), null)
+    markAsRead(id: string): Promise<boolean> {
+        return this.httpClient.patch(this.apiConfiguration.markMessageAsRead(id), null)
             .toPromise()
             .then(response => true)
             .catch(error => this.handleError(error));

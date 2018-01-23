@@ -35,16 +35,17 @@ export class MyMessagesComponent implements OnInit {
     onOpenMessage(message: Message) {
         this.messageOpened = true;
 
-        this.selectedMessageKey = message.key;
+        this.selectedMessageKey = message._id;
 
-        this.messageService.get(message.key)
-            .then(messages => this.selectedMessage = messages)
+        this.messageService.get(message._id)
+            .then(msg => { 
+                this.selectedMessage = msg.messages;
+                return message;
+            })
+            .then(() => this.messageService.markAsRead(message._id))
+            .then(() => { message.read = true })
             .catch(error => {
                 console.log(error);
-            });
-
-        this.messageService.markAsRead(message.key)
-            .then(() => { message.read = true; })
-            .catch(error => console.log(error));
+            });       
     }
 }

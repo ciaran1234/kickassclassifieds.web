@@ -1,7 +1,7 @@
 <div #messageArea [scrollTop]="messageArea.scrollHeight" class="tg-messages tg-verticalscrollbar tg-dashboardscrollbar tg-scroll-vertical" *ngIf="user">
-    <div [ngClass]="message.from._id !== user._id ? 'tg-offerermessage' : 'tg-memessage tg-readmessage'" *ngFor="let message of messages">
+    <div [ngClass]="message.sender._id !== user._id ? 'tg-offerermessage' : 'tg-memessage tg-readmessage'" *ngFor="let message of messages">
         <figure>
-            <img src="assets/images/author/img-16.jpg" alt="image description">
+            <img [src]="message.sender._id !== user._id ? (message.sender.profileImageUrl || 'assets/images/author/img-16.jpg') : (message.recipient.profileImageUrl || 'assets/images/author/img-16.jpg')" alt="image description">
         </figure>
         <div class="tg-description">
             <p>{{message.body}}</p>

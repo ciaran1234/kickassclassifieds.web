@@ -129,6 +129,9 @@ export class ClassifiedDetailsComponent extends FormComponent implements OnInit 
     onMessageSent({ value, valid }: { value: any, valid: boolean }, content) {
         this.markFormAsSubmitted(this.messageForm);
 
+
+        console.log(this.messageForm.value);
+
         if (valid === true) {
             this.messageService.send(value as MessageForm)
                 .then(response => {

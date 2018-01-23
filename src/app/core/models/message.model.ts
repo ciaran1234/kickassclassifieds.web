@@ -1,9 +1,10 @@
 export class Message {
-    public key: string;
+    public _id: string;
     public subject: string;
     public body: string;
-    public from: any;
-    public to: any;
+    public sender: any;
+    public recipient: any;
     public timestamp: Date;
     public read: Boolean;
+    public messages: Message[]
 }
