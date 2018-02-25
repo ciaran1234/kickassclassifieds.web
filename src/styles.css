@@ -1,3 +1,16 @@
+#tg-homebannerr {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+figure.item {
+    background-image: url('assets/images/slider/img-01.jpg');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
 div.tg-navigationarea {
     padding: 35px 0px 25px 0px;
 } 
@@ -240,4 +253,59 @@ position:  relative;
 
 .alert.alert-danger ul li {
     font-size: 14px;
+}
+
+/** SIMPLE CAROUSEL **/
+.owl-carousel.owl-loaded {
+    display: block;
+}
+
+.owl-carousel {
+    display: none;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.tg-categoriesslider.owl-carousel .owl-stage-outer {
+    padding: 4px 0;
+}
+
+.owl-carousel .owl-stage-outer {
+    position: relative;
+    overflow: hidden;
+}
+
+.tg-categoriesslider  simple-carousel-item.tg-category {
+    padding: 5px;
+}
+
+.tg-prev {
+    left: 15px;
+}
+
+.tg-next {
+    right: 15px;
+}
+
+.tg-prev, .tg-next {
+    top: 50%;
+    z-index: 2;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: -20px 0 0;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    transition: all 300ms ease-in-out;
+}
+
+.tg-prev span, .tg-next span {
+    display: block;
+    line-height: inherit;
 }

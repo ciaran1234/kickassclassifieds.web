@@ -3,7 +3,8 @@ import { User } from "app/core/models/user.model";
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from 'app/core/services/user.service';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
+
+// import * as $ from 'jquery';
 
 @Component({
     selector: 'app-dashboard',
@@ -19,7 +20,6 @@ export class DashboardComponent implements OnInit {
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit() {
-        this.collapseMenu();
         this.subscription = this.userService
             .user.subscribe((user: User) => {
                 if (!user) {
@@ -47,15 +47,49 @@ export class DashboardComponent implements OnInit {
     onTopMenuToggled() {
         this.isCollapsed = !this.isCollapsed;
 
-        if(this.isCollapsed === false) {
+        if (this.isCollapsed === false) {
             this.isSidebarCollapsed = false;
         }
     }
 
-    collapseMenu() {
-        $('.tg-navigation ul li.menu-item-has-children, .tg-navdashboard ul li.menu-item-has-children, .tg-navigation ul li.menu-item-has-mega-menu').on('click', function () {
-            $(this).toggleClass('tg-open');
-            $(this).children('span').next().next().slideToggle(150);
-        });
-    }
+    onToggleSideMenuItem(event: Event) {
+        let listItem;
+
+        if (event.srcElement.tagName === 'LI') {
+            listItem = event.srcElement;
+        }
+        else if (event.srcElement.parentElement.tagName === 'LI') {
+            listItem = event.srcElement.parentElement;
+        }
+        else if (event.srcElement.parentElement.parentElement.tagName === 'LI') {
+            listItem = event.srcElement.parentElement.parentElement;
+        }
+
+        if (!listItem) return false;
+
+        let elementClass = listItem.getAttribute('class') || '';
+
+        if (elementClass.indexOf('menu-item-has-children') != -1) {
+            let isOpen = elementClass.indexOf('tg-open') != -1;
+
+            if (isOpen) {
+                listItem.setAttribute('class', 'menu-item-has-children')
+            }
+            else {
+                listItem.setAttribute('class', 'tg-open menu-item-has-children');
+            }
+
+            for (let idx in listItem.children) {
+                if (listItem.children[idx].tagName === 'UL') {
+                    if (isOpen) {
+                        listItem.children[idx].setAttribute('style', '');
+                    }
+                    else {
+                        listItem.children[idx].setAttribute('style', 'display: block;');
+                    }
+                    break;
+                }
+            }
+        }
+    }  
 }

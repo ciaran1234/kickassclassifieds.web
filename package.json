@@ -27,12 +27,8 @@
     "bootstrap": "4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
-    "jquery-ui": "^1.12.1",
-    "jquery-ui-dist": "^1.12.1",
     "lodash-clean": "^1.0.1",
     "ng2-file-upload": "^1.2.1",
-    "ng2-owl-carousel": "^0.1.15",
     "ngx-gallery": "^4.0.0",
     "ngx-pagination": "^3.0.3",
     "rxjs": "^5.5.6",
@@ -40,7 +36,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^1.5.2",
+    "@angular/cli": "^1.6.5",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",

@@ -1,5 +1,5 @@
-<div class="container">
+<main id="tg-main" class="tg-main tg-haslayout">
   <ng-container *ngIf="classified">
     <classified-form [classified]="classified" [validationErrors]="serverValidationErrors"  (onSave)="onSave($event)"></classified-form>
   </ng-container>
-</div>
+</main>

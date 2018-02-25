@@ -16,8 +16,8 @@ import { ClassifiedFilter } from '../../core/models/filters/classified.filter';
 import * as clean from 'lodash-clean';
 import { Classified } from 'app/core/models/classified.model';
 import { ClassifiedService } from 'app/core/services/classified.service';
-import '../../../js/jquery.vide.min.js';
-declare var vider: any;
+// import '../../../js/jquery.vide.min.js';
+// declare var vider: any;
 
 @Component({
     selector: 'app-landing-page',
@@ -43,9 +43,9 @@ export class LandingPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (vider) {
-            vider.render();
-        }
+        // if (vider) {
+        //     vider.render();
+        // }
         
         this.filterService.init();
 

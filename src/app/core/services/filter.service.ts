@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from './http-client.service';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import * as clean from 'lodash-clean';
 
 @Injectable()

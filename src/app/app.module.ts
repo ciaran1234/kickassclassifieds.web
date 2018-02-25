@@ -13,7 +13,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorRoutingModule, errorRoutedComponents } from './errors/error-routing.module';
 import { PublicModule } from './public/public.module';
-import { OwlModule } from 'ng2-owl-carousel';
+// import { OwlModule } from 'ng2-owl-carousel';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 
@@ -29,7 +29,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
     HttpModule,
     CoreModule.forRoot(),
     NgbModule.forRoot(),
-    OwlModule,
+  //  OwlModule,
     AppRoutingModule,    
     ReactiveFormsModule,
     ErrorRoutingModule,    

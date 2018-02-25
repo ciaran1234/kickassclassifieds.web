@@ -16,6 +16,10 @@ export class PublicComponent implements OnInit {
     isCollapsed: boolean = true;
     user: User;
     subscription: Subscription;
+    languages = [
+        { code: 'en', label: 'English' },
+        { code: 'fr', label: 'Français' }
+    ];
 
     constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
@@ -24,8 +28,8 @@ export class PublicComponent implements OnInit {
 
         this.subscription = this.userService
             .user.subscribe((user: User) => {
-                if(!user){
-                    this.userService.checkIfUserLoggedIn();                    
+                if (!user) {
+                    this.userService.checkIfUserLoggedIn();
                 }
 
                 this.user = user;
@@ -34,6 +38,10 @@ export class PublicComponent implements OnInit {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    onSubmitted({ value, valid }: { value: any, valid: boolean }) {
+        //TODO ADD NEWSLETTER LOGIC
     }
 
     onSignout() {

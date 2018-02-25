@@ -18,7 +18,7 @@
                                     <a href="javascript:void(0);" data-toggle="modal" data-target=".tg-categorymodal" (click)="open(content)">(Change)</a>
                                 </li>
                             </ol>
-                        </div>                       
+                        </div>
                         <div class="form-group" [ngClass]="{ 'has-danger': !form.controls['title'].valid && (form.controls['title'].touched) }">
                             <input type="text" name="adtitle" class="form-control" placeholder="Enter Ad Title*" formControlName="title" maxlength="100">
                             <div class="form-control-feedback" *ngIf="form.get('title').hasError('required') && (form.get('title').touched)">
@@ -28,9 +28,9 @@
                                 Max length of 100 characters for Title
                             </div>
                         </div>
-                        <div class="form-group tg-priceformgroup" >
+                        <div class="form-group tg-priceformgroup">
                             <div class="tg-checkbox">
-                                <input id="hidePrice" type="checkbox" name="hidePrice" formControlName="hidePrice" >
+                                <input id="hidePrice" type="checkbox" name="hidePrice" formControlName="hidePrice">
                                 <label for="hidePrice">Price On Call</label>
                             </div>
                             <div class="input-group" formGroupName="price">
@@ -154,14 +154,17 @@
                                 </div>
                             </div>
                             <div class="form-group" [ngClass]="{ 'has-danger': form.get('advertiser').get('phoneNumber').invalid && (form.get('advertiser').get('phoneNumber').touched) }">
-                                <input type="text" name="phoneNumber" formControlName="phoneNumber"  class="form-control" placeholder="Phone*">
-                                 <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('required') && (form.get('advertiser').get('phoneNumber').touched )" class="form-control-feedback">
+                                <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="Phone*">
+                                <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('required') && (form.get('advertiser').get('phoneNumber').touched )"
+                                    class="form-control-feedback">
                                     Phone number is required
                                 </div>
-                                <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('maxlength') && form.get('advertiser').get('phoneNumber').touched" class="form-control-feedback">
+                                <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('maxlength') && form.get('advertiser').get('phoneNumber').touched"
+                                    class="form-control-feedback">
                                     Maximum of 15 characters
                                 </div>
-                                <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('minlength') && form.get('advertiser').get('phoneNumber').touched" class="form-control-feedback">
+                                <div *ngIf="form.get('advertiser').get('phoneNumber').hasError('minlength') && form.get('advertiser').get('phoneNumber').touched"
+                                    class="form-control-feedback">
                                     Minimum of 4 characters
                                 </div>
                             </div>
@@ -181,13 +184,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="tg-select">                          
+                            <div class="tg-select">
                                 <select id="state" class="form-control" formControlName="state">
                                     <option value="">Select City/County</option>
                                     <option *ngFor="let st of states" [ngValue]="st">{{st}}</option>
-                                </select>                               
+                                </select>
                             </div>
-                        </div>                      
+                        </div>
                         <div class="tg-checkbox">
                             <input id="tg-agreetermsandrules" type="checkbox" name="agreetermsandrules" value="on">
                             <label for="tg-agreetermsandrules">I agree to all
@@ -206,44 +209,28 @@
         </button>
         <div class="tg-title">
             <strong>Select Category</strong>
-        </div>       
-        <input type="hidden" formControlName="parentCategory" />
-        <owl-carousel #owlElement [options]="{ items: 4, dots: false, nav: true, loop: false,
-            center: false, autoplay: false,	dotsClass: 'tg-sliderdots',
-            navClass: ['tg-prev', 'tg-next'], 
-            navContainerClass: 'tg-slidernav',
-            navText: ['<span class=\'icon-chevron-left\'></span>', '<span class=\'icon-chevron-right\'></span>'],
-            responsive: { '0': { items: 1, center: false }, '480': { items: 2, center: false }, '568': { items: 3, center: false },	'768': { items: 4 }	}}"
-        [items]="categories" [carouselClasses]="['tg-categoriesslider', 'tg-categories']">
-           <div class="tg-category" *ngFor="let category of categories">
-               <div class="tg-categoryholder" (click)="onCategoryChanged(category)">
-                   <figure>
-                       <img src="assets/images/icons/img-08.png" alt="image description">
-                   </figure>
-                   <h3>{{category.name}}</h3>
-               </div>
-           </div>
-       </owl-carousel>       
+        </div>      
         <ul class="tg-subcategories">
+            <li>
+                <div class="tg-title">
+                    <strong>Categories</strong>
+                </div>
+                <div class=" tg-verticalscrollbar tg-dashboardscrollbar">
+                    <ul>
+                        <li class="tg-hassubcategories" (click)="onCategoryChanged(category)" *ngFor="let category of categories">{{category.name}}</li>
+                    </ul>
+                    <input type="hidden" formControlName="parentCategory" />                    
+                </div>          
+            </li>
             <li>
                 <div class="tg-title">
                     <strong>{{form.get('parentCategory').value ? form.get('parentCategory').value.name : ''}}</strong>
                 </div>
                 <div class=" tg-verticalscrollbar tg-dashboardscrollbar">
                     <ul>
-                        <li class="tg-hassubcategories" (click)="onSubCategoryChanged(subCategory)"  *ngFor="let subCategory of subCategories">{{subCategory.name}}</li>                   
+                        <li class="tg-hassubcategories" (click)="onSubCategoryChanged(subCategory)" *ngFor="let subCategory of subCategories">{{subCategory.name}}</li>
                     </ul>
                     <input id="subCategory" formControlName="category" class="form-control" type="hidden" />
-                </div>
-            </li>
-            <li>
-                <div class="tg-title">
-                    <strong>{{form.get('category').value ? form.get('category').value.name : ''}}</strong>
-                </div>
-                <div class=" tg-verticalscrollbar tg-dashboardscrollbar">
-                    <ul>
-                        
-                    </ul>
                 </div>
             </li>
         </ul>

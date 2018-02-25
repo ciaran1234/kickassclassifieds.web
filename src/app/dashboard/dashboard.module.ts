@@ -17,9 +17,10 @@ import { ImagePreview } from '../core/directives/image-preview.directive';
 import { DynamicFormService } from '../dynamic-forms/services/dynamic-form.service';
 import { DynamicFormControl } from '../dynamic-forms/directives/dynamic-form-control.directive';
 import { FileUploadModule } from 'ng2-file-upload';
-import { OwlModule } from 'ng2-owl-carousel';
+// import { OwlModule } from 'ng2-owl-carousel';
 import { MyPrivacySettingsComponent } from 'app/dashboard/components/my-privacy-settings.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LayoutModule } from 'app/layout/layout.module';
 @NgModule({
     imports: [CommonModule,
         FormsModule,
@@ -27,7 +28,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
         RouterModule,
         NgbModule.forRoot(),
         NgxPaginationModule,
-        OwlModule,
+        LayoutModule,
+       // OwlModule,
         FileUploadModule],
     declarations: [
         ImagePreview,

@@ -1,5 +1,5 @@
-<div id="tg-homebanner" class="tg-homebanner tg-haslayout">
-	<figure class="item" data-vide-bg="poster: assets/images/slider/img-01.jpg" data-vide-options="position: 50% 50%">
+<div id="tg-homebanner" class="tg-homebanner tg-haslayout outer-layer">
+	<figure class="item">
 		<figcaption>
 			<div class="container">
 				<div class="row">
@@ -15,7 +15,6 @@
 									</div>
 									<div class="form-group tg-inputwithicon">
 										<i class="icon-location"></i>
-										<!-- <a class="tg-btnsharelocation fa fa-crosshairs" href="javascript:void(0);"></a> -->
 										<div class="tg-select">
 											<select id="country" formControlName="country">
 												<option value="">All Countries</option>
@@ -44,7 +43,7 @@
 		</figcaption>
 	</figure>
 </div>
-<main id="tg-main" class="tg-main tg-haslayout">	
+<main id="tg-main" class="tg-main tg-haslayout">
 	<!--************************************
 					Categories Search Start
 			*************************************-->
@@ -55,24 +54,19 @@
 					<div class="tg-categoriessearch">
 						<div class="tg-title">
 							<h2>
-								<span>Boost your search with</span> Trending Categories</h2>
+								<span>Boost your search with</span> Trending Categories
+							</h2>
 						</div>
-						<owl-carousel [options]="{ items: 5, dots: false, nav: true, loop: false,
-							 center: false, autoplay: false,	dotsClass: 'tg-sliderdots',
-							 navClass: ['tg-prev', 'tg-next'], 
-							 navContainerClass: 'tg-slidernav',
-							 navText: ['<span class=\'icon-chevron-left\'></span>', '<span class=\'icon-chevron-right\'></span>'],
-							 responsive: { '0': { items: 1, center: false }, '480': { items: 2, center: false }, '568': { items: 3, center: false },	'768': { items: 5 }	}}"
-						 [items]="categories" [carouselClasses]="['tg-categoriesslider', 'tg-categories']">
-							<div class="tg-category" *ngFor="let category of categories">
-								<div class="tg-categoryholder" [routerLink]="['classifieds']"  [queryParams]="{category: category._id}">
+						<simple-carousel [options]="{ items: 5}">
+							<simple-carousel-item #carouselItem class="tg-category" *ngFor="let category of categories">
+								<div class="tg-categoryholder" [routerLink]="['classifieds']" [queryParams]="{category: category._id}">
 									<figure>
 										<img src="assets/images/icons/img-08.png" alt="image description">
 									</figure>
 									<h3>{{category.name}}</h3>
 								</div>
-							</div>
-						</owl-carousel>
+							</simple-carousel-item>							
+						</simple-carousel>					
 					</div>
 				</div>
 			</div>
@@ -115,7 +109,8 @@
 								<time datetime="2017-06-06">Last Updated: {{classified.updated || classified.created | date : 'dd-MM-yyyy HH:mm'}}</time>
 								<div class="tg-adprice">
 									<h4>
-										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ !classified?.hidePrice ? ((classified?.price?.value.$numberDecimal | number : '1.2-2') || 'N/A') : 'Price On Call' }}
+										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ !classified?.hidePrice ? ((classified?.price?.value.$numberDecimal | number : '1.2-2') || 'N/A') : 'Price
+										On Call' }}
 									</h4>
 								</div>
 								<address>{{classified.region?.name}}, {{classified.country?.name}}</address>
@@ -179,7 +174,8 @@
 								<time datetime="2017-06-06">Last Updated: {{classified.updated || classified.created | date : 'dd-MM-yyyy HH:mm'}}</time>
 								<div class="tg-adprice">
 									<h4>
-										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ !classified?.hidePrice ? ((classified?.price?.value.$numberDecimal | number : '1.2-2') || 'N/A') : 'Price On Call' }}
+										<span class="iso-currency" [ngClass]="classified.price?.ccy"></span>{{ !classified?.hidePrice ? ((classified?.price?.value.$numberDecimal | number : '1.2-2') || 'N/A') : 'Price
+										On Call' }}
 									</h4>
 								</div>
 								<address>{{classified.region?.name}}, {{classified.country?.name}}</address>

@@ -13,7 +13,7 @@ export class DynamicFormControl {
     @Input() model: DynamicFormControlModel;
     control: FormControl;
 
-    constructor(private renderer: Renderer2, private hostElement: ElementRef ) {
+    constructor(private renderer: Renderer2, private hostElement: ElementRef) {
         
     }
 

@@ -62,18 +62,17 @@
                         <div class="tg-safetytipstitle">
                             <h2>Safety Tips</h2>
                         </div>
-                        <owl-carousel #safetyTipsElement [options]="{ items: 1, dots: false, dotsClass: 'tg-sliderdots', 
-                        navClass: ['tg-prev', 'tg-next'], navContainerClass: 'tg-slidernav',
-                        nav: false, loop: true, navText: ['<span class=\'icon-chevron-left\'></span>', '<span class=\'icon-chevron-right\'></span>'],
-                            center: true, autoplay: true }" [items]="safetyTips" [carouselClasses]="['tg-safetytipsslider', 'slid', 'owl-carousel']">
-                            <div class="item tg-safetytip active" *ngFor="let tip of safetyTips; let i = index;">
-                                <h3>TIP # {{i + 1}}:</h3>
-                                <div class="tg-description">
-                                    <p>{{tip}}</p>
+                        <simple-carousel [options]="{ items: 1, carouselClasses: ['tg-safetytipsslider', 'slid', 'owl-carousel', 'owl-loaded']}">
+                            <simple-carousel-item #carouselItem class="tg-category" *ngFor="let tip of safetyTips; let i = index;">
+                                <div class="item tg-safetytip active">
+                                    <h3>TIP # {{i + 1}}:</h3>
+                                    <div class="tg-description">
+                                        <p>{{tip}}</p>
+                                    </div>
+                                    <div id="tg-currentandtotalslides" class="tg-currentandtotalslides">{{i + 1}} / {{safetyTips.length}}</div>
                                 </div>
-                                <div id="tg-currentandtotalslides" class="tg-currentandtotalslides">{{i + 1}} / {{safetyTips.length}}</div>
-                            </div>
-                        </owl-carousel>
+                            </simple-carousel-item>
+                        </simple-carousel>
                     </div>
                     <div class="tg-reportthisadbox">
                         <div class="tg-reportthisadtitle">

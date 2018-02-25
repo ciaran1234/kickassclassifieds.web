@@ -21,4 +21,6 @@ export class Classified {
     public details: any;
     public hidePrice: Boolean;
     public allowMessages: Boolean;
+    public created: Date;
+    public updated: Date;
 }

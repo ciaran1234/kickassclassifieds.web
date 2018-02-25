@@ -23,7 +23,6 @@ import { UserService } from 'app/core/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CustomValidator } from 'app/core/validation/custom-validation.validator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
-import { OwlCarousel } from 'ng2-owl-carousel';
 
 @Component({
     selector: 'classified-form',

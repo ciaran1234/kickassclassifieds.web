@@ -3,8 +3,8 @@ import { UserService } from './core/services/user.service';
 import { User } from 'app/core/models/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
-import '../js/main.js';
+// import * as $ from 'jquery';
+// import '../js/main.js';
 declare var websiteTemplate: any;
 
 @Component({
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    $(function () {
-      websiteTemplate.initializeTemplate();
-    });
+    // $(function () {
+    //   websiteTemplate.initializeTemplate();
+    // });
 
    
   }
